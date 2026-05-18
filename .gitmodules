@@ -2,3 +2,27 @@
 	path = agents
 	url = https://github.com/marius-patrik/agents.git
 	branch = main
+[submodule "mmo"]
+	path = mmo
+	url = https://github.com/marius-patrik/MMO.git
+	branch = main
+[submodule "rommie"]
+	path = rommie
+	url = https://github.com/marius-patrik/Rommie.git
+	branch = develop
+[submodule "rscode"]
+	path = rscode
+	url = https://github.com/marius-patrik/RSCode.git
+	branch = main
+[submodule "fabrica"]
+	path = fabrica
+	url = https://github.com/marius-patrik/Fabrica.git
+	branch = dev
+[submodule "wrkspace"]
+	path = wrkspace
+	url = https://github.com/marius-patrik/Wrkspace.git
+	branch = main
+[submodule "darkfactory-managed-smoke"]
+	path = darkfactory-managed-smoke
+	url = https://github.com/marius-patrik/DarkFactory-managed-smoke.git
+	branch = develop
