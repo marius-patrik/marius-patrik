@@ -2,7 +2,7 @@
 
 Builder of agent systems, research tooling, automation workflows, and experimental software.
 
-This profile repository is also my root workspace. The `Agent` submodule contains the agent and skill workspaces, while the remaining non-agent repositories live next to it at the root level as separate submodules.
+This profile repository is also my root workspace. The `Agent` submodule contains grouped agent and skill repositories, while the remaining non-agent repositories live next to it at the root level as separate submodules.
 
 ## Workspace layout
 
