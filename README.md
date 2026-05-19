@@ -2,11 +2,11 @@
 
 Builder of agent systems, research tooling, automation workflows, and experimental software.
 
-This profile repository is also my root workspace. The `agents` submodule contains the agent-focused projects, while the remaining non-agent repositories live next to it at the root level as separate submodules.
+This profile repository is also my root workspace. The `ML` submodule contains the ML, Agents, and Skills workspaces, while the remaining non-ML repositories live next to it at the root level as separate submodules.
 
 ## Workspace layout
 
-- `agents` — parent workspace for agent-related repositories.
+- `ML` — parent workspace for ML, Agents, and Skills.
 - `mmo` — MMO project.
 - `rscode` — React RS Build IDE.
 - `wrkspace` — workspace repository.
