@@ -1,14 +1,30 @@
-[submodule "Agent"]
-	path = Agent
-	url = https://github.com/marius-patrik/Agent.git
+[submodule "citizen"]
+	path = citizen
+	url = https://github.com/marius-patrik/Citizen.git
 	branch = main
+[submodule "darkfactory"]
+	path = darkfactory
+	url = https://github.com/marius-patrik/DarkFactory.git
+	branch = develop
+[submodule "fabrica"]
+	path = fabrica
+	url = https://github.com/marius-patrik/Fabrica.git
+	branch = dev
 [submodule "mmo"]
 	path = mmo
 	url = https://github.com/marius-patrik/MMO.git
 	branch = main
+[submodule "rommie"]
+	path = rommie
+	url = https://github.com/marius-patrik/Rommie.git
+	branch = dev
 [submodule "rscode"]
 	path = rscode
 	url = https://github.com/marius-patrik/RSCode.git
+	branch = main
+[submodule "true-qft-autoresearch"]
+	path = true-qft-autoresearch
+	url = https://github.com/marius-patrik/true-qft-autoresearch.git
 	branch = main
 [submodule "wrkspace"]
 	path = wrkspace
