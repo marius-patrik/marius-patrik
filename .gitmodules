@@ -2,6 +2,7 @@
  path = Agents
  url = https://github.com/marius-patrik/Agents.git
  branch = main
+	ignore = dirty
 [submodule "Archive"]
  path = Archive
  url = https://github.com/marius-patrik/Archive.git
