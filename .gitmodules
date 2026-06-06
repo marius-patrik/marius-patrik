@@ -1,0 +1,28 @@
+[submodule "Agents"]
+ path = Agents
+ url = https://github.com/marius-patrik/Agents.git
+ branch = main
+[submodule "Archive"]
+ path = Archive
+ url = https://github.com/marius-patrik/Archive.git
+ branch = main
+[submodule "Research"]
+ path = Research
+ url = https://github.com/marius-patrik/Research.git
+ branch = main
+[submodule "TailStreamer"]
+ path = TailStreamer
+ url = https://github.com/marius-patrik/TailStreamer.git
+ branch = main
+[submodule "Fabrica"]
+ path = Fabrica
+ url = https://github.com/marius-patrik/Fabrica.git
+ branch = dev
+[submodule "RSCode"]
+ path = RSCode
+ url = https://github.com/marius-patrik/RSCode.git
+ branch = main
+[submodule "Private"]
+ path = Private
+ url = https://github.com/marius-patrik/Private.git
+ branch = main
