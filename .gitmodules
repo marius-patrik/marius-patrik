@@ -6,23 +6,27 @@
  path = Archive
  url = https://github.com/marius-patrik/Archive.git
  branch = main
+[submodule "Blog"]
+ path = Blog
+ url = https://github.com/marius-patrik/Blog.git
+ branch = main
+[submodule "Projects"]
+ path = Projects
+ url = https://github.com/marius-patrik/Projects.git
+ branch = main
 [submodule "Research"]
  path = Research
  url = https://github.com/marius-patrik/Research.git
  branch = main
-[submodule "TailStreamer"]
- path = TailStreamer
- url = https://github.com/marius-patrik/TailStreamer.git
- branch = main
-[submodule "Fabrica"]
- path = Fabrica
- url = https://github.com/marius-patrik/Fabrica.git
- branch = dev
-[submodule "RSCode"]
- path = RSCode
- url = https://github.com/marius-patrik/RSCode.git
- branch = main
 [submodule "Private"]
  path = Private
  url = https://github.com/marius-patrik/Private.git
+ branch = main
+[submodule "Vault"]
+ path = Vault
+ url = https://github.com/marius-patrik/Vault.git
+ branch = main
+[submodule "Wiki"]
+ path = Wiki
+ url = https://github.com/marius-patrik/Wiki.git
  branch = main
