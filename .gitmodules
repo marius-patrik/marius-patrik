@@ -1,7 +1,7 @@
 [submodule "Agents"]
  path = Agents
- url = https://github.com/marius-patrik/Agents.git
- branch = main
+	url = https://github.com/marius-patrik/Agents.git
+	branch = dev
 	ignore = dirty
 [submodule "Archive"]
  path = Archive
@@ -13,8 +13,8 @@
  branch = main
 [submodule "Projects"]
  path = Projects
- url = https://github.com/marius-patrik/Projects.git
- branch = main
+	url = https://github.com/marius-patrik/Projects.git
+	branch = main
 [submodule "Research"]
  path = Research
  url = https://github.com/marius-patrik/Research.git
