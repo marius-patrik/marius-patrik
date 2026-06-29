@@ -26,7 +26,3 @@
  path = Wiki
  url = https://github.com/marius-patrik/Wiki.git
  branch = main
-[submodule "Andromeda"]
-	path = Andromeda
-	url = https://github.com/marius-patrik/Andromeda.git
-	branch = main
