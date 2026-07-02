@@ -14,24 +14,26 @@ default.
 
 ```text
 .
-├── avatars/
-│   └── agents/
-│       ├── andromeda/
-│       ├── personal-assistant/
-│       ├── skye/
-│       └── vibe-bot/
-├── templates/
-│   ├── template-bot/
-│   ├── template-cli/
-│   ├── template-mono/
-│   ├── template-repo/
-│   └── template-web/
-└── archive/
-    ├── Citizen/
-    ├── MMO/
-    ├── RSCode/
-    └── Wrkspace/
+|-- avatars/
+|   `-- agents/
+|       |-- andromeda/
+|       |-- personal-assistant/
+|       |-- skye/
+|       `-- vibe-bot/
+|-- templates/
+|   |-- template-bot/
+|   |-- template-cli/
+|   |-- template-mono/
+|   |-- template-repo/
+|   `-- template-web/
+`-- archive/
+    |-- Citizen/
+    |-- MMO/
+    |-- RSCode/
+    `-- Wrkspace/
 ```
+
+See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Root Repositories
 

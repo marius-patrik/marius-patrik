@@ -2,8 +2,7 @@
 !.gitignore
 !.gitmodules
 !README.md
-!agents
-!agents-cli
+!PROJECTS.md
 !andromeda
 !archive
 !archive/*
@@ -11,13 +10,9 @@
 !Fabrica
 !media-streamer
 !mssgs
-!personal-assistant
 !private
-!rommie
 !singularity
-!skye
 !templates
 !templates/*
-!vibe-bot
 !vsc-utils
 !yacht
