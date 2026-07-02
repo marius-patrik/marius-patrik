@@ -2,21 +2,31 @@
 
 Root workspace checkout for `marius-patrik`.
 
-This repository tracks the current `marius-patrik` repositories as Git submodules. Active repositories live at the root, agent projects and templates live in `agents/`, and archived repositories live under `archive/`. Local files outside the workspace manifest are ignored by default.
+This repository tracks the current `marius-patrik` repositories as top-level Git submodules. Local files outside the workspace manifest are ignored by default.
 
-## Submodules
+## Repositories
 
-- `Fabrica`
 - `agents`
+- `agents-cli`
+- `andromeda`
+- `Citizen`
+- `experience`
+- `Fabrica`
 - `media-streamer`
+- `MMO`
 - `mssgs`
+- `personal-assistant`
+- `private`
+- `rommie`
+- `RSCode`
 - `singularity`
+- `skye`
+- `template-bot`
+- `template-cli`
+- `template-mono`
+- `template-repo`
+- `template-web`
+- `vibe-bot`
 - `vsc-utils`
+- `Wrkspace`
 - `yacht`
-
-## Archived
-
-- `archive/Citizen`
-- `archive/MMO`
-- `archive/RSCode`
-- `archive/Wrkspace`
