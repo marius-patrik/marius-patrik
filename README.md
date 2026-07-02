@@ -9,8 +9,8 @@ This repository tracks the current `marius-patrik` repositories as Git submodule
 - `Fabrica`
 - `Private`
 - `Research`
-- `TailStreamer`
 - `Wiki`
+- `media-streamer`
 - `mssgs`
 - `singularity`
 - `vsc-utils`
