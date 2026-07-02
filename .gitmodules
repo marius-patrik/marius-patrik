@@ -22,18 +22,6 @@
 	path = yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
-[submodule "templates/template-cli"]
-	path = templates/template-cli
-	url = https://github.com/marius-patrik/template-cli.git
-	branch = main
-[submodule "templates/template-mono"]
-	path = templates/template-mono
-	url = https://github.com/marius-patrik/template-mono.git
-	branch = main
-[submodule "templates/template-web"]
-	path = templates/template-web
-	url = https://github.com/marius-patrik/template-web.git
-	branch = main
 [submodule "archive/Citizen"]
 	path = archive/Citizen
 	url = https://github.com/marius-patrik/Citizen.git
@@ -49,14 +37,6 @@
 [submodule "archive/Wrkspace"]
 	path = archive/Wrkspace
 	url = https://github.com/marius-patrik/Wrkspace.git
-	branch = main
-[submodule "templates/template-repo"]
-	path = templates/template-repo
-	url = https://github.com/marius-patrik/template-repo.git
-	branch = main
-[submodule "templates/template-bot"]
-	path = templates/template-bot
-	url = https://github.com/marius-patrik/template-bot.git
 	branch = main
 [submodule "agents"]
 	path = agents
