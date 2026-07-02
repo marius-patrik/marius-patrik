@@ -20,10 +20,9 @@ This repository tracks the current `marius-patrik` repositories as Git submodule
 
 - `agents/Andromeda`
 - `agents/agent-manager`
-- `agents/agents`
 - `agents/context-engine`
-- `agents/life-support`
-- `agents/skyagent`
+- `agents/avatars/life-support`
+- `agents/avatars/skyagent`
 
 ## Archived
 
