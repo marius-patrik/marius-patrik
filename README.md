@@ -6,22 +6,23 @@ This repository tracks the current `marius-patrik` repositories as a nested Git
 submodule workspace. Local files outside the workspace manifest are ignored by
 default.
 
-`agents` is the active agent package-manager workspace. It owns agent
-repositories under `agents/packages/*`, and the CLI inside it is also named
+`agent-os` is the active agent package-manager workspace. It owns agent
+repositories under `agent-os/packages/*`, and the CLI inside it is still named
 `agents`. SkyBlock Agent is tracked by the `skyblock-agent` repository there.
 
 ## Workspace Layout
 
 ```text
 .
-|-- agents/
+|-- agent-os/
 |   `-- packages/
-|       |-- agents-core/
+|       |-- agent-package-manager/
 |       |-- agi/
-|       |-- andromeda/
+|       |-- agent-harness/
 |       |-- skyblock-agent/
 |       |-- templates/
 |       `-- vibe-bot/
+|-- agent-harness/
 |-- packages/
 |   `-- singularity/
 `-- archive/
@@ -35,8 +36,8 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Root Repositories
 
-- `andromeda`
-- `agents`
+- `agent-harness`
+- `agent-os`
 - `Fabrica`
 - `media-streamer`
 - `mssgs`
@@ -46,21 +47,21 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Agent Repositories
 
-Agent repositories are nested inside `agents` and should not be duplicated at
+Agent repositories are nested inside `agent-os` and should not be duplicated at
 the workspace root.
 
-- `agents/packages/andromeda`
-- `agents/packages/agi`
-- `agents/packages/skyblock-agent`
-- `agents/packages/vibe-bot`
+- `agent-os/packages/agent-harness`
+- `agent-os/packages/agi`
+- `agent-os/packages/skyblock-agent`
+- `agent-os/packages/vibe-bot`
 
 ## Templates
 
-- `agents/packages/templates/template-bot`
-- `agents/packages/templates/template-cli`
-- `agents/packages/templates/template-mono`
-- `agents/packages/templates/template-repo`
-- `agents/packages/templates/template-web`
+- `agent-os/packages/templates/template-bot`
+- `agent-os/packages/templates/template-cli`
+- `agent-os/packages/templates/template-mono`
+- `agent-os/packages/templates/template-repo`
+- `agent-os/packages/templates/template-web`
 
 ## Packages
 
@@ -68,7 +69,7 @@ the workspace root.
 
 ## Migrated
 
-- `experience` was migrated into `andromeda/plugins/rommie` and is no longer a
+- `experience` was migrated into `agent-harness/packages/rommie` and is no longer a
   root workspace submodule.
 
 ## Archived

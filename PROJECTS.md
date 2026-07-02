@@ -13,19 +13,19 @@ submodule paths and repository topics.
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents` | `marius-patrik/agents` | Agent package-manager workspace and shared `agents` CLI state. |
-| `andromeda` | `marius-patrik/andromeda` | Rommie and Andromeda platform source. |
-| `andromeda/plugins/rommie` | `marius-patrik/andromeda` | Rommie plugin source that supersedes the old `experience` plugin. |
-| `agents/packages/agents-core` | `marius-patrik/agents` | Core `agents` CLI source and tests. |
-| `agents/packages/agi` | `marius-patrik/agi` | Private AGI agent package. |
-| `agents/packages/andromeda` | `marius-patrik/andromeda` | Andromeda package entry inside `agents`. |
-| `agents/packages/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
-| `agents/packages/vibe-bot` | `marius-patrik/vibe-bot` | GitHub App automation avatar package. |
-| `agents/packages/templates/template-bot` | `marius-patrik/template-bot` | Managed bot repository template. |
-| `agents/packages/templates/template-cli` | `marius-patrik/template-cli` | Managed CLI repository template. |
-| `agents/packages/templates/template-mono` | `marius-patrik/template-mono` | Managed monorepo template. |
-| `agents/packages/templates/template-repo` | `marius-patrik/template-repo` | Bun TypeScript managed repository template. |
-| `agents/packages/templates/template-web` | `marius-patrik/template-web` | Managed web app repository template. |
+| `agent-os` | `marius-patrik/agent-os` | Agent OS workspace and shared `agents` CLI state. |
+| `agent-harness` | `marius-patrik/agent-harness` | Rommie Agent Harness platform source. |
+| `agent-harness/packages/rommie` | `marius-patrik/agent-harness` | Rommie plugin package that supersedes the old `experience` plugin. |
+| `agent-os/packages/agent-package-manager` | `marius-patrik/agent-os` | Core `agents` CLI source and tests. |
+| `agent-os/packages/agi` | `marius-patrik/agi` | Private AGI agent package. |
+| `agent-os/packages/agent-harness` | `marius-patrik/agent-harness` | Agent Harness package entry inside `agent-os`. |
+| `agent-os/packages/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
+| `agent-os/packages/vibe-bot` | `marius-patrik/vibe-bot` | GitHub App automation agent package. |
+| `agent-os/packages/templates/template-bot` | `marius-patrik/template-bot` | Managed bot repository template. |
+| `agent-os/packages/templates/template-cli` | `marius-patrik/template-cli` | Managed CLI repository template. |
+| `agent-os/packages/templates/template-mono` | `marius-patrik/template-mono` | Managed monorepo template. |
+| `agent-os/packages/templates/template-repo` | `marius-patrik/template-repo` | Bun TypeScript managed repository template. |
+| `agent-os/packages/templates/template-web` | `marius-patrik/template-web` | Managed web app repository template. |
 
 ## Root Projects
 
@@ -48,7 +48,7 @@ submodule paths and repository topics.
 
 | Former Path | Repository | Current Home |
 | --- | --- | --- |
-| `experience` | `marius-patrik/experience` | `andromeda/plugins/rommie` |
+| `experience` | `marius-patrik/experience` | `agent-harness/packages/rommie` |
 
 ## Archive
 

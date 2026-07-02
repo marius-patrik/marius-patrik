@@ -1,6 +1,6 @@
-[submodule "agents"]
-	path = agents
-	url = https://github.com/marius-patrik/agents.git
+[submodule "agent-os"]
+	path = agent-os
+	url = https://github.com/marius-patrik/agent-os.git
 	branch = main
 [submodule "Citizen"]
 	path = archive/Citizen
@@ -46,7 +46,7 @@
 	path = yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
-[submodule "andromeda"]
-	path = andromeda
-	url = https://github.com/marius-patrik/andromeda.git
+[submodule "agent-harness"]
+	path = agent-harness
+	url = https://github.com/marius-patrik/agent-harness.git
 	branch = main
