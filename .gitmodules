@@ -11,11 +11,11 @@
 	url = https://github.com/marius-patrik/Wiki.git
 	branch = main
 [submodule "agents"]
-	path = agents
+	path = agents/agents
 	url = https://github.com/marius-patrik/agents.git
 	branch = main
 [submodule "Andromeda"]
-	path = Andromeda
+	path = agents/Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
 [submodule "Fabrica"]
@@ -27,15 +27,15 @@
 	url = https://github.com/marius-patrik/TailStreamer.git
 	branch = main
 [submodule "agent-manager"]
-	path = agent-manager
+	path = agents/agent-manager
 	url = https://github.com/marius-patrik/agent-manager.git
 	branch = main
 [submodule "life-support"]
-	path = life-support
+	path = agents/life-support
 	url = https://github.com/marius-patrik/life-support.git
 	branch = main
 [submodule "memory-plugin"]
-	path = memory-plugin
+	path = agents/context-engine
 	url = https://github.com/marius-patrik/memory-plugin.git
 	branch = master
 [submodule "mssgs"]
@@ -47,7 +47,7 @@
 	url = https://github.com/marius-patrik/singularity.git
 	branch = main
 [submodule "skyagent"]
-	path = skyagent
+	path = agents/skyagent
 	url = https://github.com/marius-patrik/skyagent.git
 	branch = main
 [submodule "vsc-utils"]
