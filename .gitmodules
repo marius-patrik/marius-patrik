@@ -1,7 +1,3 @@
-[submodule "Archive"]
-	path = Archive
-	url = https://github.com/marius-patrik/Archive.git
-	branch = main
 [submodule "Blog"]
 	path = Blog
 	url = https://github.com/marius-patrik/Blog.git
@@ -26,22 +22,10 @@
 	path = Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
-[submodule "Citizen"]
-	path = Citizen
-	url = https://github.com/marius-patrik/Citizen.git
-	branch = main
 [submodule "Fabrica"]
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
-[submodule "MMO"]
-	path = MMO
-	url = https://github.com/marius-patrik/MMO.git
-	branch = main
-[submodule "RSCode"]
-	path = RSCode
-	url = https://github.com/marius-patrik/RSCode.git
-	branch = main
 [submodule "TailStreamer"]
 	path = TailStreamer
 	url = https://github.com/marius-patrik/TailStreamer.git
@@ -70,18 +54,6 @@
 	path = skyagent
 	url = https://github.com/marius-patrik/skyagent.git
 	branch = main
-[submodule "template-cli"]
-	path = template-cli
-	url = https://github.com/marius-patrik/template-cli.git
-	branch = main
-[submodule "template-mono"]
-	path = template-mono
-	url = https://github.com/marius-patrik/template-mono.git
-	branch = main
-[submodule "template-web"]
-	path = template-web
-	url = https://github.com/marius-patrik/template-web.git
-	branch = main
 [submodule "vsc-utils"]
 	path = vsc-utils
 	url = https://github.com/marius-patrik/vsc-utils.git
@@ -90,7 +62,31 @@
 	path = yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
-[submodule "Wrkspace"]
-	path = Wrkspace
+[submodule "templates/template-cli"]
+	path = templates/template-cli
+	url = https://github.com/marius-patrik/template-cli.git
+	branch = main
+[submodule "templates/template-mono"]
+	path = templates/template-mono
+	url = https://github.com/marius-patrik/template-mono.git
+	branch = main
+[submodule "templates/template-web"]
+	path = templates/template-web
+	url = https://github.com/marius-patrik/template-web.git
+	branch = main
+[submodule "archive/Citizen"]
+	path = archive/Citizen
+	url = https://github.com/marius-patrik/Citizen.git
+	branch = main
+[submodule "archive/MMO"]
+	path = archive/MMO
+	url = https://github.com/marius-patrik/MMO.git
+	branch = main
+[submodule "archive/RSCode"]
+	path = archive/RSCode
+	url = https://github.com/marius-patrik/RSCode.git
+	branch = main
+[submodule "archive/Wrkspace"]
+	path = archive/Wrkspace
 	url = https://github.com/marius-patrik/Wrkspace.git
 	branch = main
