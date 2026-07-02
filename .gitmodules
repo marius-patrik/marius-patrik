@@ -6,10 +6,6 @@
 	path = archive/Citizen
 	url = https://github.com/marius-patrik/Citizen.git
 	branch = main
-[submodule "experience"]
-	path = experience
-	url = https://github.com/marius-patrik/experience.git
-	branch = master
 [submodule "Fabrica"]
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
@@ -34,29 +30,9 @@
 	path = archive/RSCode
 	url = https://github.com/marius-patrik/RSCode.git
 	branch = main
-[submodule "singularity"]
-	path = singularity
+[submodule "packages/singularity"]
+	path = packages/singularity
 	url = https://github.com/marius-patrik/singularity.git
-	branch = main
-[submodule "template-bot"]
-	path = templates/template-bot
-	url = https://github.com/marius-patrik/template-bot.git
-	branch = main
-[submodule "template-cli"]
-	path = templates/template-cli
-	url = https://github.com/marius-patrik/template-cli.git
-	branch = main
-[submodule "template-mono"]
-	path = templates/template-mono
-	url = https://github.com/marius-patrik/template-mono.git
-	branch = main
-[submodule "template-repo"]
-	path = templates/template-repo
-	url = https://github.com/marius-patrik/template-repo.git
-	branch = main
-[submodule "template-web"]
-	path = templates/template-web
-	url = https://github.com/marius-patrik/template-web.git
 	branch = main
 [submodule "vsc-utils"]
 	path = vsc-utils

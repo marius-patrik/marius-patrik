@@ -7,13 +7,11 @@
 !andromeda
 !archive
 !archive/*
-!experience
 !Fabrica
 !media-streamer
 !mssgs
+!packages
+!packages/*
 !private
-!singularity
-!templates
-!templates/*
 !vsc-utils
 !yacht

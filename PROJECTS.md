@@ -15,34 +15,40 @@ submodule paths and repository topics.
 | --- | --- | --- |
 | `agents` | `marius-patrik/agents` | Agent package-manager workspace and shared `agents` CLI state. |
 | `andromeda` | `marius-patrik/andromeda` | Rommie and Andromeda platform source. |
+| `andromeda/plugins/rommie` | `marius-patrik/andromeda` | Rommie plugin source that supersedes the old `experience` plugin. |
 | `agents/packages/agents-core` | `marius-patrik/agents` | Core `agents` CLI source and tests. |
+| `agents/packages/agi` | `marius-patrik/agi` | Private AGI agent package. |
 | `agents/packages/andromeda` | `marius-patrik/andromeda` | Andromeda package entry inside `agents`. |
-| `agents/packages/personal-assistant` | `marius-patrik/personal-assistant` | Private avatar agent package. |
-| `agents/packages/skye` | `marius-patrik/skye` | SkyAgent avatar package. |
+| `agents/packages/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
 | `agents/packages/vibe-bot` | `marius-patrik/vibe-bot` | GitHub App automation avatar package. |
+| `agents/packages/templates/template-bot` | `marius-patrik/template-bot` | Managed bot repository template. |
+| `agents/packages/templates/template-cli` | `marius-patrik/template-cli` | Managed CLI repository template. |
+| `agents/packages/templates/template-mono` | `marius-patrik/template-mono` | Managed monorepo template. |
+| `agents/packages/templates/template-repo` | `marius-patrik/template-repo` | Bun TypeScript managed repository template. |
+| `agents/packages/templates/template-web` | `marius-patrik/template-web` | Managed web app repository template. |
 
 ## Root Projects
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `experience` | `marius-patrik/experience` | Codex experience memory and workflow assets. |
 | `Fabrica` | `marius-patrik/Fabrica` | Fabrica project workspace. |
 | `media-streamer` | `marius-patrik/media-streamer` | Media streamer project workspace. |
 | `mssgs` | `marius-patrik/mssgs` | Unified messaging project workspace. |
 | `private` | `marius-patrik/private` | Private workspace repository. |
-| `singularity` | `marius-patrik/singularity` | Singularity project workspace. |
 | `vsc-utils` | `marius-patrik/vsc-utils` | VS Code utility project workspace. |
 | `yacht` | `marius-patrik/yacht` | Private yacht project workspace. |
 
-## Templates
+## Packages
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `templates/template-bot` | `marius-patrik/template-bot` | Managed bot repository template. |
-| `templates/template-cli` | `marius-patrik/template-cli` | Managed CLI repository template. |
-| `templates/template-mono` | `marius-patrik/template-mono` | Managed monorepo template. |
-| `templates/template-repo` | `marius-patrik/template-repo` | Bun TypeScript managed repository template. |
-| `templates/template-web` | `marius-patrik/template-web` | Managed web app repository template. |
+| `packages/singularity` | `marius-patrik/singularity` | Singularity project workspace. |
+
+## Migrated
+
+| Former Path | Repository | Current Home |
+| --- | --- | --- |
+| `experience` | `marius-patrik/experience` | `andromeda/plugins/rommie` |
 
 ## Archive
 

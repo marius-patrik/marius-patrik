@@ -8,7 +8,7 @@ default.
 
 `agents` is the active agent package-manager workspace. It owns agent
 repositories under `agents/packages/*`, and the CLI inside it is also named
-`agents`. SkyAgent is tracked by the `skye` repository there.
+`agents`. SkyBlock Agent is tracked by the `skyblock-agent` repository there.
 
 ## Workspace Layout
 
@@ -17,16 +17,13 @@ repositories under `agents/packages/*`, and the CLI inside it is also named
 |-- agents/
 |   `-- packages/
 |       |-- agents-core/
+|       |-- agi/
 |       |-- andromeda/
-|       |-- personal-assistant/
-|       |-- skye/
+|       |-- skyblock-agent/
+|       |-- templates/
 |       `-- vibe-bot/
-|-- templates/
-|   |-- template-bot/
-|   |-- template-cli/
-|   |-- template-mono/
-|   |-- template-repo/
-|   `-- template-web/
+|-- packages/
+|   `-- singularity/
 `-- archive/
     |-- Citizen/
     |-- MMO/
@@ -40,12 +37,10 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 - `andromeda`
 - `agents`
-- `experience`
 - `Fabrica`
 - `media-streamer`
 - `mssgs`
 - `private`
-- `singularity`
 - `vsc-utils`
 - `yacht`
 
@@ -55,17 +50,26 @@ Agent repositories are nested inside `agents` and should not be duplicated at
 the workspace root.
 
 - `agents/packages/andromeda`
-- `agents/packages/personal-assistant`
-- `agents/packages/skye`
+- `agents/packages/agi`
+- `agents/packages/skyblock-agent`
 - `agents/packages/vibe-bot`
 
 ## Templates
 
-- `templates/template-bot`
-- `templates/template-cli`
-- `templates/template-mono`
-- `templates/template-repo`
-- `templates/template-web`
+- `agents/packages/templates/template-bot`
+- `agents/packages/templates/template-cli`
+- `agents/packages/templates/template-mono`
+- `agents/packages/templates/template-repo`
+- `agents/packages/templates/template-web`
+
+## Packages
+
+- `packages/singularity`
+
+## Migrated
+
+- `experience` was migrated into `andromeda/plugins/rommie` and is no longer a
+  root workspace submodule.
 
 ## Archived
 
