@@ -2,15 +2,31 @@
 
 Root workspace checkout for `marius-patrik`.
 
-This repository tracks selected repositories as top-level Git submodules. Local files outside the workspace manifest are ignored by default.
+This repository tracks the current `marius-patrik` repositories as top-level Git submodules. Local files outside the workspace manifest are ignored by default.
 
 ## Submodules
 
-- `Agents` - wrapper repository containing `Andromeda`.
-- `Archive` - archived repositories, including `Wrkspace`, `Citizen`, and `MMO`.
-- `Blog` - blog workspace.
-- `Projects` - active projects, including `RSCode`, `TailStreamer`, and `Fabrica`.
-- `Research` - research documents and proof artifacts.
-- `Private` - private workspace.
-- `Vault` - private vault workspace.
-- `Wiki` - private wiki workspace.
+- `Andromeda`
+- `Archive`
+- `Blog`
+- `Citizen`
+- `Fabrica`
+- `MMO`
+- `Private`
+- `RSCode`
+- `Research`
+- `TailStreamer`
+- `Wiki`
+- `Wrkspace`
+- `agent-manager`
+- `agents`
+- `life-support`
+- `memory-plugin`
+- `mssgs`
+- `singularity`
+- `skyagent`
+- `template-cli`
+- `template-mono`
+- `template-web`
+- `vsc-utils`
+- `yacht`
