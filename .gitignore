@@ -5,12 +5,14 @@
 !Fabrica
 !Private
 !Research
-!TailStreamer
 !Wiki
 !agents
 !agents/*
+!agents/avatars/*
+!agents/plugins/*
 !archive
 !archive/*
+!media-streamer
 !mssgs
 !singularity
 !templates

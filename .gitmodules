@@ -31,7 +31,7 @@
 	url = https://github.com/marius-patrik/life-support.git
 	branch = main
 [submodule "memory-plugin"]
-	path = agents/context-engine
+	path = agents/plugins/context-engine
 	url = https://github.com/marius-patrik/memory-plugin.git
 	branch = master
 [submodule "mssgs"]
@@ -89,4 +89,12 @@
 [submodule "agents/andromeda-harness"]
 	path = agents/andromeda-harness
 	url = https://github.com/marius-patrik/andromeda-harness.git
+	branch = main
+[submodule "templates/template-bot"]
+	path = templates/template-bot
+	url = https://github.com/marius-patrik/template-bot.git
+	branch = main
+[submodule "agents/avatars/vibe-bot"]
+	path = agents/avatars/vibe-bot
+	url = https://github.com/marius-patrik/vibe-bot.git
 	branch = main
