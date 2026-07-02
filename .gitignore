@@ -16,11 +16,8 @@
 !rommie
 !singularity
 !skye
-!template-bot
-!template-cli
-!template-mono
-!template-repo
-!template-web
+!templates
+!templates/*
 !vibe-bot
 !vsc-utils
 !yacht

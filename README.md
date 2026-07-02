@@ -18,14 +18,17 @@ This repository tracks the current `marius-patrik` repositories as top-level Git
 - `rommie`
 - `singularity`
 - `skye`
-- `template-bot`
-- `template-cli`
-- `template-mono`
-- `template-repo`
-- `template-web`
 - `vibe-bot`
 - `vsc-utils`
 - `yacht`
+
+## Templates
+
+- `templates/template-bot`
+- `templates/template-cli`
+- `templates/template-mono`
+- `templates/template-repo`
+- `templates/template-web`
 
 ## Archived
 
