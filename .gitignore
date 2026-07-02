@@ -5,16 +5,15 @@
 !agents
 !agents-cli
 !andromeda
-!Citizen
+!archive
+!archive/*
 !experience
 !Fabrica
 !media-streamer
-!MMO
 !mssgs
 !personal-assistant
 !private
 !rommie
-!RSCode
 !singularity
 !skye
 !template-bot
@@ -24,5 +23,4 @@
 !template-web
 !vibe-bot
 !vsc-utils
-!Wrkspace
 !yacht
