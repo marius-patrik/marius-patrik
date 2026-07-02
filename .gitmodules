@@ -10,10 +10,6 @@
 	path = Wiki
 	url = https://github.com/marius-patrik/Wiki.git
 	branch = main
-[submodule "agents"]
-	path = agents/agents
-	url = https://github.com/marius-patrik/agents.git
-	branch = main
 [submodule "Andromeda"]
 	path = agents/Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
@@ -31,7 +27,7 @@
 	url = https://github.com/marius-patrik/agent-manager.git
 	branch = main
 [submodule "life-support"]
-	path = agents/life-support
+	path = agents/avatars/life-support
 	url = https://github.com/marius-patrik/life-support.git
 	branch = main
 [submodule "memory-plugin"]
@@ -47,7 +43,7 @@
 	url = https://github.com/marius-patrik/singularity.git
 	branch = main
 [submodule "skyagent"]
-	path = agents/skyagent
+	path = agents/avatars/skyagent
 	url = https://github.com/marius-patrik/skyagent.git
 	branch = main
 [submodule "vsc-utils"]
