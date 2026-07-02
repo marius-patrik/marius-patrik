@@ -9,16 +9,13 @@ This repository tracks the current `marius-patrik` repositories as top-level Git
 - `agents`
 - `agents-cli`
 - `andromeda`
-- `Citizen`
 - `experience`
 - `Fabrica`
 - `media-streamer`
-- `MMO`
 - `mssgs`
 - `personal-assistant`
 - `private`
 - `rommie`
-- `RSCode`
 - `singularity`
 - `skye`
 - `template-bot`
@@ -28,5 +25,11 @@ This repository tracks the current `marius-patrik` repositories as top-level Git
 - `template-web`
 - `vibe-bot`
 - `vsc-utils`
-- `Wrkspace`
 - `yacht`
+
+## Archived
+
+- `archive/Citizen`
+- `archive/MMO`
+- `archive/RSCode`
+- `archive/Wrkspace`
