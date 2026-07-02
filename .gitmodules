@@ -1,3 +1,23 @@
+[submodule "agents"]
+	path = agents
+	url = https://github.com/marius-patrik/agents.git
+	branch = main
+[submodule "agents-cli"]
+	path = agents-cli
+	url = https://github.com/marius-patrik/agents-cli.git
+	branch = main
+[submodule "andromeda"]
+	path = andromeda
+	url = https://github.com/marius-patrik/andromeda.git
+	branch = main
+[submodule "Citizen"]
+	path = Citizen
+	url = https://github.com/marius-patrik/Citizen.git
+	branch = main
+[submodule "experience"]
+	path = experience
+	url = https://github.com/marius-patrik/experience.git
+	branch = master
 [submodule "Fabrica"]
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
@@ -6,39 +26,71 @@
 	path = media-streamer
 	url = https://github.com/marius-patrik/media-streamer.git
 	branch = main
+[submodule "MMO"]
+	path = MMO
+	url = https://github.com/marius-patrik/MMO.git
+	branch = main
 [submodule "mssgs"]
 	path = mssgs
 	url = https://github.com/marius-patrik/mssgs.git
+	branch = main
+[submodule "personal-assistant"]
+	path = personal-assistant
+	url = https://github.com/marius-patrik/personal-assistant.git
+	branch = main
+[submodule "private"]
+	path = private
+	url = https://github.com/marius-patrik/private.git
+	branch = main
+[submodule "rommie"]
+	path = rommie
+	url = https://github.com/marius-patrik/rommie.git
+	branch = main
+[submodule "RSCode"]
+	path = RSCode
+	url = https://github.com/marius-patrik/RSCode.git
 	branch = main
 [submodule "singularity"]
 	path = singularity
 	url = https://github.com/marius-patrik/singularity.git
 	branch = main
+[submodule "skye"]
+	path = skye
+	url = https://github.com/marius-patrik/skye.git
+	branch = main
+[submodule "template-bot"]
+	path = template-bot
+	url = https://github.com/marius-patrik/template-bot.git
+	branch = main
+[submodule "template-cli"]
+	path = template-cli
+	url = https://github.com/marius-patrik/template-cli.git
+	branch = main
+[submodule "template-mono"]
+	path = template-mono
+	url = https://github.com/marius-patrik/template-mono.git
+	branch = main
+[submodule "template-repo"]
+	path = template-repo
+	url = https://github.com/marius-patrik/template-repo.git
+	branch = main
+[submodule "template-web"]
+	path = template-web
+	url = https://github.com/marius-patrik/template-web.git
+	branch = main
+[submodule "vibe-bot"]
+	path = vibe-bot
+	url = https://github.com/marius-patrik/vibe-bot.git
+	branch = main
 [submodule "vsc-utils"]
 	path = vsc-utils
 	url = https://github.com/marius-patrik/vsc-utils.git
 	branch = main
+[submodule "Wrkspace"]
+	path = Wrkspace
+	url = https://github.com/marius-patrik/Wrkspace.git
+	branch = main
 [submodule "yacht"]
 	path = yacht
 	url = https://github.com/marius-patrik/yacht.git
-	branch = main
-[submodule "archive/Citizen"]
-	path = archive/Citizen
-	url = https://github.com/marius-patrik/Citizen.git
-	branch = main
-[submodule "archive/MMO"]
-	path = archive/MMO
-	url = https://github.com/marius-patrik/MMO.git
-	branch = main
-[submodule "archive/RSCode"]
-	path = archive/RSCode
-	url = https://github.com/marius-patrik/RSCode.git
-	branch = main
-[submodule "archive/Wrkspace"]
-	path = archive/Wrkspace
-	url = https://github.com/marius-patrik/Wrkspace.git
-	branch = main
-[submodule "agents"]
-	path = agents
-	url = https://github.com/marius-patrik/agents.git
 	branch = main
