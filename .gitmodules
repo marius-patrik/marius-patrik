@@ -86,3 +86,7 @@
 	path = templates/template-repo
 	url = https://github.com/marius-patrik/template-repo.git
 	branch = main
+[submodule "agents/andromeda-harness"]
+	path = agents/andromeda-harness
+	url = https://github.com/marius-patrik/andromeda-harness.git
+	branch = main
