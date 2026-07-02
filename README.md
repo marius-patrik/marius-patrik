@@ -7,7 +7,6 @@ This repository tracks the current `marius-patrik` repositories as Git submodule
 ## Submodules
 
 - `Fabrica`
-- `Private`
 - `agents`
 - `media-streamer`
 - `mssgs`
