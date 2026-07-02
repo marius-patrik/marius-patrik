@@ -1,7 +1,3 @@
-[submodule "Blog"]
-	path = Blog
-	url = https://github.com/marius-patrik/Blog.git
-	branch = main
 [submodule "Private"]
 	path = Private
 	url = https://github.com/marius-patrik/Private.git

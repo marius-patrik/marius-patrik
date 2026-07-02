@@ -7,7 +7,6 @@ This repository tracks the current `marius-patrik` repositories as Git submodule
 ## Submodules
 
 - `Andromeda`
-- `Blog`
 - `Fabrica`
 - `Private`
 - `Research`
