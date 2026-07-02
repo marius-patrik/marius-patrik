@@ -1,6 +1,6 @@
-[submodule "avatars"]
-	path = avatars
-	url = https://github.com/marius-patrik/avatars.git
+[submodule "agent-kernel"]
+	path = agent-kernel
+	url = https://github.com/marius-patrik/agent-kernel.git
 	branch = main
 [submodule "Citizen"]
 	path = archive/Citizen
