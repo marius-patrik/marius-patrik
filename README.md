@@ -4,18 +4,19 @@ Root workspace checkout for `marius-patrik`.
 
 This repository tracks the current `marius-patrik` repositories as top-level Git submodules. Local files outside the workspace manifest are ignored by default.
 
+`avatars` is the active agent package-manager workspace. It replaces the old
+`agents` package-manager name. SkyAgent is tracked as `skye`.
+
 ## Repositories
 
-- `agents`
-- `agents-cli`
 - `andromeda`
+- `avatars`
 - `experience`
 - `Fabrica`
 - `media-streamer`
 - `mssgs`
 - `personal-assistant`
 - `private`
-- `rommie`
 - `singularity`
 - `skye`
 - `vibe-bot`
@@ -31,6 +32,9 @@ This repository tracks the current `marius-patrik` repositories as top-level Git
 - `templates/template-web`
 
 ## Archived
+
+These repositories are parked and should not be used for active work unless they
+are explicitly reopened.
 
 - `archive/Citizen`
 - `archive/MMO`
