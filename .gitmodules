@@ -1,6 +1,6 @@
-[submodule "agents"]
-	path = agents
-	url = https://github.com/marius-patrik/agents.git
+[submodule "rommie"]
+	path = rommie
+	url = https://github.com/marius-patrik/rommie.git
 	branch = main
 [submodule "cli"]
 	path = cli
@@ -41,10 +41,6 @@
 [submodule "private"]
 	path = private
 	url = https://github.com/marius-patrik/private.git
-	branch = main
-[submodule "rommie"]
-	path = rommie
-	url = https://github.com/marius-patrik/rommie.git
 	branch = main
 [submodule "RSCode"]
 	path = archive/RSCode
