@@ -26,10 +26,6 @@
 	path = mssgs
 	url = https://github.com/marius-patrik/mssgs.git
 	branch = main
-[submodule "personal-assistant"]
-	path = personal-assistant
-	url = https://github.com/marius-patrik/personal-assistant.git
-	branch = main
 [submodule "private"]
 	path = private
 	url = https://github.com/marius-patrik/private.git
@@ -41,10 +37,6 @@
 [submodule "singularity"]
 	path = singularity
 	url = https://github.com/marius-patrik/singularity.git
-	branch = main
-[submodule "skye"]
-	path = skye
-	url = https://github.com/marius-patrik/skye.git
 	branch = main
 [submodule "template-bot"]
 	path = templates/template-bot
@@ -65,10 +57,6 @@
 [submodule "template-web"]
 	path = templates/template-web
 	url = https://github.com/marius-patrik/template-web.git
-	branch = main
-[submodule "vibe-bot"]
-	path = vibe-bot
-	url = https://github.com/marius-patrik/vibe-bot.git
 	branch = main
 [submodule "vsc-utils"]
 	path = vsc-utils
