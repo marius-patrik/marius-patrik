@@ -18,7 +18,7 @@ This repository tracks the current `marius-patrik` repositories as Git submodule
 
 ## Agents
 
-- `agents/Andromeda`
+- `agents/inference-fabric`
 - `agents/agent-manager`
 - `agents/context-engine`
 - `agents/avatars/life-support`
