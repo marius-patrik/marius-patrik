@@ -6,14 +6,6 @@
 	path = Research
 	url = https://github.com/marius-patrik/Research.git
 	branch = main
-[submodule "Wiki"]
-	path = Wiki
-	url = https://github.com/marius-patrik/Wiki.git
-	branch = main
-[submodule "inference-fabric"]
-	path = agents/inference-fabric
-	url = https://github.com/marius-patrik/inference-fabric.git
-	branch = main
 [submodule "Fabrica"]
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
@@ -22,18 +14,6 @@
 	path = media-streamer
 	url = https://github.com/marius-patrik/media-streamer.git
 	branch = main
-[submodule "agent-manager"]
-	path = agents/agent-manager
-	url = https://github.com/marius-patrik/agent-manager.git
-	branch = main
-[submodule "life-support"]
-	path = agents/avatars/life-support
-	url = https://github.com/marius-patrik/life-support.git
-	branch = main
-[submodule "experience"]
-	path = agents/plugins/experience
-	url = https://github.com/marius-patrik/experience.git
-	branch = master
 [submodule "mssgs"]
 	path = mssgs
 	url = https://github.com/marius-patrik/mssgs.git
@@ -41,10 +21,6 @@
 [submodule "singularity"]
 	path = singularity
 	url = https://github.com/marius-patrik/singularity.git
-	branch = main
-[submodule "skyagent"]
-	path = agents/avatars/skyagent
-	url = https://github.com/marius-patrik/skyagent.git
 	branch = main
 [submodule "vsc-utils"]
 	path = vsc-utils
@@ -86,15 +62,11 @@
 	path = templates/template-repo
 	url = https://github.com/marius-patrik/template-repo.git
 	branch = main
-[submodule "agents/andromeda-harness"]
-	path = agents/andromeda-harness
-	url = https://github.com/marius-patrik/andromeda-harness.git
-	branch = main
 [submodule "templates/template-bot"]
 	path = templates/template-bot
 	url = https://github.com/marius-patrik/template-bot.git
 	branch = main
-[submodule "agents/avatars/vibe-bot"]
-	path = agents/avatars/vibe-bot
-	url = https://github.com/marius-patrik/vibe-bot.git
+[submodule "agents"]
+	path = agents
+	url = https://github.com/marius-patrik/agents.git
 	branch = main
