@@ -3,8 +3,8 @@
 !.gitmodules
 !README.md
 !PROJECTS.md
-!agents
-!andromeda
+!agent-os
+!agent-harness
 !archive
 !archive/*
 !Fabrica
