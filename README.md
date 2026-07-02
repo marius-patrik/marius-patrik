@@ -34,4 +34,5 @@ This repository tracks the current `marius-patrik` repositories as Git submodule
 
 - `templates/template-cli`
 - `templates/template-mono`
+- `templates/template-repo`
 - `templates/template-web`
