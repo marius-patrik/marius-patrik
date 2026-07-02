@@ -15,10 +15,11 @@ submodule paths and repository topics.
 | --- | --- | --- |
 | `agents` | `marius-patrik/agents` | Agent package-manager workspace and shared `agents` CLI state. |
 | `andromeda` | `marius-patrik/andromeda` | Rommie and Andromeda platform source. |
-| `agents/agents/andromeda` | `marius-patrik/andromeda` | Andromeda package entry inside `agents`. |
-| `agents/agents/personal-assistant` | `marius-patrik/personal-assistant` | Private avatar agent package. |
-| `agents/agents/skye` | `marius-patrik/skye` | SkyAgent avatar package. |
-| `agents/agents/vibe-bot` | `marius-patrik/vibe-bot` | GitHub App automation avatar package. |
+| `agents/packages/agents-core` | `marius-patrik/agents` | Core `agents` CLI source and tests. |
+| `agents/packages/andromeda` | `marius-patrik/andromeda` | Andromeda package entry inside `agents`. |
+| `agents/packages/personal-assistant` | `marius-patrik/personal-assistant` | Private avatar agent package. |
+| `agents/packages/skye` | `marius-patrik/skye` | SkyAgent avatar package. |
+| `agents/packages/vibe-bot` | `marius-patrik/vibe-bot` | GitHub App automation avatar package. |
 
 ## Root Projects
 
