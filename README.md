@@ -6,15 +6,15 @@ This repository tracks the current `marius-patrik` repositories as a nested Git
 submodule workspace. Local files outside the workspace manifest are ignored by
 default.
 
-`agent-kernel` is the active agent package-manager workspace. It owns agent
-repositories under `agent-kernel/agents/*`, and the CLI inside it is still named
+`agents` is the active agent package-manager workspace. It owns agent
+repositories under `agents/agents/*`, and the CLI inside it is also named
 `agents`. SkyAgent is tracked by the `skye` repository there.
 
 ## Workspace Layout
 
 ```text
 .
-|-- agent-kernel/
+|-- agents/
 |   `-- agents/
 |       |-- andromeda/
 |       |-- personal-assistant/
@@ -38,7 +38,7 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 ## Root Repositories
 
 - `andromeda`
-- `agent-kernel`
+- `agents`
 - `experience`
 - `Fabrica`
 - `media-streamer`
@@ -50,13 +50,13 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Agent Repositories
 
-Agent repositories are nested inside `agent-kernel` and should not be duplicated
-at the workspace root.
+Agent repositories are nested inside `agents` and should not be duplicated at
+the workspace root.
 
-- `agent-kernel/agents/andromeda`
-- `agent-kernel/agents/personal-assistant`
-- `agent-kernel/agents/skye`
-- `agent-kernel/agents/vibe-bot`
+- `agents/agents/andromeda`
+- `agents/agents/personal-assistant`
+- `agents/agents/skye`
+- `agents/agents/vibe-bot`
 
 ## Templates
 

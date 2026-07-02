@@ -9,16 +9,16 @@ submodule paths and repository topics.
 | --- | --- | --- |
 | `.` | `marius-patrik/marius-patrik` | Root nested submodule workspace and project map. |
 
-## Agent Kernel
+## Agents
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agent-kernel` | `marius-patrik/agent-kernel` | Agent package-manager workspace and shared `agents` CLI state. |
+| `agents` | `marius-patrik/agents` | Agent package-manager workspace and shared `agents` CLI state. |
 | `andromeda` | `marius-patrik/andromeda` | Rommie and Andromeda platform source. |
-| `agent-kernel/agents/andromeda` | `marius-patrik/andromeda` | Andromeda package entry inside `agent-kernel`. |
-| `agent-kernel/agents/personal-assistant` | `marius-patrik/personal-assistant` | Private avatar agent package. |
-| `agent-kernel/agents/skye` | `marius-patrik/skye` | SkyAgent avatar package. |
-| `agent-kernel/agents/vibe-bot` | `marius-patrik/vibe-bot` | GitHub App automation avatar package. |
+| `agents/agents/andromeda` | `marius-patrik/andromeda` | Andromeda package entry inside `agents`. |
+| `agents/agents/personal-assistant` | `marius-patrik/personal-assistant` | Private avatar agent package. |
+| `agents/agents/skye` | `marius-patrik/skye` | SkyAgent avatar package. |
+| `agents/agents/vibe-bot` | `marius-patrik/vibe-bot` | GitHub App automation avatar package. |
 
 ## Root Projects
 
