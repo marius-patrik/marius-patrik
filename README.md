@@ -7,7 +7,7 @@ submodule workspace. Local files outside the workspace manifest are ignored by
 default.
 
 `agents` is the active agent package-manager workspace. It owns agent
-repositories under `agents/agents/*`, and the CLI inside it is also named
+repositories under `agents/packages/*`, and the CLI inside it is also named
 `agents`. SkyAgent is tracked by the `skye` repository there.
 
 ## Workspace Layout
@@ -15,7 +15,8 @@ repositories under `agents/agents/*`, and the CLI inside it is also named
 ```text
 .
 |-- agents/
-|   `-- agents/
+|   `-- packages/
+|       |-- agents-core/
 |       |-- andromeda/
 |       |-- personal-assistant/
 |       |-- skye/
@@ -53,10 +54,10 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 Agent repositories are nested inside `agents` and should not be duplicated at
 the workspace root.
 
-- `agents/agents/andromeda`
-- `agents/agents/personal-assistant`
-- `agents/agents/skye`
-- `agents/agents/vibe-bot`
+- `agents/packages/andromeda`
+- `agents/packages/personal-assistant`
+- `agents/packages/skye`
+- `agents/packages/vibe-bot`
 
 ## Templates
 
