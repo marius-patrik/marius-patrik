@@ -54,7 +54,7 @@ workspace submodules below `agents-mono/`.
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-mono/packages/data/data-agentos` | `marius-patrik/agentos-data` | Managed data root for agent and workspace package data. |
+| `agents-mono/data/data-agentos` | `marius-patrik/agentos-data` | Managed data root for agent and workspace package data. |
 | `agents-mono/plugins/dream` | `marius-patrik/dream` | Dream plugin package. |
 | `agents-mono/packages/workspaces/darkfactory-workspace` | `marius-patrik/darkfactory-workspace` | DarkFactory workspace package. |
 
@@ -72,6 +72,7 @@ workspace submodules below `agents-mono/`.
 | `archive/MMO` | `marius-patrik/MMO` | Archived. |
 | `archive/RSCode` | `marius-patrik/RSCode` | Archived. |
 | `archive/Wrkspace` | `marius-patrik/Wrkspace` | Archived. |
+
 
 
 
