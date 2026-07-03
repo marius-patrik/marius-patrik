@@ -2,14 +2,14 @@
 
 Profile workspace checkout for `marius-patrik`.
 
-This repository tracks current `marius-patrik` repositories as root-level Git
-submodules. Archived repositories are grouped under `archive/`, and `agentos`
-owns managed agent, app, package, and template submodules. Local files outside
-the workspace manifest are ignored by default.
+This repository tracks current `marius-patrik` repositories as a flat root-level
+submodule list. Archived repositories are grouped under `archive/`. Agentos owns
+the nested agent, app, harness, package, template, and private workspace
+submodules.
 
-Rommie is managed by `agentos` at `agentos/agents/rommie`. Singularity is
-managed at `agentos/apps/singularity`. The private workspace repository is
-managed at `agentos/workspace`.
+Rommie is managed by Agentos at `agentos/agents/rommie-agent`. Singularity is
+managed at `agentos/apps/singularity`. The private Agentos workspace repository
+is tracked at `agentos/workspace`.
 
 ## Workspace Layout
 
@@ -17,18 +17,25 @@ managed at `agentos/workspace`.
 .
 |-- agentos/
 |   |-- agents/
-|   |   |-- agi/
 |   |   |-- dark-factory/
-|   |   |-- rommie/
+|   |   |-- life-support/
+|   |   |-- rommie-agent/
 |   |   `-- skyblock-agent/
 |   |-- apps/
 |   |   `-- singularity/
+|   |-- harnesses/
+|   |   `-- andromeda-harness/
 |   |-- packages/
-|   |   |-- agentos-harness/
+|   |   |-- agentos-core/
+|   |   |-- agentos-gateway/
+|   |   |-- agentos-inferer/
 |   |   `-- agentos-manager/
 |   |-- templates/
 |   `-- workspace/
-|-- agentos-harness/
+|       `-- andromeda/
+|           |-- research/
+|           `-- wiki/
+|-- andromeda-harness/
 |-- Fabrica/
 |-- media-streamer/
 |-- mssgs/
@@ -46,7 +53,7 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 ## Root Repositories
 
 - `agentos`
-- `agentos-harness`
+- `andromeda-harness`
 - `Fabrica`
 - `media-streamer`
 - `mssgs`
@@ -55,19 +62,28 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Agentos Managed Repositories
 
-- `agentos/agents/agi`
 - `agentos/agents/dark-factory`
-- `agentos/agents/rommie`
+- `agentos/agents/life-support`
+- `agentos/agents/rommie-agent`
 - `agentos/agents/skyblock-agent`
 - `agentos/apps/singularity`
-- `agentos/packages/agentos-harness`
+- `agentos/harnesses/andromeda-harness`
 - `agentos/templates/*`
 - `agentos/workspace`
 
+## Agentos Packages
+
+- `agentos/packages/agentos-core`
+- `agentos/packages/agentos-gateway`
+- `agentos/packages/agentos-inferer`
+- `agentos/packages/agentos-manager`
+
 ## Migrated
 
-- `experience` was migrated into `agentos/agents/rommie` and is no longer a
-  profile workspace submodule.
+- `experience` was migrated into `agentos/agents/rommie-agent` and is no longer
+  a profile workspace submodule.
+- Andromeda wiki and research material was moved into `agentos/workspace` under
+  `andromeda/wiki` and `andromeda/research`.
 
 ## Archived
 
