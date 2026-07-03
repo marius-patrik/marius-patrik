@@ -2,7 +2,7 @@
 
 Active GitHub repositories are tracked as profile submodules. Archived
 repositories live under `archive/`; `agentos` owns managed agent, app, package,
-and template submodules.
+template, and private workspace submodules.
 
 ## Workspace
 
@@ -19,7 +19,6 @@ and template submodules.
 | `Fabrica` | `marius-patrik/Fabrica` | Fabrica project workspace. |
 | `media-streamer` | `marius-patrik/media-streamer` | Media streamer project workspace. |
 | `mssgs` | `marius-patrik/mssgs` | Unified messaging project workspace. |
-| `private` | `marius-patrik/private` | Private workspace repository. |
 | `vsc-utils` | `marius-patrik/vsc-utils` | VS Code utility project workspace. |
 | `yacht` | `marius-patrik/yacht` | Private yacht project workspace. |
 
@@ -38,6 +37,7 @@ and template submodules.
 | `agentos/templates/template-mono` | `marius-patrik/template-mono` | Managed monorepo template. |
 | `agentos/templates/template-repo` | `marius-patrik/template-repo` | Bun TypeScript managed repository template. |
 | `agentos/templates/template-web` | `marius-patrik/template-web` | Managed web app repository template. |
+| `agentos/workspace` | `marius-patrik/agentos-workspace` | Private Agentos workspace repository. |
 
 ## Migrated
 

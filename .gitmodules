@@ -22,10 +22,6 @@
 	path = mssgs
 	url = https://github.com/marius-patrik/mssgs.git
 	branch = main
-[submodule "private"]
-	path = private
-	url = https://github.com/marius-patrik/private.git
-	branch = main
 [submodule "RSCode"]
 	path = archive/RSCode
 	url = https://github.com/marius-patrik/RSCode.git
