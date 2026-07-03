@@ -4,9 +4,9 @@ Profile workspace checkout for `marius-patrik`.
 
 This repository tracks current `marius-patrik` repositories as a flat root-level
 submodule list. Archived repositories are grouped under `archive/`. Agentos owns
-the nested agent, app, harness, package, plugin, skills, and data submodules.
+the nested agent, app, OS package, plugin, skills, and data submodules.
 
-Andromeda is managed by Agentos at `agents-mono/plugins/andromeda`. Singularity is
+Rommie is managed by Agentos at `agents-mono/plugins/plugin-rommie`. Singularity is
 managed at `agents-mono/apps/singularity`. The private workspace material is under
 `agents-mono/workspaces`.
 
@@ -22,24 +22,22 @@ managed at `agents-mono/apps/singularity`. The private workspace material is und
 |   |-- apps/
 |   |   |-- fabrica/
 |   |   `-- singularity/
-|   |-- harnesses/
-|   |   `-- andromeda-harness/
 |   |-- os/
 |   |   |-- agents-core/
-|   |   `-- agents-manager/
-|   |-- llm-gateway/
-|   |-- inference-engine/
+|   |   |-- agents-manager/
+|   |   |-- agents-harness/
+|   |   |-- llm-gateway/
+|   |   `-- inference-engine/
 |   |-- data/
 |   |   `-- data-agentos/
 |   |-- plugins/
-|   |   |-- andromeda/
+|   |   |-- plugin-rommie/
 |   |   `-- dream/
 |   |-- skills/
 |   |-- templates/
 |   |   `-- darkfactory-templates/
 |   `-- workspaces/
 |       `-- darkfactory-workspace/
-|-- andromeda-harness/
 |-- Fabrica/
 |-- media-streamer/
 |-- mssgs/
@@ -57,7 +55,6 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 ## Root Repositories
 
 - `agents-mono`
-- `andromeda-harness`
 - `Fabrica`
 - `media-streamer`
 - `mssgs`
@@ -71,12 +68,12 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 - `agents-mono/agents/skyblock-agent`
 - `agents-mono/apps/fabrica`
 - `agents-mono/apps/singularity`
-- `agents-mono/harnesses/andromeda-harness`
 - `agents-mono/os/agents-core`
 - `agents-mono/os/agents-manager`
-- `agents-mono/llm-gateway`
-- `agents-mono/inference-engine`
-- `agents-mono/plugins/andromeda`
+- `agents-mono/os/agents-harness`
+- `agents-mono/os/llm-gateway`
+- `agents-mono/os/inference-engine`
+- `agents-mono/plugins/plugin-rommie`
 - `agents-mono/plugins/dream`
 - `agents-mono/skills`
 - `agents-mono/templates/darkfactory-templates`
@@ -84,10 +81,11 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Migrated
 
-- `experience` was migrated into the Andromeda plugin and is no longer a profile workspace submodule.
+- `experience` was migrated into the Rommie plugin and is no longer a profile workspace submodule.
 - Andromeda wiki and research material was moved into `agents-mono/workspaces` under
   `andromeda/wiki` and `andromeda/research` as part of workspace consolidation.
-- The former memory plugin was renamed to `andromeda-plugin` and lives at `agents-mono/plugins/andromeda`.
+- The former plugin repo was renamed to `plugin-rommie` and lives at `agents-mono/plugins/plugin-rommie`.
+- The former Andromeda harness repo was renamed to `agents-harness` and lives at `agents-mono/os/agents-harness`.
 
 ## Archived
 
@@ -98,4 +96,3 @@ are explicitly reopened.
 - `archive/MMO`
 - `archive/RSCode`
 - `archive/Wrkspace`
-
