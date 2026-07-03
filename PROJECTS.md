@@ -3,7 +3,7 @@
 Active GitHub repositories are tracked as profile submodules. The profile root is
 a flat active-repository list except for archived repositories under `archive/`.
 Agentos owns managed agent, app, harness, template, data, plugin, and private
-workspace submodules below `agents-os/`.
+workspace submodules below `agents-mono/`.
 
 ## Workspace
 
@@ -15,7 +15,7 @@ workspace submodules below `agents-os/`.
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-os` | `marius-patrik/agentos` | Agents-OS workspace, package manager, shared contracts, gateway, inference, and managed repo tree. |
+| `agents-mono` | `marius-patrik/agents-mono` | Agents-OS workspace, package manager, shared contracts, gateway, inference, and managed repo tree. |
 | `andromeda-harness` | `marius-patrik/andromeda-harness` | Thin Andromeda runtime harness managed by AgentOS. |
 | `Fabrica` | `marius-patrik/Fabrica` | Fabrica project workspace. |
 | `media-streamer` | `marius-patrik/media-streamer` | Media streamer project workspace. |
@@ -27,42 +27,42 @@ workspace submodules below `agents-os/`.
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-os/agents/darkfactory-agent` | `marius-patrik/darkfactory-agent` | GitHub App automation agent. |
-| `agents-os/agents/life-support` | `marius-patrik/life-support` | Private life-support agent package. |
-| `agents-os/agents/rommie-agent` | `marius-patrik/rommie-agent` | Rommie Codex plugin and agent package. |
-| `agents-os/agents/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
+| `agents-mono/agents/darkfactory-agent` | `marius-patrik/darkfactory-agent` | GitHub App automation agent. |
+| `agents-mono/agents/life-support` | `marius-patrik/life-support` | Private life-support agent package. |
+| `agents-mono/plugins/andromeda` | `marius-patrik/rommie-agent` | Andromeda Codex plugin package. |
+| `agents-mono/agents/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
 
 ## Agentos Apps, Harnesses, and Templates
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-os/apps/fabrica` | `marius-patrik/Fabrica` | Managed Fabrica app workspace. |
-| `agents-os/apps/singularity` | `marius-patrik/singularity` | Singularity app workspace. |
-| `agents-os/harnesses/andromeda-harness` | `marius-patrik/andromeda-harness` | Managed Andromeda harness runtime package. |
-| `agents-os/templates/darkfactory-templates` | `marius-patrik/darkfactory-templates` | Bun templates monorepo with managed templates. |
+| `agents-mono/apps/fabrica` | `marius-patrik/Fabrica` | Managed Fabrica app workspace. |
+| `agents-mono/apps/singularity` | `marius-patrik/singularity` | Singularity app workspace. |
+| `agents-mono/harnesses/andromeda-harness` | `marius-patrik/andromeda-harness` | Managed Andromeda harness runtime package. |
+| `agents-mono/templates/darkfactory-templates` | `marius-patrik/darkfactory-templates` | Bun templates monorepo with managed templates. |
 
 ## Agentos Packages
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-os/packages/agentos-core` | `marius-patrik/agentos` | Shared protobuf contracts, generated clients, schemas, and package manifests. |
-| `agents-os/packages/agentos-gateway` | `marius-patrik/agentos` | Gateway/router package migrated from Andromeda, including OAuth, registry, quota, and tests. |
-| `agents-os/packages/agentos-inferer` | `marius-patrik/agentos` | Inference engine, daemon, coordination, manager, state-sync, Python agent, and self-improve packages migrated from Andromeda. |
-| `agents-os/packages/agentos-manager` | `marius-patrik/agentos` | Agents-OS package-manager CLI. |
+| `agents-mono/packages/agentos-core` | `marius-patrik/agents-mono` | Shared protobuf contracts, generated clients, schemas, and package manifests. |
+| `agents-mono/packages/llm-gateway` | `marius-patrik/agents-mono` | Gateway/router package migrated from Andromeda, including OAuth, registry, quota, and tests. |
+| `agents-mono/packages/inference-engine` | `marius-patrik/agents-mono` | Inference engine, daemon, coordination, manager, state-sync, Python agent, and self-improve packages migrated from Andromeda. |
+| `agents-mono/packages/agents-manager` | `marius-patrik/agents-mono` | Agents-OS package-manager CLI. |
 
 ## Agentos Data, Workspace, Plugin, and Managed Repository Map
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-os/packages/data/data-agentos` | `marius-patrik/agentos-data` | Managed data root for agent and workspace package data. |
-| `agents-os/packages/plugins/dream` | `marius-patrik/dream` | Managed Dream plugin package. |
-| `agents-os/packages/workspaces/darkfactory-workspace` | `marius-patrik/darkfactory-workspace` | DarkFactory workspace package. |
+| `agents-mono/packages/data/data-agentos` | `marius-patrik/agentos-data` | Managed data root for agent and workspace package data. |
+| `agents-mono/packages/plugins/dream` | `marius-patrik/dream` | Managed Dream plugin package. |
+| `agents-mono/packages/workspaces/darkfactory-workspace` | `marius-patrik/darkfactory-workspace` | DarkFactory workspace package. |
 
 ## Migrated
 
 | Former Path | Repository | Current Home |
 | --- | --- | --- |
-| `experience` | `marius-patrik/experience` | `agents-os/agents/rommie-agent` |
+| `experience` | `marius-patrik/experience` | `agents-mono/plugins/andromeda` |
 
 ## Archive
 
@@ -72,3 +72,6 @@ workspace submodules below `agents-os/`.
 | `archive/MMO` | `marius-patrik/MMO` | Archived. |
 | `archive/RSCode` | `marius-patrik/RSCode` | Archived. |
 | `archive/Wrkspace` | `marius-patrik/Wrkspace` | Archived. |
+
+
+

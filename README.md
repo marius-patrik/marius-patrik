@@ -7,15 +7,15 @@ submodule list. Archived repositories are grouped under `archive/`. Agentos owns
 the nested agent, app, harness, package, template, plugin, skills, and
 data submodules.
 
-Rommie is managed by Agentos at `agents-os/agents/rommie-agent`. Singularity is
-managed at `agents-os/apps/singularity`. The private workspace material is under
-`agents-os/packages/workspaces`.
+Rommie is managed by Agentos at `agents-mono/plugins/andromeda`. Singularity is
+managed at `agents-mono/apps/singularity`. The private workspace material is under
+`agents-mono/packages/workspaces`.
 
 ## Workspace Layout
 
 ```text
 .
-|-- agents-os/
+|-- agents-mono/
 |   |-- agents/
 |   |   |-- darkfactory-agent/
 |   |   |-- life-support/
@@ -28,9 +28,9 @@ managed at `agents-os/apps/singularity`. The private workspace material is under
 |   |   `-- andromeda-harness/
 |   |-- packages/
 |   |   |-- agentos-core/
-|   |   |-- agentos-gateway/
-|   |   |-- agentos-inferer/
-|   |   |-- agentos-manager/
+|   |   |-- llm-gateway/
+|   |   |-- inference-engine/
+|   |   |-- agents-manager/
 |   |-- data/
 |   |   `-- data-agentos/
 |   |   |-- plugins/
@@ -57,7 +57,7 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Root Repositories
 
-- `agents-os`
+- `agents-mono`
 - `andromeda-harness`
 - `Fabrica`
 - `media-streamer`
@@ -67,30 +67,30 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Agentos Managed Repositories
 
-- `agents-os/agents/darkfactory-agent`
-- `agents-os/agents/life-support`
-- `agents-os/agents/rommie-agent`
-- `agents-os/agents/skyblock-agent`
-- `agents-os/apps/fabrica`
-- `agents-os/apps/singularity`
-- `agents-os/harnesses/andromeda-harness`
-- `agents-os/plugins/dream`
-- `agents-os/skills`
-- `agents-os/templates/darkfactory-templates`
-- `agents-os/workspaces/darkfactory-workspace`
+- `agents-mono/agents/darkfactory-agent`
+- `agents-mono/agents/life-support`
+- `agents-mono/plugins/andromeda`
+- `agents-mono/agents/skyblock-agent`
+- `agents-mono/apps/fabrica`
+- `agents-mono/apps/singularity`
+- `agents-mono/harnesses/andromeda-harness`
+- `agents-mono/plugins/dream`
+- `agents-mono/skills`
+- `agents-mono/templates/darkfactory-templates`
+- `agents-mono/workspaces/darkfactory-workspace`
 
 ## Agentos Packages
 
-- `agents-os/packages/agentos-core`
-- `agents-os/packages/agentos-gateway`
-- `agents-os/packages/agentos-inferer`
-- `agents-os/packages/agentos-manager`
+- `agents-mono/packages/agentos-core`
+- `agents-mono/packages/llm-gateway`
+- `agents-mono/packages/inference-engine`
+- `agents-mono/packages/agents-manager`
 
 ## Migrated
 
-- `experience` was migrated into `agents-os/agents/rommie-agent` and is no longer
+- `experience` was migrated into `agents-mono/plugins/andromeda` and is no longer
   a profile workspace submodule.
-- Andromeda wiki and research material was moved into `agents-os/workspaces` under
+- Andromeda wiki and research material was moved into `agents-mono/workspaces` under
   `andromeda/wiki` and `andromeda/research` as part of workspace consolidation.
 
 ## Archived
@@ -102,3 +102,5 @@ are explicitly reopened.
 - `archive/MMO`
 - `archive/RSCode`
 - `archive/Wrkspace`
+
+
