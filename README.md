@@ -2,13 +2,12 @@
 
 Profile workspace checkout for `marius-patrik`.
 
-This repository tracks current `marius-patrik` repositories as a flat root-level
-Git submodule list. Archived repositories are the only grouped submodules and
-live under `archive/`. Local files outside the workspace manifest are ignored by
-default.
+This repository tracks current `marius-patrik` repositories as root-level Git
+submodules. Archived repositories are grouped under `archive/`, and `agent-os`
+owns its managed package submodules under `agent-os/packages/`. Local files
+outside the workspace manifest are ignored by default.
 
-`agent-os` can own its own internal package checkouts, but the profile workspace
-keeps its repository list flat.
+`singularity` is managed by `agent-os` at `agent-os/packages/singularity`.
 
 ## Workspace Layout
 
@@ -16,11 +15,12 @@ keeps its repository list flat.
 .
 |-- agent-harness/
 |-- agent-os/
+|   `-- packages/
+|       `-- singularity/
 |-- Fabrica/
 |-- media-streamer/
 |-- mssgs/
 |-- private/
-|-- singularity/
 |-- vsc-utils/
 |-- yacht/
 `-- archive/
@@ -40,9 +40,12 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 - `media-streamer`
 - `mssgs`
 - `private`
-- `singularity`
 - `vsc-utils`
 - `yacht`
+
+## Agent OS Packages
+
+- `agent-os/packages/singularity`
 
 ## Migrated
 
