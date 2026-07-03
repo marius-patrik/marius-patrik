@@ -10,8 +10,7 @@
 !Fabrica
 !media-streamer
 !mssgs
-!packages
-!packages/*
 !private
+!singularity
 !vsc-utils
 !yacht
