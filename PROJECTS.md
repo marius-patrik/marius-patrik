@@ -29,7 +29,7 @@ workspace submodules below `agents-mono/`.
 | --- | --- | --- |
 | `agents-mono/agents/darkfactory-agent` | `marius-patrik/darkfactory-agent` | GitHub App automation agent. |
 | `agents-mono/agents/life-support` | `marius-patrik/life-support` | Private life-support agent package. |
-| `agents-mono/plugins/andromeda` | `marius-patrik/rommie-agent` | Andromeda Codex plugin package. |
+| `agents-mono/plugins/andromeda` | `marius-patrik/andromeda-plugin` | Andromeda Codex plugin package. |
 | `agents-mono/agents/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
 
 ## Agentos Apps, Harnesses, and Templates
@@ -45,17 +45,17 @@ workspace submodules below `agents-mono/`.
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-mono/packages/agentos-core` | `marius-patrik/agents-mono` | Shared protobuf contracts, generated clients, schemas, and package manifests. |
-| `agents-mono/packages/llm-gateway` | `marius-patrik/agents-mono` | Gateway/router package migrated from Andromeda, including OAuth, registry, quota, and tests. |
-| `agents-mono/packages/inference-engine` | `marius-patrik/agents-mono` | Inference engine, daemon, coordination, manager, state-sync, Python agent, and self-improve packages migrated from Andromeda. |
-| `agents-mono/packages/agents-manager` | `marius-patrik/agents-mono` | Agents-OS package-manager CLI. |
+| `agents-mono/os/agents-core` | `marius-patrik/agents-core` | Shared protobuf contracts, generated clients, schemas, and package manifests. |
+| `agents-mono/packages/llm-gateway` | `marius-patrik/llm-gateway` | Gateway/router package migrated from Andromeda, including OAuth, registry, quota, and tests. |
+| `agents-mono/packages/inference-engine` | `marius-patrik/inference-engine` | Inference engine, daemon, coordination, manager, state-sync, Python agent, and self-improve packages migrated from Andromeda. |
+| `agents-mono/packages/agents-manager` | `marius-patrik/agents-manager` | Agents-OS package-manager CLI. |
 
 ## Agentos Data, Workspace, Plugin, and Managed Repository Map
 
 | Path | Repository | Role |
 | --- | --- | --- |
 | `agents-mono/packages/data/data-agentos` | `marius-patrik/agentos-data` | Managed data root for agent and workspace package data. |
-| `agents-mono/packages/plugins/dream` | `marius-patrik/dream` | Managed Dream plugin package. |
+| `agents-mono/plugins/dream` | `marius-patrik/dream` | Dream plugin package. |
 | `agents-mono/packages/workspaces/darkfactory-workspace` | `marius-patrik/darkfactory-workspace` | DarkFactory workspace package. |
 
 ## Migrated
@@ -72,6 +72,7 @@ workspace submodules below `agents-mono/`.
 | `archive/MMO` | `marius-patrik/MMO` | Archived. |
 | `archive/RSCode` | `marius-patrik/RSCode` | Archived. |
 | `archive/Wrkspace` | `marius-patrik/Wrkspace` | Archived. |
+
 
 
 
