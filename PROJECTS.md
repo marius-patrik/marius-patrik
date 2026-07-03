@@ -1,8 +1,8 @@
 # Project Map
 
 Active GitHub repositories are tracked as profile submodules. Archived
-repositories live under `archive/`; `agent-os` owns package submodules under
-`agent-os/packages/`.
+repositories live under `archive/`; `agentos` owns managed agent, app, package,
+and template submodules.
 
 ## Workspace
 
@@ -14,8 +14,8 @@ repositories live under `archive/`; `agent-os` owns package submodules under
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agent-harness` | `marius-patrik/agent-harness` | Rommie Agent Harness platform source. |
-| `agent-os` | `marius-patrik/agent-os` | Agent OS workspace and shared `agents` CLI state. |
+| `agentos` | `marius-patrik/agentos` | Agentos workspace and shared `agents` CLI state. |
+| `agentos-harness` | `marius-patrik/agentos-harness` | Rommie Agentos Harness platform source. |
 | `Fabrica` | `marius-patrik/Fabrica` | Fabrica project workspace. |
 | `media-streamer` | `marius-patrik/media-streamer` | Media streamer project workspace. |
 | `mssgs` | `marius-patrik/mssgs` | Unified messaging project workspace. |
@@ -23,17 +23,27 @@ repositories live under `archive/`; `agent-os` owns package submodules under
 | `vsc-utils` | `marius-patrik/vsc-utils` | VS Code utility project workspace. |
 | `yacht` | `marius-patrik/yacht` | Private yacht project workspace. |
 
-## Agent OS Packages
+## Agentos Managed Repositories
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agent-os/packages/singularity` | `marius-patrik/singularity` | Singularity package managed by Agent OS. |
+| `agentos/agents/agi` | `marius-patrik/agi` | Private AGI agent package. |
+| `agentos/agents/dark-factory` | `marius-patrik/dark-factory` | GitHub App automation agent. |
+| `agentos/agents/rommie` | `marius-patrik/rommie` | Rommie Codex plugin and agent package. |
+| `agentos/agents/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
+| `agentos/apps/singularity` | `marius-patrik/singularity` | Singularity app workspace. |
+| `agentos/packages/agentos-harness` | `marius-patrik/agentos-harness` | Managed Rommie runtime harness. |
+| `agentos/templates/template-bot` | `marius-patrik/template-bot` | Managed bot repository template. |
+| `agentos/templates/template-cli` | `marius-patrik/template-cli` | Managed CLI repository template. |
+| `agentos/templates/template-mono` | `marius-patrik/template-mono` | Managed monorepo template. |
+| `agentos/templates/template-repo` | `marius-patrik/template-repo` | Bun TypeScript managed repository template. |
+| `agentos/templates/template-web` | `marius-patrik/template-web` | Managed web app repository template. |
 
 ## Migrated
 
 | Former Path | Repository | Current Home |
 | --- | --- | --- |
-| `experience` | `marius-patrik/experience` | `agent-harness` |
+| `experience` | `marius-patrik/experience` | `agentos/agents/rommie` |
 
 ## Archive
 

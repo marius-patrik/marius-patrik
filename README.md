@@ -3,20 +3,30 @@
 Profile workspace checkout for `marius-patrik`.
 
 This repository tracks current `marius-patrik` repositories as root-level Git
-submodules. Archived repositories are grouped under `archive/`, and `agent-os`
-owns its managed package submodules under `agent-os/packages/`. Local files
-outside the workspace manifest are ignored by default.
+submodules. Archived repositories are grouped under `archive/`, and `agentos`
+owns managed agent, app, package, and template submodules. Local files outside
+the workspace manifest are ignored by default.
 
-`singularity` is managed by `agent-os` at `agent-os/packages/singularity`.
+Rommie is managed by `agentos` at `agentos/agents/rommie`. Singularity is
+managed at `agentos/apps/singularity`.
 
 ## Workspace Layout
 
 ```text
 .
-|-- agent-harness/
-|-- agent-os/
-|   `-- packages/
-|       `-- singularity/
+|-- agentos/
+|   |-- agents/
+|   |   |-- agi/
+|   |   |-- dark-factory/
+|   |   |-- rommie/
+|   |   `-- skyblock-agent/
+|   |-- apps/
+|   |   `-- singularity/
+|   |-- packages/
+|   |   |-- agentos-harness/
+|   |   `-- agentos-manager/
+|   `-- templates/
+|-- agentos-harness/
 |-- Fabrica/
 |-- media-streamer/
 |-- mssgs/
@@ -34,8 +44,8 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Root Repositories
 
-- `agent-harness`
-- `agent-os`
+- `agentos`
+- `agentos-harness`
 - `Fabrica`
 - `media-streamer`
 - `mssgs`
@@ -43,13 +53,19 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 - `vsc-utils`
 - `yacht`
 
-## Agent OS Packages
+## Agentos Managed Repositories
 
-- `agent-os/packages/singularity`
+- `agentos/agents/agi`
+- `agentos/agents/dark-factory`
+- `agentos/agents/rommie`
+- `agentos/agents/skyblock-agent`
+- `agentos/apps/singularity`
+- `agentos/packages/agentos-harness`
+- `agentos/templates/*`
 
 ## Migrated
 
-- `experience` was migrated into `agent-harness` as Rommie and is no longer a
+- `experience` was migrated into `agentos/agents/rommie` and is no longer a
   profile workspace submodule.
 
 ## Archived
