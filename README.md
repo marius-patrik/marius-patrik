@@ -8,7 +8,8 @@ owns managed agent, app, package, and template submodules. Local files outside
 the workspace manifest are ignored by default.
 
 Rommie is managed by `agentos` at `agentos/agents/rommie`. Singularity is
-managed at `agentos/apps/singularity`.
+managed at `agentos/apps/singularity`. The private workspace repository is
+managed at `agentos/workspace`.
 
 ## Workspace Layout
 
@@ -25,12 +26,12 @@ managed at `agentos/apps/singularity`.
 |   |-- packages/
 |   |   |-- agentos-harness/
 |   |   `-- agentos-manager/
-|   `-- templates/
+|   |-- templates/
+|   `-- workspace/
 |-- agentos-harness/
 |-- Fabrica/
 |-- media-streamer/
 |-- mssgs/
-|-- private/
 |-- vsc-utils/
 |-- yacht/
 `-- archive/
@@ -49,7 +50,6 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 - `Fabrica`
 - `media-streamer`
 - `mssgs`
-- `private`
 - `vsc-utils`
 - `yacht`
 
@@ -62,6 +62,7 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 - `agentos/apps/singularity`
 - `agentos/packages/agentos-harness`
 - `agentos/templates/*`
+- `agentos/workspace`
 
 ## Migrated
 
