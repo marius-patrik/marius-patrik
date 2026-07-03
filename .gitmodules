@@ -38,7 +38,7 @@
 	path = yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
-[submodule "agentos-harness"]
-	path = agentos-harness
-	url = https://github.com/marius-patrik/agentos-harness.git
+[submodule "andromeda-harness"]
+	path = andromeda-harness
+	url = https://github.com/marius-patrik/andromeda-harness.git
 	branch = main
