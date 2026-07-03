@@ -1,7 +1,8 @@
 # Project Map
 
-Active GitHub repositories are tracked as root-level submodules in this profile
-workspace. Archived repositories live under `archive/`.
+Active GitHub repositories are tracked as profile submodules. Archived
+repositories live under `archive/`; `agent-os` owns package submodules under
+`agent-os/packages/`.
 
 ## Workspace
 
@@ -19,9 +20,14 @@ workspace. Archived repositories live under `archive/`.
 | `media-streamer` | `marius-patrik/media-streamer` | Media streamer project workspace. |
 | `mssgs` | `marius-patrik/mssgs` | Unified messaging project workspace. |
 | `private` | `marius-patrik/private` | Private workspace repository. |
-| `singularity` | `marius-patrik/singularity` | Singularity project workspace. |
 | `vsc-utils` | `marius-patrik/vsc-utils` | VS Code utility project workspace. |
 | `yacht` | `marius-patrik/yacht` | Private yacht project workspace. |
+
+## Agent OS Packages
+
+| Path | Repository | Role |
+| --- | --- | --- |
+| `agent-os/packages/singularity` | `marius-patrik/singularity` | Singularity package managed by Agent OS. |
 
 ## Migrated
 

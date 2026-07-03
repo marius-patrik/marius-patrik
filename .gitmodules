@@ -30,10 +30,6 @@
 	path = archive/RSCode
 	url = https://github.com/marius-patrik/RSCode.git
 	branch = main
-[submodule "singularity"]
-	path = singularity
-	url = https://github.com/marius-patrik/singularity.git
-	branch = main
 [submodule "vsc-utils"]
 	path = vsc-utils
 	url = https://github.com/marius-patrik/vsc-utils.git
