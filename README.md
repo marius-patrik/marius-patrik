@@ -87,7 +87,7 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 - `experience` was migrated into the Andromeda plugin and is no longer a profile workspace submodule.
 - Andromeda wiki and research material was moved into `agents-mono/workspaces` under
   `andromeda/wiki` and `andromeda/research` as part of workspace consolidation.
-- `rommie-agent` was renamed to `andromeda-plugin` and lives at `agents-mono/plugins/andromeda`.
+- The former memory plugin was renamed to `andromeda-plugin` and lives at `agents-mono/plugins/andromeda`.
 
 ## Archived
 
@@ -98,3 +98,4 @@ are explicitly reopened.
 - `archive/MMO`
 - `archive/RSCode`
 - `archive/Wrkspace`
+
