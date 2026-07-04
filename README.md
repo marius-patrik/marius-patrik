@@ -26,12 +26,12 @@ managed at `agents-mono/apps/singularity`. The private workspace material is und
 |   |   |-- agents-core/
 |   |   |-- agents-manager/
 |   |   |-- agents-harness/
+|   |   |-- agents-plugin/
 |   |   |-- llm-gateway/
 |   |   `-- inference-engine/
 |   |-- data/
 |   |   `-- data-agentos/
 |   |-- plugins/
-|   |   |-- agents-plugin/
 |   |   `-- dream/
 |   |-- skills/
 |   |-- templates/
