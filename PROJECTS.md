@@ -27,9 +27,9 @@ workspace submodules below `agents-mono/`.
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-mono/agents/darkfactory-agent` | `marius-patrik/darkfactory-agent` | GitHub App automation agent. |
+| `agents-mono/agents/agent-darkfactory` | `marius-patrik/agent-darkfactory` | GitHub App automation agent. |
 | `agents-mono/agents/life-support` | `marius-patrik/life-support` | Private life-support agent package. |
-| `agents-mono/plugins/plugin-rommie` | `marius-patrik/plugin-rommie` | Rommie Codex plugin package. |
+| `agents-mono/os/agents-plugin` | `marius-patrik/agents-plugin` | Rommie Codex plugin package. |
 | `agents-mono/agents/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
 
 ## Agentos Apps, Harnesses, and Templates
@@ -54,15 +54,15 @@ workspace submodules below `agents-mono/`.
 
 | Path | Repository | Role |
 | --- | --- | --- |
-| `agents-mono/data/data-agentos` | `marius-patrik/agentos-data` | Managed data root for agent and workspace package data. |
+| `agents-mono/data/data-agentos` | `marius-patrik/data-agentos` | Managed data root for agent and workspace package data. |
 | `agents-mono/plugins/dream` | `marius-patrik/dream` | Dream plugin package. |
-| `agents-mono/packages/workspaces/darkfactory-workspace` | `marius-patrik/darkfactory-workspace` | DarkFactory workspace package. |
+| `agents-mono/workspaces/workspace-darkfactory` | `marius-patrik/workspace-darkfactory` | DarkFactory workspace package. |
 
 ## Migrated
 
 | Former Path | Repository | Current Home |
 | --- | --- | --- |
-| `experience` | `marius-patrik/experience` | `agents-mono/plugins/plugin-rommie` |
+| `experience` | `marius-patrik/experience` | `agents-mono/os/agents-plugin` |
 
 ## Archive
 
