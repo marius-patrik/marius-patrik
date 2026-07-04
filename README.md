@@ -6,7 +6,7 @@ This repository tracks current `marius-patrik` repositories as a flat root-level
 submodule list. Archived repositories are grouped under `archive/`. Agentos owns
 the nested agent, app, OS package, plugin, skills, and data submodules.
 
-Rommie is managed by Agentos at `agents-mono/plugins/plugin-rommie`. Singularity is
+Rommie is managed by Agentos at `agents-mono/os/agents-plugin`. Singularity is
 managed at `agents-mono/apps/singularity`. The private workspace material is under
 `agents-mono/workspaces`.
 
@@ -16,7 +16,7 @@ managed at `agents-mono/apps/singularity`. The private workspace material is und
 .
 |-- agents-mono/
 |   |-- agents/
-|   |   |-- darkfactory-agent/
+|   |   |-- agent-darkfactory/
 |   |   |-- life-support/
 |   |   `-- skyblock-agent/
 |   |-- apps/
@@ -31,13 +31,13 @@ managed at `agents-mono/apps/singularity`. The private workspace material is und
 |   |-- data/
 |   |   `-- data-agentos/
 |   |-- plugins/
-|   |   |-- plugin-rommie/
+|   |   |-- agents-plugin/
 |   |   `-- dream/
 |   |-- skills/
 |   |-- templates/
 |   |   `-- darkfactory-templates/
 |   `-- workspaces/
-|       `-- darkfactory-workspace/
+|       `-- workspace-darkfactory/
 |-- Fabrica/
 |-- media-streamer/
 |-- mssgs/
@@ -63,7 +63,7 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 
 ## Agentos Managed Repositories
 
-- `agents-mono/agents/darkfactory-agent`
+- `agents-mono/agents/agent-darkfactory`
 - `agents-mono/agents/life-support`
 - `agents-mono/agents/skyblock-agent`
 - `agents-mono/apps/fabrica`
@@ -73,18 +73,18 @@ See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
 - `agents-mono/os/agents-harness`
 - `agents-mono/os/llm-gateway`
 - `agents-mono/os/inference-engine`
-- `agents-mono/plugins/plugin-rommie`
+- `agents-mono/os/agents-plugin`
 - `agents-mono/plugins/dream`
 - `agents-mono/skills`
 - `agents-mono/templates/darkfactory-templates`
-- `agents-mono/workspaces/darkfactory-workspace`
+- `agents-mono/workspaces/workspace-darkfactory`
 
 ## Migrated
 
 - `experience` was migrated into the Rommie plugin and is no longer a profile workspace submodule.
 - Andromeda wiki and research material was moved into `agents-mono/workspaces` under
   `andromeda/wiki` and `andromeda/research` as part of workspace consolidation.
-- The former plugin repo was renamed to `plugin-rommie` and lives at `agents-mono/plugins/plugin-rommie`.
+- The former plugin repo was renamed to `agents-plugin` and lives at `agents-mono/os/agents-plugin`.
 - The former Andromeda harness repo was renamed to `agents-harness` and lives at `agents-mono/os/agents-harness`.
 
 ## Archived
