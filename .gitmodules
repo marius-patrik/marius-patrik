@@ -39,3 +39,23 @@
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
 
+[submodule "agent-darkfactory"]
+	path = agent-darkfactory
+	url = https://github.com/marius-patrik/agent-darkfactory.git
+	branch = main
+[submodule "agents-data"]
+	path = agents-data
+	url = https://github.com/marius-patrik/agents-data.git
+	branch = main
+[submodule "darkfactory-data"]
+	path = darkfactory-data
+	url = https://github.com/marius-patrik/darkfactory-data.git
+	branch = main
+[submodule "tmux-agent-status"]
+	path = tmux-agent-status
+	url = https://github.com/marius-patrik/tmux-agent-status.git
+	branch = main
+[submodule "workspace-agents"]
+	path = workspace-agents
+	url = https://github.com/marius-patrik/workspace-agents.git
+	branch = main
