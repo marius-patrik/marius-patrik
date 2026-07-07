@@ -1,6 +1,6 @@
 [submodule "agents-mono"]
 	path = agents-mono
-	url = https://github.com/marius-patrik/agents-mono.git
+	url = https://github.com/marius-patrik/agents-manager.git
 	branch = main
 [submodule "Citizen"]
 	path = archive/Citizen
