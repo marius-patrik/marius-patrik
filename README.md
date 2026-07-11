@@ -5,13 +5,15 @@ Canonical profile workspace and repository inventory for
 
 This repository tracks every other repository owned by the account as a gitlink:
 
-- active repositories live at the root using their exact GitHub names;
-- archived repositories live under `archive/`;
+- active public repositories live at the root using their exact GitHub names;
+- active private repositories live under `private/`;
+- archived public repositories live under `archive/`;
+- archived private repositories live under `private/archive/`;
 - each gitlink points to the current head of that repository's default branch at the time
   this inventory is refreshed;
 - child repositories are not modified by an inventory refresh.
 
-The current snapshot contains 16 active and 17 archived repositories. Use
+The current snapshot contains 15 active and 18 archived repositories. Use
 [`PROJECTS.md`](PROJECTS.md) for the complete map, visibility, and default branches.
 
 ## Primary systems
