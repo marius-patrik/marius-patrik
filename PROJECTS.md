@@ -1,80 +1,58 @@
-# Project Map
+# Repository Map
 
-Active GitHub repositories are tracked as profile submodules. The profile root is
-a flat active-repository list except for archived repositories under `archive/`.
-Agentos owns managed agent, app, harness, template, data, plugin, and private
-workspace submodules below `agents-mono/`.
+Live inventory of repositories owned by `marius-patrik`. Paths match the umbrella
+`.gitmodules` file. The umbrella repository itself is omitted from the gitlink tables.
 
-## Workspace
+## Active repositories
 
-| Path | Repository | Role |
-| --- | --- | --- |
-| `.` | `marius-patrik/marius-patrik` | Profile workspace and project map. |
+| Path | Repository | Visibility | Default branch |
+| --- | --- | --- | --- |
+| `Andromeda` | `marius-patrik/Andromeda` | Public | `main` |
+| `DarkFactory` | `marius-patrik/DarkFactory` | Public | `main` |
+| `Fabrica` | `marius-patrik/Fabrica` | Public | `dev` |
+| `Rommie` | `marius-patrik/Rommie` | Private | `main` |
+| `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
+| `agents-plugin` | `marius-patrik/agents-plugin` | Public | `main` |
+| `darkfactory-data` | `marius-patrik/darkfactory-data` | Private | `main` |
+| `dream` | `marius-patrik/dream` | Public | `main` |
+| `life-support` | `marius-patrik/life-support` | Public | `main` |
+| `media-streamer` | `marius-patrik/media-streamer` | Public | `main` |
+| `mssgs` | `marius-patrik/mssgs` | Public | `main` |
+| `singularity` | `marius-patrik/singularity` | Public | `main` |
+| `tmux-agent-status` | `marius-patrik/tmux-agent-status` | Public | `master` |
+| `vsc-utils` | `marius-patrik/vsc-utils` | Public | `main` |
+| `workspace-agents` | `marius-patrik/workspace-agents` | Public | `main` |
+| `yacht` | `marius-patrik/yacht` | Private | `main` |
 
-## Active Root Repositories
+## Archived repositories
 
-| Path | Repository | Role |
-| --- | --- | --- |
-| `agents-mono` | `marius-patrik/agents-mono` | Agents-OS workspace, package manager, shared contracts, gateway, inference, and managed repo tree. |
+| Path | Repository | Visibility | Default branch |
+| --- | --- | --- | --- |
+| `archive/agents-core` | `marius-patrik/agents-core` | Public | `main` |
+| `archive/agents-harness` | `marius-patrik/agents-harness` | Public | `main` |
+| `archive/agents-manager-legacy` | `marius-patrik/agents-manager-legacy` | Public | `main` |
+| `archive/Citizen` | `marius-patrik/Citizen` | Private | `main` |
+| `archive/darkfactory-templates` | `marius-patrik/darkfactory-templates` | Public | `main` |
+| `archive/data-agentos` | `marius-patrik/data-agentos` | Private | `main` |
+| `archive/experience` | `marius-patrik/experience` | Public | `master` |
+| `archive/inference-engine` | `marius-patrik/inference-engine` | Public | `main` |
+| `archive/llm-gateway` | `marius-patrik/llm-gateway` | Public | `main` |
+| `archive/MMO` | `marius-patrik/MMO` | Public | `main` |
+| `archive/RSCode` | `marius-patrik/RSCode` | Public | `main` |
+| `archive/template-bot` | `marius-patrik/template-bot` | Public | `main` |
+| `archive/template-cli` | `marius-patrik/template-cli` | Public | `main` |
+| `archive/template-repo` | `marius-patrik/template-repo` | Public | `main` |
+| `archive/template-web` | `marius-patrik/template-web` | Public | `main` |
+| `archive/workspace-darkfactory` | `marius-patrik/workspace-darkfactory` | Private | `main` |
+| `archive/Wrkspace` | `marius-patrik/Wrkspace` | Public | `main` |
 
-| `Fabrica` | `marius-patrik/Fabrica` | Fabrica project workspace. |
-| `media-streamer` | `marius-patrik/media-streamer` | Media streamer project workspace. |
-| `mssgs` | `marius-patrik/mssgs` | Unified messaging project workspace. |
-| `vsc-utils` | `marius-patrik/vsc-utils` | VS Code utility project workspace. |
-| `yacht` | `marius-patrik/yacht` | Private yacht project workspace. |
+## Refresh contract
 
-## Agentos Agents
+An inventory refresh must:
 
-| Path | Repository | Role |
-| --- | --- | --- |
-| `agents-mono/agents/agent-darkfactory` | `marius-patrik/agent-darkfactory` | GitHub App automation agent. |
-| `agents-mono/agents/life-support` | `marius-patrik/life-support` | Private life-support agent package. |
-| `agents-mono/os/agents-plugin` | `marius-patrik/agents-plugin` | Rommie Codex plugin package. |
-| `agents-mono/agents/skyblock-agent` | `marius-patrik/skyblock-agent` | SkyBlock Agent package. |
-
-## Agentos Apps, Harnesses, and Templates
-
-| Path | Repository | Role |
-| --- | --- | --- |
-| `agents-mono/apps/fabrica` | `marius-patrik/Fabrica` | Managed Fabrica app workspace. |
-| `agents-mono/apps/singularity` | `marius-patrik/singularity` | Singularity app workspace. |
-| `agents-mono/os/agents-harness` | `marius-patrik/agents-harness` | Managed Agents harness runtime package. |
-| `agents-mono/templates/darkfactory-templates` | `marius-patrik/darkfactory-templates` | Bun templates monorepo with managed templates. |
-
-## Agentos Packages
-
-| Path | Repository | Role |
-| --- | --- | --- |
-| `agents-mono/os/agents-core` | `marius-patrik/agents-core` | Shared protobuf contracts, generated clients, schemas, and package manifests. |
-| `agents-mono/os/llm-gateway` | `marius-patrik/llm-gateway` | Gateway/router package migrated from Andromeda, including OAuth, registry, quota, and tests. |
-| `agents-mono/os/inference-engine` | `marius-patrik/inference-engine` | Inference engine, daemon, coordination, manager, state-sync, Python agent, and self-improve packages migrated from Andromeda. |
-| `agents-mono/os/agents-manager` | `marius-patrik/agents-manager` | Agents-OS package-manager CLI. |
-
-## Agentos Data, Workspace, Plugin, and Managed Repository Map
-
-| Path | Repository | Role |
-| --- | --- | --- |
-| `agents-mono/data/data-agentos` | `marius-patrik/data-agentos` | Managed data root for agent and workspace package data. |
-| `agents-mono/plugins/dream` | `marius-patrik/dream` | Dream plugin package. |
-| `agents-mono/workspaces/workspace-darkfactory` | `marius-patrik/workspace-darkfactory` | DarkFactory workspace package. |
-
-## Migrated
-
-| Former Path | Repository | Current Home |
-| --- | --- | --- |
-| `experience` | `marius-patrik/experience` | `agents-mono/os/agents-plugin` |
-
-## Archive
-
-| Path | Repository | State |
-| --- | --- | --- |
-| `archive/Citizen` | `marius-patrik/Citizen` | Archived. |
-| `archive/MMO` | `marius-patrik/MMO` | Archived. |
-| `archive/RSCode` | `marius-patrik/RSCode` | Archived. |
-| `archive/Wrkspace` | `marius-patrik/Wrkspace` | Archived. |
-
-
-
-
-
-
+1. enumerate repositories from the live GitHub account;
+2. classify them from GitHub's current `isArchived` value;
+3. use each repository's exact name, visibility, and default branch;
+4. pin each gitlink to the current default-branch commit;
+5. exclude only `marius-patrik/marius-patrik` itself;
+6. avoid changing child repository contents or branches.

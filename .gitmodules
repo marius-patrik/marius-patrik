@@ -1,61 +1,133 @@
-[submodule "agents-mono"]
-	path = agents-mono
-	url = https://github.com/marius-patrik/agents-manager.git
+[submodule "Andromeda"]
+	path = Andromeda
+	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
-[submodule "Citizen"]
-	path = archive/Citizen
-	url = https://github.com/marius-patrik/Citizen.git
+[submodule "DarkFactory"]
+	path = DarkFactory
+	url = https://github.com/marius-patrik/DarkFactory.git
 	branch = main
 [submodule "Fabrica"]
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
+[submodule "Rommie"]
+	path = Rommie
+	url = https://github.com/marius-patrik/Rommie.git
+	branch = main
+[submodule "SkyAgent"]
+	path = SkyAgent
+	url = https://github.com/marius-patrik/SkyAgent.git
+	branch = main
+[submodule "agents-plugin"]
+	path = agents-plugin
+	url = https://github.com/marius-patrik/agents-plugin.git
+	branch = main
+[submodule "darkfactory-data"]
+	path = darkfactory-data
+	url = https://github.com/marius-patrik/darkfactory-data.git
+	branch = main
+[submodule "dream"]
+	path = dream
+	url = https://github.com/marius-patrik/dream.git
+	branch = main
+[submodule "life-support"]
+	path = life-support
+	url = https://github.com/marius-patrik/life-support.git
+	branch = main
 [submodule "media-streamer"]
 	path = media-streamer
 	url = https://github.com/marius-patrik/media-streamer.git
-	branch = main
-[submodule "MMO"]
-	path = archive/MMO
-	url = https://github.com/marius-patrik/MMO.git
 	branch = main
 [submodule "mssgs"]
 	path = mssgs
 	url = https://github.com/marius-patrik/mssgs.git
 	branch = main
-[submodule "RSCode"]
-	path = archive/RSCode
-	url = https://github.com/marius-patrik/RSCode.git
+[submodule "singularity"]
+	path = singularity
+	url = https://github.com/marius-patrik/singularity.git
 	branch = main
+[submodule "tmux-agent-status"]
+	path = tmux-agent-status
+	url = https://github.com/marius-patrik/tmux-agent-status.git
+	branch = master
 [submodule "vsc-utils"]
 	path = vsc-utils
 	url = https://github.com/marius-patrik/vsc-utils.git
 	branch = main
-[submodule "Wrkspace"]
-	path = archive/Wrkspace
-	url = https://github.com/marius-patrik/Wrkspace.git
+[submodule "workspace-agents"]
+	path = workspace-agents
+	url = https://github.com/marius-patrik/workspace-agents.git
 	branch = main
 [submodule "yacht"]
 	path = yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
 
-[submodule "agent-darkfactory"]
-	path = agent-darkfactory
-	url = https://github.com/marius-patrik/agent-darkfactory.git
+[submodule "archive/agents-core"]
+	path = archive/agents-core
+	url = https://github.com/marius-patrik/agents-core.git
 	branch = main
-[submodule "agents-data"]
-	path = agents-data
-	url = https://github.com/marius-patrik/agents-data.git
+[submodule "archive/agents-harness"]
+	path = archive/agents-harness
+	url = https://github.com/marius-patrik/agents-harness.git
 	branch = main
-[submodule "darkfactory-data"]
-	path = darkfactory-data
-	url = https://github.com/marius-patrik/darkfactory-data.git
+[submodule "archive/agents-manager-legacy"]
+	path = archive/agents-manager-legacy
+	url = https://github.com/marius-patrik/agents-manager-legacy.git
 	branch = main
-[submodule "tmux-agent-status"]
-	path = tmux-agent-status
-	url = https://github.com/marius-patrik/tmux-agent-status.git
+[submodule "archive/Citizen"]
+	path = archive/Citizen
+	url = https://github.com/marius-patrik/Citizen.git
+	branch = main
+[submodule "archive/darkfactory-templates"]
+	path = archive/darkfactory-templates
+	url = https://github.com/marius-patrik/darkfactory-templates.git
+	branch = main
+[submodule "archive/data-agentos"]
+	path = archive/data-agentos
+	url = https://github.com/marius-patrik/data-agentos.git
+	branch = main
+[submodule "archive/experience"]
+	path = archive/experience
+	url = https://github.com/marius-patrik/experience.git
 	branch = master
-[submodule "workspace-agents"]
-	path = workspace-agents
-	url = https://github.com/marius-patrik/workspace-agents.git
+[submodule "archive/inference-engine"]
+	path = archive/inference-engine
+	url = https://github.com/marius-patrik/inference-engine.git
+	branch = main
+[submodule "archive/llm-gateway"]
+	path = archive/llm-gateway
+	url = https://github.com/marius-patrik/llm-gateway.git
+	branch = main
+[submodule "archive/MMO"]
+	path = archive/MMO
+	url = https://github.com/marius-patrik/MMO.git
+	branch = main
+[submodule "archive/RSCode"]
+	path = archive/RSCode
+	url = https://github.com/marius-patrik/RSCode.git
+	branch = main
+[submodule "archive/template-bot"]
+	path = archive/template-bot
+	url = https://github.com/marius-patrik/template-bot.git
+	branch = main
+[submodule "archive/template-cli"]
+	path = archive/template-cli
+	url = https://github.com/marius-patrik/template-cli.git
+	branch = main
+[submodule "archive/template-repo"]
+	path = archive/template-repo
+	url = https://github.com/marius-patrik/template-repo.git
+	branch = main
+[submodule "archive/template-web"]
+	path = archive/template-web
+	url = https://github.com/marius-patrik/template-web.git
+	branch = main
+[submodule "archive/workspace-darkfactory"]
+	path = archive/workspace-darkfactory
+	url = https://github.com/marius-patrik/workspace-darkfactory.git
+	branch = main
+[submodule "archive/Wrkspace"]
+	path = archive/Wrkspace
+	url = https://github.com/marius-patrik/Wrkspace.git
 	branch = main
