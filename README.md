@@ -1,98 +1,39 @@
 # Patrik Marius
 
-Profile workspace checkout for `marius-patrik`.
+Canonical profile workspace and repository inventory for
+[`marius-patrik`](https://github.com/marius-patrik).
 
-This repository tracks current `marius-patrik` repositories as a flat root-level
-submodule list. Archived repositories are grouped under `archive/`. Agentos owns
-the nested agent, app, OS package, plugin, skills, and data submodules.
+This repository tracks every other repository owned by the account as a gitlink:
 
-Rommie is managed by Agentos at `agents-mono/os/agents-plugin`. Singularity is
-managed at `agents-mono/apps/singularity`. The private workspace material is under
-`agents-mono/workspaces`.
+- active repositories live at the root using their exact GitHub names;
+- archived repositories live under `archive/`;
+- each gitlink points to the current head of that repository's default branch at the time
+  this inventory is refreshed;
+- child repositories are not modified by an inventory refresh.
 
-## Workspace Layout
+The current snapshot contains 16 active and 17 archived repositories. Use
+[`PROJECTS.md`](PROJECTS.md) for the complete map, visibility, and default branches.
 
-```text
-.
-|-- agents-mono/
-|   |-- agents/
-|   |   |-- agent-darkfactory/
-|   |   |-- life-support/
-|   |   `-- skyblock-agent/
-|   |-- apps/
-|   |   |-- fabrica/
-|   |   `-- singularity/
-|   |-- os/
-|   |   |-- agents-core/
-|   |   |-- agents-manager/
-|   |   |-- agents-harness/
-|   |   |-- agents-plugin/
-|   |   |-- llm-gateway/
-|   |   `-- inference-engine/
-|   |-- data/
-|   |   `-- data-agentos/
-|   |-- plugins/
-|   |   `-- dream/
-|   |-- skills/
-|   |-- templates/
-|   |   `-- darkfactory-templates/
-|   `-- workspaces/
-|       `-- workspace-darkfactory/
-|-- Fabrica/
-|-- media-streamer/
-|-- mssgs/
-|-- vsc-utils/
-|-- yacht/
-`-- archive/
-    |-- Citizen/
-    |-- MMO/
-    |-- RSCode/
-    `-- Wrkspace/
+## Primary systems
+
+- [`Andromeda`](https://github.com/marius-patrik/Andromeda) - integrated Agent OS product
+  and control plane.
+- [`DarkFactory`](https://github.com/marius-patrik/DarkFactory) - repository automation
+  agent.
+- [`Rommie`](https://github.com/marius-patrik/Rommie) - private Agent OS data authority.
+- [`SkyAgent`](https://github.com/marius-patrik/SkyAgent) - Hypixel SkyBlock agent.
+
+## Checkout policy
+
+The umbrella is an inventory first. Submodules may remain deinitialized and can be checked
+out on demand:
+
+```powershell
+git submodule update --init -- <path>
 ```
 
-See [PROJECTS.md](PROJECTS.md) for the GitHub repository map.
+To initialize everything, including archived repositories:
 
-## Root Repositories
-
-- `agents-mono`
-- `Fabrica`
-- `media-streamer`
-- `mssgs`
-- `vsc-utils`
-- `yacht`
-
-## Agentos Managed Repositories
-
-- `agents-mono/agents/agent-darkfactory`
-- `agents-mono/agents/life-support`
-- `agents-mono/agents/skyblock-agent`
-- `agents-mono/apps/fabrica`
-- `agents-mono/apps/singularity`
-- `agents-mono/os/agents-core`
-- `agents-mono/os/agents-manager`
-- `agents-mono/os/agents-harness`
-- `agents-mono/os/llm-gateway`
-- `agents-mono/os/inference-engine`
-- `agents-mono/os/agents-plugin`
-- `agents-mono/plugins/dream`
-- `agents-mono/skills`
-- `agents-mono/templates/darkfactory-templates`
-- `agents-mono/workspaces/workspace-darkfactory`
-
-## Migrated
-
-- `experience` was migrated into the Rommie plugin and is no longer a profile workspace submodule.
-- Andromeda wiki and research material was moved into `agents-mono/workspaces` under
-  `andromeda/wiki` and `andromeda/research` as part of workspace consolidation.
-- The former plugin repo was renamed to `agents-plugin` and lives at `agents-mono/os/agents-plugin`.
-- The former Andromeda harness repo was renamed to `agents-harness` and lives at `agents-mono/os/agents-harness`.
-
-## Archived
-
-These repositories are parked and should not be used for active work unless they
-are explicitly reopened.
-
-- `archive/Citizen`
-- `archive/MMO`
-- `archive/RSCode`
-- `archive/Wrkspace`
+```powershell
+git submodule update --init --recursive
+```
