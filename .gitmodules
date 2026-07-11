@@ -11,7 +11,7 @@
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
 [submodule "Rommie"]
-	path = Rommie
+	path = private/Rommie
 	url = https://github.com/marius-patrik/Rommie.git
 	branch = main
 [submodule "SkyAgent"]
@@ -23,7 +23,7 @@
 	url = https://github.com/marius-patrik/agents-plugin.git
 	branch = main
 [submodule "darkfactory-data"]
-	path = darkfactory-data
+	path = private/darkfactory-data
 	url = https://github.com/marius-patrik/darkfactory-data.git
 	branch = main
 [submodule "dream"]
@@ -55,11 +55,11 @@
 	url = https://github.com/marius-patrik/vsc-utils.git
 	branch = main
 [submodule "workspace-agents"]
-	path = workspace-agents
+	path = archive/workspace-agents
 	url = https://github.com/marius-patrik/workspace-agents.git
 	branch = main
 [submodule "yacht"]
-	path = yacht
+	path = private/yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
 
@@ -76,7 +76,7 @@
 	url = https://github.com/marius-patrik/agents-manager-legacy.git
 	branch = main
 [submodule "archive/Citizen"]
-	path = archive/Citizen
+	path = private/archive/Citizen
 	url = https://github.com/marius-patrik/Citizen.git
 	branch = main
 [submodule "archive/darkfactory-templates"]
@@ -84,7 +84,7 @@
 	url = https://github.com/marius-patrik/darkfactory-templates.git
 	branch = main
 [submodule "archive/data-agentos"]
-	path = archive/data-agentos
+	path = private/archive/data-agentos
 	url = https://github.com/marius-patrik/data-agentos.git
 	branch = main
 [submodule "archive/experience"]
@@ -124,7 +124,7 @@
 	url = https://github.com/marius-patrik/template-web.git
 	branch = main
 [submodule "archive/workspace-darkfactory"]
-	path = archive/workspace-darkfactory
+	path = private/archive/workspace-darkfactory
 	url = https://github.com/marius-patrik/workspace-darkfactory.git
 	branch = main
 [submodule "archive/Wrkspace"]
