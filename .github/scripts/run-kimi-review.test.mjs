@@ -121,6 +121,9 @@ test("workflow isolates Codex and Kimi credentials in separate provider steps", 
   assert.match(kimiStep, /KIMI_AUTH_JSON:/);
   assert.doesNotMatch(kimiStep, /CODEX_AUTH_JSON:/);
   assert.match(kimiStep, /steps\.review\.outputs\.takeover == 'true'/);
+  assert.match(workflow, /Stage trusted review control plane/);
+  assert.match(workflow, /RUNNER_TEMP}\/trusted-review\/run-kimi-review\.mjs/);
+  assert.doesNotMatch(kimiStep, /node \.github\/scripts\/run-kimi-review\.mjs/);
   for (const contextFile of [
     ".agents/.global/AGENT_PROTOCOL.md",
     ".agents/.global/WORKFLOW.md",
