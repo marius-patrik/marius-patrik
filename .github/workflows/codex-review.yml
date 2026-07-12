@@ -17,16 +17,42 @@ jobs:
   codex-review:
     name: Codex Review
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     if: ${{ !github.event.pull_request.draft }}
 
     steps:
-      - name: Checkout PR
+      - name: Checkout immutable trusted base
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.base.sha }}
           fetch-depth: 0
+          persist-credentials: false
 
-      - name: Build Codex review image
-        run: docker build -f .github/codex-review.Dockerfile -t darkfactory-codex-review .
+      - name: Stage trusted review control plane
+        shell: bash
+        run: |
+          TRUSTED_CONTEXT="${RUNNER_TEMP}/trusted-review-context"
+          mkdir -p "${TRUSTED_CONTEXT}/.github/scripts"
+          fetch_trusted() {
+            local source_path="$1"
+            local expected_hash="$2"
+            local destination="${TRUSTED_CONTEXT}/${source_path}"
+            curl --fail --silent --show-error --location \
+              "https://raw.githubusercontent.com/marius-patrik/Andromeda/d7bafd4f660c275bb327b9dd97b371f26a48adc2/${source_path}" \
+              --output "${destination}"
+            printf '%s  %s\n' "${expected_hash}" "${destination}" | sha256sum --check --strict
+          }
+          fetch_trusted ".github/codex-review.Dockerfile" "b49fc573da18b69a60a092f45dded5f98449e0e741d097224e63ed2649cb9b25"
+          fetch_trusted ".github/codex-review.schema.json" "4fb5a14cf30b012ff7d8170ba829f6c46da10d8a6e035fb8b1d9dd19a391e3b3"
+          fetch_trusted ".github/scripts/run-codex-review.sh" "2e7bb924c7fa462f3a251537d6fb596215deea15a9afcdea0510f335707763e8"
+          fetch_trusted ".github/scripts/run-kimi-review.mjs" "8912ed10844cb6373c70efc6054a49d0f5dc445235da73cfbb97fb1e72b0377f"
+          chmod 500 "${TRUSTED_CONTEXT}/.github/scripts/run-kimi-review.mjs"
+
+      - name: Build trusted Codex review image
+        shell: bash
+        run: |
+          TRUSTED_CONTEXT="${RUNNER_TEMP}/trusted-review-context"
+          docker build -f "${TRUSTED_CONTEXT}/.github/codex-review.Dockerfile" -t darkfactory-codex-review "${TRUSTED_CONTEXT}"
 
       - name: Checkout PR head
         uses: actions/checkout@v4
@@ -35,6 +61,21 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
           path: pr-workspace
+
+      - name: Fetch immutable base ref
+        working-directory: pr-workspace
+        env:
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+        shell: bash
+        run: git fetch --no-tags origin "refs/heads/${BASE_BRANCH}:refs/remotes/origin/${BASE_BRANCH}"
+
+      - name: Validate proposed review control plane without credentials
+        working-directory: pr-workspace
+        shell: bash
+        run: |
+          node --test .github/scripts/run-kimi-review.test.mjs
+          node --check .github/scripts/run-kimi-review.mjs
+          bash -n .github/scripts/run-codex-review.sh
 
       - name: Prepare review context
         uses: actions/github-script@v7
@@ -100,49 +141,76 @@ jobs:
         id: review
         env:
           CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
-          CODEX_REVIEW_MODEL: gpt-5.5
-          CODEX_REVIEW_EFFORT: low
           BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_BODY: ${{ github.event.pull_request.body }}
         shell: bash
         run: |
-          if [ -z "${CODEX_AUTH_JSON:-}" ]; then
-            cat > codex-review.json <<'EOF'
-          {
-            "approved": false,
-            "summary": "Codex autoreview could not run because repository secret CODEX_AUTH_JSON is not configured.",
-            "blocking_findings": [
-              "Configure CODEX_AUTH_JSON in GitHub repository secrets to enable automated Codex PR review with Codex OAuth auth."
-            ],
-            "non_blocking_notes": []
-          }
-          EOF
-            exit 0
-          fi
-
           CODEX_HOME_DIR="${RUNNER_TEMP}/codex-home"
+          REVIEW_OUTPUT_DIR="${RUNNER_TEMP}/review-output"
           mkdir -p "${CODEX_HOME_DIR}"
+          mkdir -p "${REVIEW_OUTPUT_DIR}"
           printf '%s' "${CODEX_AUTH_JSON}" > "${CODEX_HOME_DIR}/auth.json"
           chmod 600 "${CODEX_HOME_DIR}/auth.json"
 
+          set +e
           docker run --rm \
             -e CODEX_HOME=/codex-home \
             -e HOME=/codex-home \
             -e BASE_BRANCH \
             -e BASE_REF=origin/${BASE_BRANCH} \
-            -e REVIEW_OUTPUT=codex-review.json \
-            -e CODEX_REVIEW_MODEL \
-            -e CODEX_REVIEW_EFFORT \
+            -e REVIEW_OUTPUT=/review-output/codex-review.json \
+            -e PROMPT_EXPORT=/review-output/review-prompt.txt \
             -e REVIEW_CONTEXT_DIR=/review-context \
             -e PR_TITLE \
             -e PR_BODY \
-            -v "${PWD}/pr-workspace:/workspace" \
+            -v "${PWD}/pr-workspace:/workspace:ro" \
             -v "${PWD}/review-context:/review-context:ro" \
             -v "${CODEX_HOME_DIR}:/codex-home" \
+            -v "${REVIEW_OUTPUT_DIR}:/review-output" \
             darkfactory-codex-review
+          REVIEW_EXIT_CODE=$?
+          set -e
 
-          cp pr-workspace/codex-review.json codex-review.json
+          if [ -s "${REVIEW_OUTPUT_DIR}/codex-review.json" ]; then
+            cp "${REVIEW_OUTPUT_DIR}/codex-review.json" codex-review.json
+          else
+            node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'The primary review container produced no result.',blocking_findings:['Inspect the Codex Review workflow infrastructure before allowing merge.'],non_blocking_notes:[]},null,2)+'\\n')"
+          fi
+
+          if node "${RUNNER_TEMP}/trusted-review-context/.github/scripts/run-kimi-review.mjs" --should-takeover "${REVIEW_EXIT_CODE}"; then
+            echo "takeover=true" >> "${GITHUB_OUTPUT}"
+          elif [ "${REVIEW_EXIT_CODE}" -ne 0 ]; then
+            node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'The primary review container failed outside the provider-takeover contract.',blocking_findings:['Inspect the Codex Review workflow infrastructure before allowing merge.'],non_blocking_notes:[]},null,2)+'\\n')"
+          fi
+
+      - name: Create secret-rotation token
+        if: steps.review.outputs.takeover == 'true' && github.event.pull_request.head.repo.full_name == github.repository
+        id: app-token
+        continue-on-error: true
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.DARKFACTORY_APP_ID }}
+          private-key: ${{ secrets.DARKFACTORY_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: marius-patrik
+          permission-secrets: write
+
+      - name: Run credential-isolated Kimi takeover
+        if: steps.review.outputs.takeover == 'true' && github.event.pull_request.head.repo.full_name == github.repository
+        env:
+          KIMI_AUTH_JSON: ${{ secrets.KIMI_AUTH_JSON }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        shell: bash
+        run: |
+          if [ -z "${KIMI_AUTH_JSON:-}" ]; then
+            node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'Codex failed and Kimi takeover credentials are unavailable.',blocking_findings:['Configure KIMI_AUTH_JSON before allowing provider takeover.'],non_blocking_notes:[]},null,2)+'\\n')"
+            exit 0
+          fi
+          KIMI_REVIEW_PROMPT="${RUNNER_TEMP}/review-output/review-prompt.txt" \
+          KIMI_REVIEW_OUTPUT="${PWD}/codex-review.json" \
+          node "${RUNNER_TEMP}/trusted-review-context/.github/scripts/run-kimi-review.mjs"
+
 
       - name: Comment review
         if: always()
@@ -158,8 +226,8 @@ jobs:
             const notes = review.non_blocking_notes.length
               ? review.non_blocking_notes.map((item) => `- ${item}`).join("\n")
               : "- None";
-            const verdict = review.approved ? "Approved" : "Changes required";
-            const commentBody = `${marker}\n## Codex Autoreview\n\n**Verdict:** ${verdict}\n\n${review.summary}\n\n### Blocking Findings\n\n${blocking}\n\n### Non-Blocking Notes\n\n${notes}`;
+            const verdict = review.approved && review.blocking_findings.length === 0 ? "Approved" : "Changes required";
+            const commentBody = `${marker}\n## Agent Autoreview\n\n**Verdict:** ${verdict}\n\n${review.summary}\n\n### Blocking Findings\n\n${blocking}\n\n### Non-Blocking Notes\n\n${notes}`;
             const { owner, repo } = context.repo;
             const issue_number = context.issue.number;
             const comments = await github.rest.issues.listComments({ owner, repo, issue_number, per_page: 100 });
@@ -174,4 +242,4 @@ jobs:
         if: always()
         shell: bash
         run: |
-          node -e "const fs = require('fs'); const r = JSON.parse(fs.readFileSync('codex-review.json', 'utf8')); if (!r.approved) { console.error('Codex review did not approve this PR.'); process.exit(1); }"
+          node -e "const fs = require('fs'); const r = JSON.parse(fs.readFileSync('codex-review.json', 'utf8')); if (!r.approved || r.blocking_findings.length) { console.error('Automated review did not approve this PR.'); process.exit(1); }"
