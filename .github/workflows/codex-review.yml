@@ -28,25 +28,31 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Build Codex review image
-        run: docker build -f .github/codex-review.Dockerfile -t darkfactory-codex-review .
-
       - name: Stage trusted review control plane
         shell: bash
         run: |
-          mkdir -p "${RUNNER_TEMP}/trusted-review"
-          TRUSTED_RUNNER="${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs"
-          if [ -f .github/scripts/run-kimi-review.mjs ]; then
-            cp .github/scripts/run-kimi-review.mjs "${TRUSTED_RUNNER}"
-          else
+          TRUSTED_CONTEXT="${RUNNER_TEMP}/trusted-review-context"
+          mkdir -p "${TRUSTED_CONTEXT}/.github/scripts"
+          fetch_trusted() {
+            local source_path="$1"
+            local expected_hash="$2"
+            local destination="${TRUSTED_CONTEXT}/${source_path}"
             curl --fail --silent --show-error --location \
-              "https://raw.githubusercontent.com/marius-patrik/Andromeda/d7bafd4f660c275bb327b9dd97b371f26a48adc2/.github/scripts/run-kimi-review.mjs" \
-              --output "${TRUSTED_RUNNER}"
-            printf '%s  %s\n' \
-              "8912ed10844cb6373c70efc6054a49d0f5dc445235da73cfbb97fb1e72b0377f" \
-              "${TRUSTED_RUNNER}" | sha256sum --check --strict
-          fi
-          chmod 500 "${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs"
+              "https://raw.githubusercontent.com/marius-patrik/Andromeda/d7bafd4f660c275bb327b9dd97b371f26a48adc2/${source_path}" \
+              --output "${destination}"
+            printf '%s  %s\n' "${expected_hash}" "${destination}" | sha256sum --check --strict
+          }
+          fetch_trusted ".github/codex-review.Dockerfile" "b49fc573da18b69a60a092f45dded5f98449e0e741d097224e63ed2649cb9b25"
+          fetch_trusted ".github/codex-review.schema.json" "4fb5a14cf30b012ff7d8170ba829f6c46da10d8a6e035fb8b1d9dd19a391e3b3"
+          fetch_trusted ".github/scripts/run-codex-review.sh" "2e7bb924c7fa462f3a251537d6fb596215deea15a9afcdea0510f335707763e8"
+          fetch_trusted ".github/scripts/run-kimi-review.mjs" "8912ed10844cb6373c70efc6054a49d0f5dc445235da73cfbb97fb1e72b0377f"
+          chmod 500 "${TRUSTED_CONTEXT}/.github/scripts/run-kimi-review.mjs"
+
+      - name: Build trusted Codex review image
+        shell: bash
+        run: |
+          TRUSTED_CONTEXT="${RUNNER_TEMP}/trusted-review-context"
+          docker build -f "${TRUSTED_CONTEXT}/.github/codex-review.Dockerfile" -t darkfactory-codex-review "${TRUSTED_CONTEXT}"
 
       - name: Checkout PR head
         uses: actions/checkout@v4
@@ -172,7 +178,7 @@ jobs:
             node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'The primary review container produced no result.',blocking_findings:['Inspect the Codex Review workflow infrastructure before allowing merge.'],non_blocking_notes:[]},null,2)+'\\n')"
           fi
 
-          if node "${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs" --should-takeover "${REVIEW_EXIT_CODE}"; then
+          if node "${RUNNER_TEMP}/trusted-review-context/.github/scripts/run-kimi-review.mjs" --should-takeover "${REVIEW_EXIT_CODE}"; then
             echo "takeover=true" >> "${GITHUB_OUTPUT}"
           elif [ "${REVIEW_EXIT_CODE}" -ne 0 ]; then
             node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'The primary review container failed outside the provider-takeover contract.',blocking_findings:['Inspect the Codex Review workflow infrastructure before allowing merge.'],non_blocking_notes:[]},null,2)+'\\n')"
@@ -203,7 +209,7 @@ jobs:
           fi
           KIMI_REVIEW_PROMPT="${RUNNER_TEMP}/review-output/review-prompt.txt" \
           KIMI_REVIEW_OUTPUT="${PWD}/codex-review.json" \
-          node "${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs"
+          node "${RUNNER_TEMP}/trusted-review-context/.github/scripts/run-kimi-review.mjs"
 
 
       - name: Comment review
