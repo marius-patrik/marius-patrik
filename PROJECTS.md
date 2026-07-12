@@ -10,9 +10,9 @@ Live inventory of repositories owned by `marius-patrik`. Paths match the umbrell
 | `Andromeda` | `marius-patrik/Andromeda` | Public | `main` |
 | `DarkFactory` | `marius-patrik/DarkFactory` | Public | `main` |
 | `Fabrica` | `marius-patrik/Fabrica` | Public | `dev` |
-| `private/Rommie` | `marius-patrik/Rommie` | Private | `main` |
+| `private/Andromeda-data` | `marius-patrik/Andromeda-data` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
-| `agents-plugin` | `marius-patrik/agents-plugin` | Public | `main` |
+| `Rommie` | `marius-patrik/Rommie` | Public | `main` |
 | `private/darkfactory-data` | `marius-patrik/darkfactory-data` | Private | `main` |
 | `dream` | `marius-patrik/dream` | Public | `main` |
 | `life-support` | `marius-patrik/life-support` | Public | `main` |

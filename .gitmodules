@@ -10,17 +10,17 @@
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
-[submodule "Rommie"]
-	path = private/Rommie
-	url = https://github.com/marius-patrik/Rommie.git
+[submodule "Andromeda-data"]
+	path = private/Andromeda-data
+	url = https://github.com/marius-patrik/Andromeda-data.git
 	branch = main
 [submodule "SkyAgent"]
 	path = SkyAgent
 	url = https://github.com/marius-patrik/SkyAgent.git
 	branch = main
-[submodule "agents-plugin"]
-	path = agents-plugin
-	url = https://github.com/marius-patrik/agents-plugin.git
+[submodule "Rommie"]
+	path = Rommie
+	url = https://github.com/marius-patrik/Rommie.git
 	branch = main
 [submodule "darkfactory-data"]
 	path = private/darkfactory-data

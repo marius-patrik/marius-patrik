@@ -20,9 +20,11 @@ The current snapshot contains 15 active and 18 archived repositories. Use
 
 - [`Andromeda`](https://github.com/marius-patrik/Andromeda) - integrated Agent OS product
   and control plane.
+- [`Andromeda-data`](https://github.com/marius-patrik/Andromeda-data) - private Agent OS
+  data authority.
 - [`DarkFactory`](https://github.com/marius-patrik/DarkFactory) - repository automation
   agent.
-- [`Rommie`](https://github.com/marius-patrik/Rommie) - private Agent OS data authority.
+- [`Rommie`](https://github.com/marius-patrik/Rommie) - Codex agent plugin.
 - [`SkyAgent`](https://github.com/marius-patrik/SkyAgent) - Hypixel SkyBlock agent.
 
 ## Checkout policy
