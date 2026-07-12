@@ -42,9 +42,6 @@ append_capped_file() {
 
 git config --global --add safe.directory /workspace
 if ! git rev-parse --verify "${BASE_REF}^{commit}" >/dev/null 2>&1; then
-  git fetch --no-tags origin "refs/heads/${BASE_BRANCH}:refs/remotes/origin/${BASE_BRANCH}" || true
-fi
-if ! git rev-parse --verify "${BASE_REF}^{commit}" >/dev/null 2>&1; then
   write_blocked_review \
     "Codex autoreview could not resolve the configured base ref." \
     "Fetch ${BASE_BRANCH} into ${BASE_REF} before running the read-only review container."
