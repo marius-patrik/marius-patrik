@@ -49,6 +49,10 @@ jobs:
             const contextFiles = [
               "AGENTS.md",
               ".agents/AGENTS.md",
+              ".agents/.global/AGENT_PROTOCOL.md",
+              ".agents/.global/WORKFLOW.md",
+              ".agents/.global/VALIDATION.md",
+              ".agents/.global/DOCS_AND_MEMORY.md",
               ".agents/.project/AGENTS.md",
               ".agents/.project/PROJECT.md",
               ".agents/.project/COMMANDS.md",
@@ -101,7 +105,7 @@ jobs:
           app-id: ${{ secrets.DARKFACTORY_APP_ID }}
           private-key: ${{ secrets.DARKFACTORY_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: Andromeda
+          repositories: marius-patrik
           permission-secrets: write
 
       - name: Run Codex review
