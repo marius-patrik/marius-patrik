@@ -21,10 +21,12 @@ jobs:
     if: ${{ !github.event.pull_request.draft }}
 
     steps:
-      - name: Checkout PR
+      - name: Checkout immutable trusted base
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.base.sha }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Build Codex review image
         run: docker build -f .github/codex-review.Dockerfile -t darkfactory-codex-review .
