@@ -153,8 +153,11 @@ test("review prompt budgets generated payloads as a file summary", async () => {
   assert.match(runner, /Generated payload file summary/);
   assert.match(runner, /trap cleanup_review_temp EXIT/);
   assert.match(runner, /rm -f .*GENERATED_FILE/);
-  assert.match(runner, /git fetch --no-tags origin/);
-  assert.match(runner, /refs\/heads\/\$\{BASE_BRANCH\}:refs\/remotes\/origin\/\$\{BASE_BRANCH\}/);
+  assert.doesNotMatch(runner, /git fetch/);
+  const workflow = await readFile(".github/workflows/codex-review.yml", "utf8");
+  assert.match(workflow, /Fetch immutable base ref/);
+  assert.match(workflow, /working-directory: pr-workspace/);
+  assert.match(workflow, /git fetch --no-tags origin "refs\/heads\/\$\{BASE_BRANCH\}:refs\/remotes\/origin\/\$\{BASE_BRANCH\}"/);
 });
 
 test("persists rotated credentials through an in-memory gh stdin pipe", async () => {

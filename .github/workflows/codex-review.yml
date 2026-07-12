@@ -44,6 +44,13 @@ jobs:
           persist-credentials: false
           path: pr-workspace
 
+      - name: Fetch immutable base ref
+        working-directory: pr-workspace
+        env:
+          BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+        shell: bash
+        run: git fetch --no-tags origin "refs/heads/${BASE_BRANCH}:refs/remotes/origin/${BASE_BRANCH}"
+
       - name: Prepare review context
         uses: actions/github-script@v7
         with:
