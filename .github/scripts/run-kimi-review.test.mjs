@@ -124,6 +124,10 @@ test("workflow isolates Codex and Kimi credentials in separate provider steps", 
   assert.match(workflow, /Stage trusted review control plane/);
   assert.match(workflow, /RUNNER_TEMP}\/trusted-review\/run-kimi-review\.mjs/);
   assert.doesNotMatch(kimiStep, /node \.github\/scripts\/run-kimi-review\.mjs/);
+  assert.ok(workflow.indexOf("- name: Run Codex review") < workflow.indexOf("- name: Create secret-rotation token"));
+  assert.ok(workflow.indexOf("- name: Create secret-rotation token") < workflow.indexOf("- name: Run credential-isolated Kimi takeover"));
+  assert.match(workflow, /Create secret-rotation token[\s\S]*?if: steps\.review\.outputs\.takeover == 'true' && github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
+  assert.match(kimiStep, /github\.event\.pull_request\.head\.repo\.full_name == github\.repository/);
   for (const contextFile of [
     ".agents/.global/AGENT_PROTOCOL.md",
     ".agents/.global/WORKFLOW.md",
