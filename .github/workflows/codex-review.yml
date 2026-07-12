@@ -29,6 +29,13 @@ jobs:
       - name: Build Codex review image
         run: docker build -f .github/codex-review.Dockerfile -t darkfactory-codex-review .
 
+      - name: Stage trusted review control plane
+        shell: bash
+        run: |
+          mkdir -p "${RUNNER_TEMP}/trusted-review"
+          cp .github/scripts/run-kimi-review.mjs "${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs"
+          chmod 500 "${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs"
+
       - name: Checkout PR head
         uses: actions/checkout@v4
         with:
@@ -149,7 +156,7 @@ jobs:
             node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'The primary review container produced no result.',blocking_findings:['Inspect the Codex Review workflow infrastructure before allowing merge.'],non_blocking_notes:[]},null,2)+'\\n')"
           fi
 
-          if node .github/scripts/run-kimi-review.mjs --should-takeover "${REVIEW_EXIT_CODE}"; then
+          if node "${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs" --should-takeover "${REVIEW_EXIT_CODE}"; then
             echo "takeover=true" >> "${GITHUB_OUTPUT}"
           elif [ "${REVIEW_EXIT_CODE}" -ne 0 ]; then
             node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'The primary review container failed outside the provider-takeover contract.',blocking_findings:['Inspect the Codex Review workflow infrastructure before allowing merge.'],non_blocking_notes:[]},null,2)+'\\n')"
@@ -168,7 +175,7 @@ jobs:
           fi
           KIMI_REVIEW_PROMPT="${RUNNER_TEMP}/review-output/review-prompt.txt" \
           KIMI_REVIEW_OUTPUT="${PWD}/codex-review.json" \
-          node .github/scripts/run-kimi-review.mjs
+          node "${RUNNER_TEMP}/trusted-review/run-kimi-review.mjs"
 
 
       - name: Comment review
