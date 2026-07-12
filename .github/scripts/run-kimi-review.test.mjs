@@ -123,6 +123,10 @@ test("workflow isolates Codex and Kimi credentials in separate provider steps", 
   assert.match(kimiStep, /steps\.review\.outputs\.takeover == 'true'/);
   assert.match(workflow, /Stage trusted review control plane/);
   assert.match(workflow, /Checkout immutable trusted base[\s\S]*?ref: \$\{\{ github\.event\.pull_request\.base\.sha \}\}[\s\S]*?persist-credentials: false/);
+  assert.match(workflow, /Andromeda\/d7bafd4f660c275bb327b9dd97b371f26a48adc2\/\.github\/scripts\/run-kimi-review\.mjs/);
+  assert.match(workflow, /8912ed10844cb6373c70efc6054a49d0f5dc445235da73cfbb97fb1e72b0377f/);
+  assert.match(workflow, /Validate proposed review control plane without credentials/);
+  assert.match(workflow, /working-directory: pr-workspace/);
   assert.match(workflow, /RUNNER_TEMP}\/trusted-review\/run-kimi-review\.mjs/);
   assert.doesNotMatch(kimiStep, /node \.github\/scripts\/run-kimi-review\.mjs/);
   assert.ok(workflow.indexOf("- name: Run Codex review") < workflow.indexOf("- name: Create secret-rotation token"));
