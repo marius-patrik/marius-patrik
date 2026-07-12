@@ -4,6 +4,13 @@
 !AGENTS.md
 !README.md
 !PROJECTS.md
+!.agents/
+!.agents/.project/
+!.agents/.project/*.md
+!.github/
+!.github/scripts/
+!.github/scripts/run-kimi-review.mjs
+!.github/scripts/run-kimi-review.test.mjs
 !Andromeda
 !DarkFactory
 !Fabrica
