@@ -5,7 +5,7 @@ export const API_ROOT = "https://api.github.com";
 export const DEFAULT_DATA_REPO = "marius-patrik/darkfactory-data";
 export const PARKED_REPOS = new Set([
   "marius-patrik/fabrica",
-  "marius-patrik/skyblock-agent",
+  "marius-patrik/SkyAgent",
   "marius-patrik/singularity",
   "marius-patrik/life-support"
 ]);

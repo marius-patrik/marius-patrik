@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     if: >-
       ${{
-        github.repository == 'marius-patrik/agent-darkfactory' &&
+        github.repository == 'marius-patrik/DarkFactory' &&
         (
           github.event_name == 'schedule' ||
           github.event_name == 'workflow_dispatch' ||
@@ -81,7 +81,7 @@ jobs:
       - name: Run orchestrator
         env:
           DARK_FACTORY_TOKEN: ${{ steps.app-token.outputs.token }}
-          DF_CONTROL_REPO: marius-patrik/agent-darkfactory
+          DF_CONTROL_REPO: marius-patrik/DarkFactory
           DF_TRIGGER: ${{ github.event_name }}
           DF_DATA_REPO: marius-patrik/darkfactory-data
         run: node ${{ steps.script-path.outputs.path }}
