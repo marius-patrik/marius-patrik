@@ -34,8 +34,8 @@ jobs:
     if: >-
       ${{
         github.event_name == 'push' ||
-        (github.event_name == 'schedule' && github.repository == 'marius-patrik/agent-darkfactory') ||
-        (github.event_name == 'workflow_dispatch' && github.repository == 'marius-patrik/agent-darkfactory')
+        (github.event_name == 'schedule' && github.repository == 'marius-patrik/DarkFactory') ||
+        (github.event_name == 'workflow_dispatch' && github.repository == 'marius-patrik/DarkFactory')
       }}
 
     steps:
@@ -80,7 +80,7 @@ jobs:
         run: |
           repo="${{ inputs.repo }}"
           case "${repo}" in
-            marius-patrik/fabrica|marius-patrik/skyblock-agent|marius-patrik/singularity|marius-patrik/life-support)
+            marius-patrik/fabrica|marius-patrik/SkyAgent|marius-patrik/singularity|marius-patrik/life-support)
               echo "::error::DarkFactory manual planning target is parked: ${repo}."
               exit 1
               ;;
@@ -109,7 +109,7 @@ jobs:
         if: github.event_name != 'push'
         uses: actions/checkout@v4
         with:
-          repository: marius-patrik/agent-darkfactory
+          repository: marius-patrik/DarkFactory
           ref: ${{ github.sha }}
           persist-credentials: false
 
@@ -131,7 +131,7 @@ jobs:
       - name: Run planner
         env:
           DARK_FACTORY_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
-          DF_CONTROL_REPO: marius-patrik/agent-darkfactory
+          DF_CONTROL_REPO: marius-patrik/DarkFactory
           DF_TARGET_REPO: ${{ github.event_name == 'workflow_dispatch' && inputs.repo || github.repository }}
           DF_TARGET_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || (github.event_name == 'push' && github.sha || '') }}
           DF_PLAN_ALL: ${{ github.event_name == 'schedule' && 'true' || 'false' }}
