@@ -4,6 +4,9 @@
 !AGENTS.md
 !README.md
 !PROJECTS.md
+!.agents/
+!.agents/.project/
+!.agents/.project/*.md
 !Andromeda
 !DarkFactory
 !Fabrica
