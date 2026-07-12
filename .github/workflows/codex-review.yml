@@ -104,17 +104,6 @@ jobs:
                 : "No linked issue was found in the PR body using closes/fixes/resolves syntax.",
             );
 
-      - name: Create secret-rotation token
-        id: app-token
-        continue-on-error: true
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.DARKFACTORY_APP_ID }}
-          private-key: ${{ secrets.DARKFACTORY_APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-          repositories: marius-patrik
-          permission-secrets: write
-
       - name: Run Codex review
         id: review
         env:
@@ -162,8 +151,20 @@ jobs:
             node -e "const fs=require('fs'); fs.writeFileSync('codex-review.json', JSON.stringify({approved:false,summary:'The primary review container failed outside the provider-takeover contract.',blocking_findings:['Inspect the Codex Review workflow infrastructure before allowing merge.'],non_blocking_notes:[]},null,2)+'\\n')"
           fi
 
+      - name: Create secret-rotation token
+        if: steps.review.outputs.takeover == 'true' && github.event.pull_request.head.repo.full_name == github.repository
+        id: app-token
+        continue-on-error: true
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.DARKFACTORY_APP_ID }}
+          private-key: ${{ secrets.DARKFACTORY_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: marius-patrik
+          permission-secrets: write
+
       - name: Run credential-isolated Kimi takeover
-        if: steps.review.outputs.takeover == 'true'
+        if: steps.review.outputs.takeover == 'true' && github.event.pull_request.head.repo.full_name == github.repository
         env:
           KIMI_AUTH_JSON: ${{ secrets.KIMI_AUTH_JSON }}
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
