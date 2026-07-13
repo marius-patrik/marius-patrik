@@ -30,9 +30,9 @@
 	path = life-support
 	url = https://github.com/marius-patrik/life-support.git
 	branch = main
-[submodule "media-streamer"]
-	path = media-streamer
-	url = https://github.com/marius-patrik/media-streamer.git
+[submodule "MediaStream"]
+	path = MediaStream
+	url = https://github.com/marius-patrik/MediaStream.git
 	branch = main
 [submodule "mssgs"]
 	path = mssgs
@@ -62,9 +62,9 @@
 	path = template-web
 	url = https://github.com/marius-patrik/template-web.git
 	branch = main
-[submodule "tmux-agent-status"]
-	path = tmux-agent-status
-	url = https://github.com/marius-patrik/tmux-agent-status.git
+[submodule "StatusLine"]
+	path = StatusLine
+	url = https://github.com/marius-patrik/StatusLine.git
 	branch = master
 [submodule "vsc-utils"]
 	path = vsc-utils
