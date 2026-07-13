@@ -16,7 +16,7 @@ from the gitlink tables.
 | `experience` | `marius-patrik/experience` | Public | `master` |
 | `Fabrica` | `marius-patrik/Fabrica` | Public | `dev` |
 | `life-support` | `marius-patrik/life-support` | Public | `main` |
-| `media-streamer` | `marius-patrik/media-streamer` | Public | `main` |
+| `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
 | `mssgs` | `marius-patrik/mssgs` | Public | `main` |
 | `singularity` | `marius-patrik/singularity` | Public | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
@@ -24,7 +24,7 @@ from the gitlink tables.
 | `template-cli` | `marius-patrik/template-cli` | Public | `main` |
 | `template-repo` | `marius-patrik/template-repo` | Public | `main` |
 | `template-web` | `marius-patrik/template-web` | Public | `main` |
-| `tmux-agent-status` | `marius-patrik/tmux-agent-status` | Public | `master` |
+| `StatusLine` | `marius-patrik/StatusLine` | Public | `master` |
 | `vsc-utils` | `marius-patrik/vsc-utils` | Public | `main` |
 | `private/yacht` | `marius-patrik/yacht` | Private | `main` |
 
