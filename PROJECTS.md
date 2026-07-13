@@ -13,12 +13,12 @@ from the gitlink tables.
 | `DarkFactory` | `marius-patrik/DarkFactory` | Public | `main` |
 | `private/darkfactory-data` | `marius-patrik/darkfactory-data` | Private | `main` |
 | `darkfactory-templates` | `marius-patrik/darkfactory-templates` | Public | `main` |
-| `experience` | `marius-patrik/experience` | Public | `master` |
+| `Experience` | `marius-patrik/Experience` | Public | `master` |
 | `Fabrica` | `marius-patrik/Fabrica` | Public | `dev` |
-| `life-support` | `marius-patrik/life-support` | Public | `main` |
+| `LifeQuest` | `marius-patrik/LifeQuest` | Public | `main` |
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
 | `mssgs` | `marius-patrik/mssgs` | Public | `main` |
-| `singularity` | `marius-patrik/singularity` | Public | `main` |
+| `Singularity` | `marius-patrik/Singularity` | Public | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `template-bot` | `marius-patrik/template-bot` | Public | `main` |
 | `template-cli` | `marius-patrik/template-cli` | Public | `main` |
