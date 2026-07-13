@@ -2,7 +2,9 @@
 
 - The 2026-07-13 live-account refresh records 29 child repositories: 19 active and
   10 archived.
-- Every gitlink points to the current head of its repository's live default branch.
+- At each refresh snapshot, every gitlink points to the then-current head of its
+  repository's live default branch; operational data repositories may advance after
+  the snapshot is published.
 - `darkfactory-templates`, `experience`, and the four `template-*` repositories are
   active again; `dream` and `Rommie` are archived.
 - Four stale inventory entries whose repositories no longer exist on the account were
