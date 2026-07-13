@@ -18,29 +18,29 @@
 	path = darkfactory-templates
 	url = https://github.com/marius-patrik/darkfactory-templates.git
 	branch = main
-[submodule "experience"]
-	path = experience
-	url = https://github.com/marius-patrik/experience.git
+[submodule "Experience"]
+	path = Experience
+	url = https://github.com/marius-patrik/Experience.git
 	branch = master
 [submodule "Fabrica"]
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
-[submodule "life-support"]
-	path = life-support
-	url = https://github.com/marius-patrik/life-support.git
+[submodule "LifeQuest"]
+	path = LifeQuest
+	url = https://github.com/marius-patrik/LifeQuest.git
 	branch = main
-[submodule "media-streamer"]
-	path = media-streamer
-	url = https://github.com/marius-patrik/media-streamer.git
+[submodule "MediaStream"]
+	path = MediaStream
+	url = https://github.com/marius-patrik/MediaStream.git
 	branch = main
 [submodule "mssgs"]
 	path = mssgs
 	url = https://github.com/marius-patrik/mssgs.git
 	branch = main
-[submodule "singularity"]
-	path = singularity
-	url = https://github.com/marius-patrik/singularity.git
+[submodule "Singularity"]
+	path = Singularity
+	url = https://github.com/marius-patrik/Singularity.git
 	branch = main
 [submodule "SkyAgent"]
 	path = SkyAgent
@@ -62,9 +62,9 @@
 	path = template-web
 	url = https://github.com/marius-patrik/template-web.git
 	branch = main
-[submodule "tmux-agent-status"]
-	path = tmux-agent-status
-	url = https://github.com/marius-patrik/tmux-agent-status.git
+[submodule "StatusLine"]
+	path = StatusLine
+	url = https://github.com/marius-patrik/StatusLine.git
 	branch = master
 [submodule "vsc-utils"]
 	path = vsc-utils

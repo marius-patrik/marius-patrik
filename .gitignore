@@ -19,11 +19,12 @@
 !agents-plugin
 !darkfactory-data
 !dream
-!life-support
-!media-streamer
+!Experience
+!LifeQuest
+!MediaStream
 !mssgs
-!singularity
-!tmux-agent-status
+!Singularity
+!StatusLine
 !vsc-utils
 !workspace-agents
 !yacht
