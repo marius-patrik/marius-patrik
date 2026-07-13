@@ -2,34 +2,30 @@
 	path = Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
-[submodule "DarkFactory"]
-	path = DarkFactory
-	url = https://github.com/marius-patrik/DarkFactory.git
-	branch = main
-[submodule "Fabrica"]
-	path = Fabrica
-	url = https://github.com/marius-patrik/Fabrica.git
-	branch = dev
 [submodule "Andromeda-data"]
 	path = private/Andromeda-data
 	url = https://github.com/marius-patrik/Andromeda-data.git
 	branch = main
-[submodule "SkyAgent"]
-	path = SkyAgent
-	url = https://github.com/marius-patrik/SkyAgent.git
-	branch = main
-[submodule "Rommie"]
-	path = Rommie
-	url = https://github.com/marius-patrik/Rommie.git
+[submodule "DarkFactory"]
+	path = DarkFactory
+	url = https://github.com/marius-patrik/DarkFactory.git
 	branch = main
 [submodule "darkfactory-data"]
 	path = private/darkfactory-data
 	url = https://github.com/marius-patrik/darkfactory-data.git
 	branch = main
-[submodule "dream"]
-	path = dream
-	url = https://github.com/marius-patrik/dream.git
+[submodule "darkfactory-templates"]
+	path = darkfactory-templates
+	url = https://github.com/marius-patrik/darkfactory-templates.git
 	branch = main
+[submodule "experience"]
+	path = experience
+	url = https://github.com/marius-patrik/experience.git
+	branch = master
+[submodule "Fabrica"]
+	path = Fabrica
+	url = https://github.com/marius-patrik/Fabrica.git
+	branch = dev
 [submodule "life-support"]
 	path = life-support
 	url = https://github.com/marius-patrik/life-support.git
@@ -46,6 +42,26 @@
 	path = singularity
 	url = https://github.com/marius-patrik/singularity.git
 	branch = main
+[submodule "SkyAgent"]
+	path = SkyAgent
+	url = https://github.com/marius-patrik/SkyAgent.git
+	branch = main
+[submodule "template-bot"]
+	path = template-bot
+	url = https://github.com/marius-patrik/template-bot.git
+	branch = main
+[submodule "template-cli"]
+	path = template-cli
+	url = https://github.com/marius-patrik/template-cli.git
+	branch = main
+[submodule "template-repo"]
+	path = template-repo
+	url = https://github.com/marius-patrik/template-repo.git
+	branch = main
+[submodule "template-web"]
+	path = template-web
+	url = https://github.com/marius-patrik/template-web.git
+	branch = main
 [submodule "tmux-agent-status"]
 	path = tmux-agent-status
 	url = https://github.com/marius-patrik/tmux-agent-status.git
@@ -54,19 +70,11 @@
 	path = vsc-utils
 	url = https://github.com/marius-patrik/vsc-utils.git
 	branch = main
-[submodule "workspace-agents"]
-	path = archive/workspace-agents
-	url = https://github.com/marius-patrik/workspace-agents.git
-	branch = main
 [submodule "yacht"]
 	path = private/yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
 
-[submodule "archive/agents-core"]
-	path = archive/agents-core
-	url = https://github.com/marius-patrik/agents-core.git
-	branch = main
 [submodule "archive/agents-harness"]
 	path = archive/agents-harness
 	url = https://github.com/marius-patrik/agents-harness.git
@@ -79,18 +87,10 @@
 	path = private/archive/Citizen
 	url = https://github.com/marius-patrik/Citizen.git
 	branch = main
-[submodule "archive/darkfactory-templates"]
-	path = archive/darkfactory-templates
-	url = https://github.com/marius-patrik/darkfactory-templates.git
+[submodule "archive/dream"]
+	path = archive/dream
+	url = https://github.com/marius-patrik/dream.git
 	branch = main
-[submodule "archive/data-agentos"]
-	path = private/archive/data-agentos
-	url = https://github.com/marius-patrik/data-agentos.git
-	branch = main
-[submodule "archive/experience"]
-	path = archive/experience
-	url = https://github.com/marius-patrik/experience.git
-	branch = master
 [submodule "archive/inference-engine"]
 	path = archive/inference-engine
 	url = https://github.com/marius-patrik/inference-engine.git
@@ -103,29 +103,13 @@
 	path = archive/MMO
 	url = https://github.com/marius-patrik/MMO.git
 	branch = main
+[submodule "archive/Rommie"]
+	path = archive/Rommie
+	url = https://github.com/marius-patrik/Rommie.git
+	branch = main
 [submodule "archive/RSCode"]
 	path = archive/RSCode
 	url = https://github.com/marius-patrik/RSCode.git
-	branch = main
-[submodule "archive/template-bot"]
-	path = archive/template-bot
-	url = https://github.com/marius-patrik/template-bot.git
-	branch = main
-[submodule "archive/template-cli"]
-	path = archive/template-cli
-	url = https://github.com/marius-patrik/template-cli.git
-	branch = main
-[submodule "archive/template-repo"]
-	path = archive/template-repo
-	url = https://github.com/marius-patrik/template-repo.git
-	branch = main
-[submodule "archive/template-web"]
-	path = archive/template-web
-	url = https://github.com/marius-patrik/template-web.git
-	branch = main
-[submodule "archive/workspace-darkfactory"]
-	path = private/archive/workspace-darkfactory
-	url = https://github.com/marius-patrik/workspace-darkfactory.git
 	branch = main
 [submodule "archive/Wrkspace"]
 	path = archive/Wrkspace
