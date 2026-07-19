@@ -1,6 +1,6 @@
 # Repository Map
 
-Live inventory of repositories owned by `marius-patrik`, refreshed on 2026-07-13.
+Live inventory of repositories owned by `marius-patrik`, refreshed on 2026-07-19.
 Paths match the umbrella `.gitmodules` file. The umbrella repository itself is omitted
 from the gitlink tables.
 
@@ -15,6 +15,7 @@ from the gitlink tables.
 | `darkfactory-templates` | `marius-patrik/darkfactory-templates` | Public | `main` |
 | `Experience` | `marius-patrik/Experience` | Public | `master` |
 | `Fabrica` | `marius-patrik/Fabrica` | Public | `dev` |
+| `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
 | `LifeQuest` | `marius-patrik/LifeQuest` | Public | `main` |
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
 | `mssgs` | `marius-patrik/mssgs` | Public | `main` |

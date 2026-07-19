@@ -26,6 +26,10 @@
 	path = Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
+[submodule "genesis-os"]
+	path = genesis-os
+	url = https://github.com/marius-patrik/genesis-os.git
+	branch = main
 [submodule "LifeQuest"]
 	path = LifeQuest
 	url = https://github.com/marius-patrik/LifeQuest.git

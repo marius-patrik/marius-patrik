@@ -13,7 +13,7 @@ This repository tracks every other repository owned by the account as a gitlink:
   this inventory is refreshed;
 - child repositories are not modified by an inventory refresh.
 
-The current snapshot contains 19 active and 10 archived repositories. Use
+The current snapshot contains 20 active and 10 archived repositories. Use
 [`PROJECTS.md`](PROJECTS.md) for the complete map, visibility, and default branches.
 
 ## Primary systems
@@ -24,6 +24,8 @@ The current snapshot contains 19 active and 10 archived repositories. Use
   data authority.
 - [`DarkFactory`](https://github.com/marius-patrik/DarkFactory) - repository automation
   agent.
+- [`genesis-os`](https://github.com/marius-patrik/genesis-os) - developmental
+  intelligence, continual-learning, and model-lineage substrate.
 - [`experience`](https://github.com/marius-patrik/experience) - Codex memory and
   continuity plugin.
 - [`SkyAgent`](https://github.com/marius-patrik/SkyAgent) - Hypixel SkyBlock agent.
