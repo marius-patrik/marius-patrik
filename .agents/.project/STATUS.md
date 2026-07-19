@@ -3,7 +3,7 @@
 - The 2026-07-19 live-account refresh records 30 child repositories: 20 active and
   10 archived.
 - `genesis-os` is tracked as an active public `main`-branch gitlink pinned to
-  `4f2e06223e16934483ac2f634c86279cfe112af7`.
+  `12b3713564024ee06042b0f4818a9a935bf06507`.
 - At each refresh snapshot, every gitlink points to the then-current head of its
   repository's live default branch; operational data repositories may advance after
   the snapshot is published.
