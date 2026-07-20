@@ -10,10 +10,6 @@
 	path = darkfactory-templates
 	url = https://github.com/marius-patrik/darkfactory-templates.git
 	branch = main
-[submodule "Experience"]
-	path = Experience
-	url = https://github.com/marius-patrik/Experience.git
-	branch = master
 [submodule "Fabrica"]
 	path = archive/Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
@@ -71,29 +67,9 @@
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
 
-[submodule "archive/agents-harness"]
-	path = archive/agents-harness
-	url = https://github.com/marius-patrik/agents-harness.git
-	branch = main
-[submodule "archive/agents-manager-legacy"]
-	path = archive/agents-manager-legacy
-	url = https://github.com/marius-patrik/agents-manager-legacy.git
-	branch = main
 [submodule "archive/Citizen"]
 	path = private/archive/Citizen
 	url = https://github.com/marius-patrik/Citizen.git
-	branch = main
-[submodule "archive/dream"]
-	path = archive/dream
-	url = https://github.com/marius-patrik/dream.git
-	branch = main
-[submodule "archive/inference-engine"]
-	path = archive/inference-engine
-	url = https://github.com/marius-patrik/inference-engine.git
-	branch = main
-[submodule "archive/llm-gateway"]
-	path = archive/llm-gateway
-	url = https://github.com/marius-patrik/llm-gateway.git
 	branch = main
 [submodule "archive/MMO"]
 	path = archive/MMO
