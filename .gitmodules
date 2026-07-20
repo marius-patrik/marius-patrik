@@ -2,9 +2,9 @@
 	path = Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
-[submodule "Andromeda-data"]
-	path = private/Andromeda-data
-	url = https://github.com/marius-patrik/Andromeda-data.git
+[submodule "private-data"]
+	path = private/private-data
+	url = https://github.com/marius-patrik/private-data.git
 	branch = main
 [submodule "darkfactory-templates"]
 	path = darkfactory-templates
