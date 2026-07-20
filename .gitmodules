@@ -30,10 +30,6 @@
 	path = mssgs
 	url = https://github.com/marius-patrik/mssgs.git
 	branch = main
-[submodule "Singularity"]
-	path = Singularity
-	url = https://github.com/marius-patrik/Singularity.git
-	branch = main
 [submodule "SkyAgent"]
 	path = SkyAgent
 	url = https://github.com/marius-patrik/SkyAgent.git
