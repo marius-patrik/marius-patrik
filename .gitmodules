@@ -6,10 +6,6 @@
 	path = private/private-data
 	url = https://github.com/marius-patrik/private-data.git
 	branch = main
-[submodule "darkfactory-templates"]
-	path = darkfactory-templates
-	url = https://github.com/marius-patrik/darkfactory-templates.git
-	branch = main
 [submodule "Fabrica"]
 	path = archive/Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
@@ -29,22 +25,6 @@
 [submodule "SkyAgent"]
 	path = SkyAgent
 	url = https://github.com/marius-patrik/SkyAgent.git
-	branch = main
-[submodule "template-bot"]
-	path = template-bot
-	url = https://github.com/marius-patrik/template-bot.git
-	branch = main
-[submodule "template-cli"]
-	path = template-cli
-	url = https://github.com/marius-patrik/template-cli.git
-	branch = main
-[submodule "template-repo"]
-	path = template-repo
-	url = https://github.com/marius-patrik/template-repo.git
-	branch = main
-[submodule "template-web"]
-	path = template-web
-	url = https://github.com/marius-patrik/template-web.git
 	branch = main
 [submodule "StatusLine"]
 	path = StatusLine
