@@ -7,20 +7,14 @@ Systems Architect & AI Engineer building **Agent OS runtimes**, **developmental 
 ### 🚀 Featured Ecosystem
 
 #### 🌌 [Andromeda](https://github.com/marius-patrik/Andromeda)
-> **Agent OS Product & Control Plane**  
+> **Agent OS Product & Control Plane**
 > An integrated Agent OS monorepo powering autonomous agent execution, protocol wrappers, server deployment, CLI, and client runtimes. Features a unified protocol layer absorbing MCP, fail-closed state validation, and cross-machine event synchronization.
-
-#### 🧠 [Genesis OS](https://github.com/marius-patrik/genesis-os)
-> **Developmental AI Runtime**  
-> A developmental intelligence substrate featuring Birth, Wake, Sleep, persistent memory, dynamic tools, lineage evolution, and world-model training.
+>
+> Andromeda now carries what were once separate runtimes — the developmental AI substrate, the inference engine, the LLM gateway, the agent harness, and the workspace substrate — folded in with their full history under `src/migrate`, to be reimplemented against the SDK rather than maintained in place.
 
 #### 🤖 [DarkFactory](https://github.com/marius-patrik/DarkFactory)
-> **Autonomous Repository Agent**  
-> GitHub App automation agent managing repository setup, automated code reviews, continuous policy enforcement, and autonomous maintenance gates.
-
-#### ⚡ [Singularity](https://github.com/marius-patrik/Singularity)
-> **IDE Workspace & Execution Substrate**  
-> Advanced developer workspace engine and utility substrate for high-throughput agent-human pair programming.
+> **Autonomous Repository Agent**
+> GitHub App automation agent managing repository setup, automated code reviews, continuous policy enforcement, and autonomous maintenance gates. Runs as the protected control plane for managed repositories, and is carried inside Andromeda as an agent project.
 
 ---
 
@@ -29,17 +23,17 @@ Systems Architect & AI Engineer building **Agent OS runtimes**, **developmental 
 ```text
   +-------------------------------------------------------------------+
   |                           Andromeda OS                            |
-  |   +-------------+  +-------------+  +-------------+  +----------+   |
-  |   |   SDK Core  |  |  Protocol   |  |   Server    |  | Clients  |   |
-  |   |  (Types/Ctx)|  | (MCP/Events)|  | (Deployment)|  | (CLI/Web)|   |
-  |   +-------------+  +-------------+  +-------------+  +----------+   |
+  |   +-------------+  +-------------+  +-------------+  +----------+  |
+  |   |   SDK Core  |  |  Protocol   |  |   Server    |  | Clients  |  |
+  |   |  (Types/Ctx)|  | (MCP/Events)|  | (Deployment)|  | (CLI/Web)|  |
+  |   +-------------+  +-------------+  +-------------+  +----------+  |
   +-------------------------------------------------------------------+
-           ^                         ^                         ^
-           |                         |                         |
-  +-----------------+       +-----------------+       +-----------------+
-  |   Genesis OS    |       |   DarkFactory   |       |   Singularity   |
-  | (Developmental) |       |  (Automation)   |       |   (Workspace)   |
-  +-----------------+       +-----------------+       +-----------------+
+                                  ^
+                                  |
+                        +-----------------+
+                        |   DarkFactory   |
+                        |  (Automation)   |
+                        +-----------------+
 ```
 
 - **Languages**: TypeScript, JavaScript (Bun/Node), Python, Go, Rust, HTML/CSS
@@ -51,12 +45,34 @@ Systems Architect & AI Engineer building **Agent OS runtimes**, **developmental 
 
 ### 🌐 Repository Inventory
 
-This umbrella repository tracks my full project ecosystem as gitlinks:
-- **Active Public Repositories**: Root level (`Andromeda`, `DarkFactory`, `genesis-os`, `Singularity`, `SkyAgent`, etc.)
-- **Active Private Repositories**: `private/` (`Andromeda-data`, `darkfactory-data`, `yacht`)
-- **Archived Repositories**: `archive/` (`Fabrica`, `dream`, `agents-manager-legacy`, `llm-gateway`, etc.)
+This umbrella repository tracks my project ecosystem as gitlinks:
 
-*Full map, visibility matrix, and default branch index are maintained in [`PROJECTS.md`](PROJECTS.md).*
+- **Active public repositories** at the root — `Andromeda`, `DarkFactory`, `SkyAgent`, `MediaStream`, and others.
+- **Active private repositories** under `private/` — including `private-data`, the Agent OS state repository.
+- **Archived repositories** under `archive/`, with private archives under `archive/private/`.
+
+*Full map, visibility matrix, and default-branch index are maintained in [`PROJECTS.md`](PROJECTS.md).*
+
+---
+
+### 📐 What this repository is, and is not
+
+This umbrella repository is a **workspace index, not a package or product**. It owns
+exactly three things: the workspace layout, the submodule pointers, and the
+project-map documentation.
+
+It deliberately has no root package manifest, no installer, and no user-facing
+artifact. Build, test, installer, and release validation belong to the nested
+repositories that own that code — the umbrella never duplicates them.
+
+Its CI validates only what it owns: that `.gitmodules` parses, that every declared
+submodule is a real gitlink and every gitlink is declared, and that `PROJECTS.md`
+documents exactly the submodules that exist. A stale project map fails the build.
+
+For the same reason the umbrella is **formally exempt from the DarkFactory managed
+enforcement baseline**, which targets product repositories with their own build and
+release surface. Managed workflows, review gates, and policy files are installed in
+the repositories that actually ship something.
 
 ---
 
