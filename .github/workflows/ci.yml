@@ -4,11 +4,9 @@ on:
   push:
     branches:
       - main
-      - dev
   pull_request:
     branches:
       - main
-      - dev
 
 permissions:
   contents: read
@@ -27,36 +25,8 @@ jobs:
         with:
           node-version: 22
 
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: 1.3.14
-
-      - name: Install dependencies
-        shell: bash
-        run: |
-          if [ -f package-lock.json ]; then
-            npm ci
-          elif [ -f bun.lock ] || [ -f bun.lockb ]; then
-            bun install --frozen-lockfile
-          elif [ -f package.json ]; then
-            npm install
-          else
-            echo "No package manifest found; skipping dependency install."
-          fi
-
-      - name: Validate
-        shell: bash
-        run: |
-          if [ ! -f package.json ]; then
-            echo "No package.json found; nothing to validate."
-            exit 0
-          fi
-
-          if node -e "const p=require('./package.json'); process.exit(p.scripts?.ci ? 0 : 1)"; then
-            npm run ci
-          elif node -e "const p=require('./package.json'); process.exit(p.scripts?.check ? 0 : 1)"; then
-            npm run check
-          else
-            npm test
-          fi
+      # This repository is a workspace index, not a package. It owns submodule
+      # pointer hygiene and project-map accuracy; package build, test, and
+      # release validation belongs to the nested repositories.
+      - name: Verify workspace pointers and project map
+        run: node scripts/verify-umbrella.mjs
