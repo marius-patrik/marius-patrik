@@ -14,17 +14,12 @@ repositories. `scripts/verify-umbrella.mjs` fails the build if this table and
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
 | `Andromeda` | `marius-patrik/Andromeda` | Public | `main` |
-| `darkfactory-templates` | `marius-patrik/darkfactory-templates` | Public | `main` |
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
 | `mssgs` | `marius-patrik/mssgs` | Public | `main` |
 | `private/private-data` | `marius-patrik/private-data` | Private | `main` |
 | `private/yacht` | `marius-patrik/yacht` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `StatusLine` | `marius-patrik/StatusLine` | Public | `master` |
-| `template-bot` | `marius-patrik/template-bot` | Public | `main` |
-| `template-cli` | `marius-patrik/template-cli` | Public | `main` |
-| `template-repo` | `marius-patrik/template-repo` | Public | `main` |
-| `template-web` | `marius-patrik/template-web` | Public | `main` |
 | `vsc-utils` | `marius-patrik/vsc-utils` | Public | `main` |
 
 ## Archived repositories
