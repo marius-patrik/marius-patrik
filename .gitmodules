@@ -59,3 +59,6 @@
 	path = archive/Wrkspace
 	url = https://github.com/marius-patrik/Wrkspace.git
 	branch = main
+[submodule "agentx"]
+	path = agentx
+	url = https://github.com/marius-patrik/agentx.git
