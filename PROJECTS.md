@@ -13,7 +13,7 @@ repositories. `scripts/verify-umbrella.mjs` fails the build if this table and
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
-| `agentx` | `marius-patrik/agentx` | Public | `main` |
+| `froq` | `marius-patrik/froq` | Public | `main` |
 | `Andromeda` | `marius-patrik/Andromeda` | Public | `main` |
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
 | `mssgs` | `marius-patrik/mssgs` | Public | `main` |
