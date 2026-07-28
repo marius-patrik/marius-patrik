@@ -51,8 +51,8 @@
 	path = archive/Rommie
 	url = https://github.com/marius-patrik/Rommie.git
 	branch = main
-[submodule "archive/RSCode"]
-	path = archive/RSCode
+[submodule "RSCode"]
+	path = RSCode
 	url = https://github.com/marius-patrik/RSCode.git
 	branch = main
 [submodule "archive/Wrkspace"]

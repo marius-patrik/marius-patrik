@@ -22,6 +22,7 @@ repositories. `scripts/verify-umbrella.mjs` fails the build if this table and
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `StatusLine` | `marius-patrik/StatusLine` | Public | `master` |
 | `vsc-utils` | `marius-patrik/vsc-utils` | Public | `main` |
+| `RSCode` | `marius-patrik/RSCode` | Private | `main` |
 
 ## Archived repositories
 
@@ -34,7 +35,6 @@ that matters is folded into an active repository first.
 | `archive/MMO` | `marius-patrik/MMO` | Private | `main` |
 | `archive/private/Citizen` | `marius-patrik/Citizen` | Private | `main` |
 | `archive/Rommie` | `marius-patrik/Rommie` | Private | `main` |
-| `archive/RSCode` | `marius-patrik/RSCode` | Private | `main` |
 | `archive/Wrkspace` | `marius-patrik/Wrkspace` | Public | `main` |
 | `LifeQuest` | `marius-patrik/LifeQuest` | Private | `main` |
 
