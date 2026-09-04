@@ -20,7 +20,6 @@ repositories never do.
 | `agents-super` | `marius-patrik/agents-super` | Private | `main` |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
 | `Citizen` | `marius-patrik/Citizen` | Private | `main` |
-| `data-agentos` | `marius-patrik/data-agentos` | Private | `main` |
 | `DarkFactory` | `marius-patrik/DarkFactory` | Public | `main` |
 | `dsh-stack` | `marius-patrik/dsh-stack` | Public | `main` |
 | `Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
