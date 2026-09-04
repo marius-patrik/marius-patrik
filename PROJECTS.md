@@ -27,7 +27,7 @@ repositories never do.
 | `MMO` | `marius-patrik/MMO` | Private | `main` |
 | `MoneyMaker` | `marius-patrik/MoneyMaker` | Public | `main` |
 | `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
-| `private-data` | `marius-patrik/private-data` | Private | `main` |
+| `data-private` | `marius-patrik/data-private` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
 

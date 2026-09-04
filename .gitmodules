@@ -2,9 +2,9 @@
 	path = archive/Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
-[submodule "private-data"]
-	path = private-data
-	url = https://github.com/marius-patrik/private-data.git
+[submodule "data-private"]
+	path = data-private
+	url = https://github.com/marius-patrik/data-private.git
 	branch = main
 [submodule "Fabrica"]
 	path = Fabrica
