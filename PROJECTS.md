@@ -31,7 +31,6 @@ repositories never do.
 | `private-data` | `marius-patrik/private-data` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
-| `workspace-darkfactory` | `marius-patrik/workspace-darkfactory` | Private | `main` |
 
 ## Archived repositories
 
