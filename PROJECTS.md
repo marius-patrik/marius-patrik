@@ -16,6 +16,7 @@ repositories never do.
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
+| `accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Public | `main` |
 | `data-agents` | `marius-patrik/data-agents` | Private | `main` |
 | `agents-super` | `marius-patrik/agents-super` | Private | `main` |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
@@ -26,6 +27,7 @@ repositories never do.
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
 | `MMO` | `marius-patrik/MMO` | Private | `main` |
 | `MoneyMaker` | `marius-patrik/MoneyMaker` | Public | `main` |
+| `PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
 | `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
 | `data-private` | `marius-patrik/data-private` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |

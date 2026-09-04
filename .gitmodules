@@ -122,3 +122,11 @@
 	path = Memory
 	url = https://github.com/marius-patrik/Memory.git
 	branch = main
+[submodule "accumulative-matrix-sweeping"]
+	path = accumulative-matrix-sweeping
+	url = https://github.com/marius-patrik/accumulative-matrix-sweeping.git
+	branch = main
+[submodule "PAES-enterprise"]
+	path = PAES-enterprise
+	url = https://github.com/marius-patrik/PAES-enterprise.git
+	branch = main
