@@ -55,5 +55,5 @@ that matters is folded into an active repository first.
 | `archive/RSCode` | `marius-patrik/RSCode` | Private | `main` |
 | `archive/StatusLine` | `marius-patrik/StatusLine` | Private | `master` |
 | `archive/vsc-utils` | `marius-patrik/vsc-utils` | Private | `main` |
-| `archive/Wrkspace` | `marius-patrik/Wrkspace` | Public | `main` |
+| `archive/Wrkspace` | `marius-patrik/Wrkspace` | Private | `main` |
 | `archive/yacht` | `marius-patrik/yacht` | Private | `main` |
