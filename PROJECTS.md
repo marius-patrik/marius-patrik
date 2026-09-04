@@ -16,7 +16,7 @@ repositories never do.
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
-| `Agents` | `marius-patrik/Agents` | Private | `main` |
+| `data-agents` | `marius-patrik/data-agents` | Private | `main` |
 | `agents-super` | `marius-patrik/agents-super` | Private | `main` |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
 | `Citizen` | `marius-patrik/Citizen` | Private | `main` |

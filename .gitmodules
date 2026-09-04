@@ -98,9 +98,9 @@
 	path = TransparentPhone
 	url = https://github.com/marius-patrik/TransparentPhone.git
 	branch = main
-[submodule "Agents"]
-	path = Agents
-	url = https://github.com/marius-patrik/Agents.git
+[submodule "data-agents"]
+	path = data-agents
+	url = https://github.com/marius-patrik/data-agents.git
 	branch = main
 [submodule "agents-super"]
 	path = agents-super

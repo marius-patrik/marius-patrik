@@ -11,7 +11,7 @@
 !.github/scripts/
 !.github/scripts/run-kimi-review.mjs
 !.github/scripts/run-kimi-review.test.mjs
-!Agents
+!data-agents
 !agents-super
 !ChessWithQuests
 !Citizen
