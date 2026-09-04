@@ -106,3 +106,11 @@
 	path = agents-super
 	url = https://github.com/marius-patrik/agents-super.git
 	branch = main
+[submodule "data-agentos"]
+	path = data-agentos
+	url = https://github.com/marius-patrik/data-agentos.git
+	branch = main
+[submodule "workspace-darkfactory"]
+	path = workspace-darkfactory
+	url = https://github.com/marius-patrik/workspace-darkfactory.git
+	branch = main
