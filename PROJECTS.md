@@ -17,7 +17,7 @@ repositories never do.
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
 | `accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Public | `main` |
-| `agents-claude` | `marius-patrik/agents-claude` | Private | `main` |
+| `data-claude` | `marius-patrik/data-claude` | Private | `main` |
 | `data-agents` | `marius-patrik/data-agents` | Private | `main` |
 | `agents-super` | `marius-patrik/agents-super` | Private | `main` |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
