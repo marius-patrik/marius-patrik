@@ -29,6 +29,7 @@ repositories never do.
 | `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
 | `data-private` | `marius-patrik/data-private` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
+| `singularity` | `marius-patrik/singularity` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
 
 ## Archived repositories

@@ -106,3 +106,7 @@
 	path = agents-super
 	url = https://github.com/marius-patrik/agents-super.git
 	branch = main
+[submodule "singularity"]
+	path = singularity
+	url = https://github.com/marius-patrik/singularity.git
+	branch = main
