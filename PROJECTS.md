@@ -29,6 +29,9 @@ repositories never do.
 | `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
 | `data-private` | `marius-patrik/data-private` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
+| `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
+| `livequest` | `marius-patrik/livequest` | Public | `main` |
+| `Memory` | `marius-patrik/Memory` | Public | `main` |
 | `singularity` | `marius-patrik/singularity` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
 

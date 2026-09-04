@@ -110,3 +110,15 @@
 	path = singularity
 	url = https://github.com/marius-patrik/singularity.git
 	branch = main
+[submodule "genesis-os"]
+	path = genesis-os
+	url = https://github.com/marius-patrik/genesis-os.git
+	branch = main
+[submodule "livequest"]
+	path = livequest
+	url = https://github.com/marius-patrik/livequest.git
+	branch = main
+[submodule "Memory"]
+	path = Memory
+	url = https://github.com/marius-patrik/Memory.git
+	branch = main
