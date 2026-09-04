@@ -29,7 +29,6 @@ repositories never do.
 | `MoneyMaker` | `marius-patrik/MoneyMaker` | Public | `main` |
 | `PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
 | `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
-| `data-private` | `marius-patrik/data-private` | Private | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
 | `livequest` | `marius-patrik/livequest` | Public | `main` |

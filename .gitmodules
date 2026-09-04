@@ -2,9 +2,9 @@
 	path = archive/Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
-[submodule "data-private"]
-	path = data-private
-	url = https://github.com/marius-patrik/data-private.git
+[submodule "data-agents"]
+	path = data-agents
+	url = https://github.com/marius-patrik/data-agents.git
 	branch = main
 [submodule "Fabrica"]
 	path = Fabrica
@@ -97,10 +97,6 @@
 [submodule "TransparentPhone"]
 	path = TransparentPhone
 	url = https://github.com/marius-patrik/TransparentPhone.git
-	branch = main
-[submodule "data-agents"]
-	path = data-agents
-	url = https://github.com/marius-patrik/data-agents.git
 	branch = main
 [submodule "agents-super"]
 	path = agents-super
