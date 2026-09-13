@@ -137,7 +137,7 @@
 	branch = main
 
 [submodule "DarkFactory-old"]
-	path = DarkFactory-old
+	path = archive/DarkFactory-old
 	url = https://github.com/marius-patrik/DarkFactory-old.git
 	branch = main
 [submodule "super-orca"]

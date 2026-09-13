@@ -22,7 +22,6 @@ Layout rules:
 | `accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Public | `main` |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
 | `DarkFactory` | `marius-patrik/DarkFactory` | Public | `darkfactory` |
-| `DarkFactory-old` | `marius-patrik/DarkFactory-old` | Public | `main` |
 | `dsh-stack` | `marius-patrik/dsh-stack` | Public | `main` |
 | `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
 | `livequest` | `marius-patrik/livequest` | Public | `main` |
@@ -83,6 +82,7 @@ that matters is folded into an active repository first.
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
 | `archive/Andromeda` | `marius-patrik/Andromeda` | Private | `main` |
+| `archive/DarkFactory-old` | `marius-patrik/DarkFactory-old` | Private | `main` |
 | `archive/froq` | `marius-patrik/froq` | Private | `main` |
 | `archive/LifeQuest` | `marius-patrik/LifeQuest` | Private | `main` |
 | `archive/life-support` | `marius-patrik/life-support` | Private | `main` |
