@@ -37,30 +37,35 @@ repositories never do.
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `super-orca` | `marius-patrik/super-orca` | Public | `main` |
 | `tax-archive` | `marius-patrik/tax-archive` | Private | `main` |
-| `template-agent-mcp` | `marius-patrik/template-agent-mcp` | Public | `main` |
-| `template-agent-monorepo` | `marius-patrik/template-agent-monorepo` | Public | `main` |
-| `template-agent-plugin` | `marius-patrik/template-agent-plugin` | Public | `main` |
-| `template-go-api` | `marius-patrik/template-go-api` | Public | `main` |
-| `template-go-cli` | `marius-patrik/template-go-cli` | Public | `main` |
-| `template-go-lib` | `marius-patrik/template-go-lib` | Public | `main` |
-| `template-go-tui` | `marius-patrik/template-go-tui` | Public | `main` |
-| `template-native` | `marius-patrik/template-native` | Public | `main` |
-| `template-OdbornaPrace` | `marius-patrik/template-OdbornaPrace` | Public | `main` |
-| `template-py-api` | `marius-patrik/template-py-api` | Public | `main` |
-| `template-py-cli` | `marius-patrik/template-py-cli` | Public | `main` |
-| `template-py-lib` | `marius-patrik/template-py-lib` | Public | `main` |
-| `template-py-ml` | `marius-patrik/template-py-ml` | Public | `main` |
-| `templates-super` | `marius-patrik/templates-super` | Public | `main` |
-| `template-ts-cli` | `marius-patrik/template-ts-cli` | Public | `main` |
-| `template-ts-lib` | `marius-patrik/template-ts-lib` | Public | `main` |
-| `template-ts-monorepo` | `marius-patrik/template-ts-monorepo` | Public | `main` |
-| `template-ts-tui` | `marius-patrik/template-ts-tui` | Public | `main` |
-| `template-web-app` | `marius-patrik/template-web-app` | Public | `main` |
 | `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
 | `livequest` | `marius-patrik/livequest` | Public | `main` |
 | `Memory` | `marius-patrik/Memory` | Public | `main` |
 | `singularity` | `marius-patrik/singularity` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
+
+## Template repositories
+
+| Path | Repository | Visibility | Default branch |
+| --- | --- | --- | --- |
+| `templates/template-agent-mcp` | `marius-patrik/template-agent-mcp` | Public | `main` |
+| `templates/template-agent-monorepo` | `marius-patrik/template-agent-monorepo` | Public | `main` |
+| `templates/template-agent-plugin` | `marius-patrik/template-agent-plugin` | Public | `main` |
+| `templates/template-go-api` | `marius-patrik/template-go-api` | Public | `main` |
+| `templates/template-go-cli` | `marius-patrik/template-go-cli` | Public | `main` |
+| `templates/template-go-lib` | `marius-patrik/template-go-lib` | Public | `main` |
+| `templates/template-go-tui` | `marius-patrik/template-go-tui` | Public | `main` |
+| `templates/template-native` | `marius-patrik/template-native` | Public | `main` |
+| `templates/template-OdbornaPrace` | `marius-patrik/template-OdbornaPrace` | Public | `main` |
+| `templates/template-py-api` | `marius-patrik/template-py-api` | Public | `main` |
+| `templates/template-py-cli` | `marius-patrik/template-py-cli` | Public | `main` |
+| `templates/template-py-lib` | `marius-patrik/template-py-lib` | Public | `main` |
+| `templates/template-py-ml` | `marius-patrik/template-py-ml` | Public | `main` |
+| `templates/templates-super` | `marius-patrik/templates-super` | Public | `main` |
+| `templates/template-ts-cli` | `marius-patrik/template-ts-cli` | Public | `main` |
+| `templates/template-ts-lib` | `marius-patrik/template-ts-lib` | Public | `main` |
+| `templates/template-ts-monorepo` | `marius-patrik/template-ts-monorepo` | Public | `main` |
+| `templates/template-ts-tui` | `marius-patrik/template-ts-tui` | Public | `main` |
+| `templates/template-web-app` | `marius-patrik/template-web-app` | Public | `main` |
 
 ## Archived repositories
 

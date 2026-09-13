@@ -149,75 +149,75 @@
 	url = https://github.com/marius-patrik/tax-archive.git
 	branch = main
 [submodule "templates-super"]
-	path = templates-super
+	path = templates/templates-super
 	url = https://github.com/marius-patrik/templates-super.git
 	branch = main
 [submodule "template-go-lib"]
-	path = template-go-lib
+	path = templates/template-go-lib
 	url = https://github.com/marius-patrik/template-go-lib.git
 	branch = main
 [submodule "template-go-api"]
-	path = template-go-api
+	path = templates/template-go-api
 	url = https://github.com/marius-patrik/template-go-api.git
 	branch = main
 [submodule "template-go-tui"]
-	path = template-go-tui
+	path = templates/template-go-tui
 	url = https://github.com/marius-patrik/template-go-tui.git
 	branch = main
 [submodule "template-go-cli"]
-	path = template-go-cli
+	path = templates/template-go-cli
 	url = https://github.com/marius-patrik/template-go-cli.git
 	branch = main
 [submodule "template-py-ml"]
-	path = template-py-ml
+	path = templates/template-py-ml
 	url = https://github.com/marius-patrik/template-py-ml.git
 	branch = main
 [submodule "template-py-api"]
-	path = template-py-api
+	path = templates/template-py-api
 	url = https://github.com/marius-patrik/template-py-api.git
 	branch = main
 [submodule "template-py-lib"]
-	path = template-py-lib
+	path = templates/template-py-lib
 	url = https://github.com/marius-patrik/template-py-lib.git
 	branch = main
 [submodule "template-py-cli"]
-	path = template-py-cli
+	path = templates/template-py-cli
 	url = https://github.com/marius-patrik/template-py-cli.git
 	branch = main
 [submodule "template-ts-monorepo"]
-	path = template-ts-monorepo
+	path = templates/template-ts-monorepo
 	url = https://github.com/marius-patrik/template-ts-monorepo.git
 	branch = main
 [submodule "template-ts-lib"]
-	path = template-ts-lib
+	path = templates/template-ts-lib
 	url = https://github.com/marius-patrik/template-ts-lib.git
 	branch = main
 [submodule "template-ts-tui"]
-	path = template-ts-tui
+	path = templates/template-ts-tui
 	url = https://github.com/marius-patrik/template-ts-tui.git
 	branch = main
 [submodule "template-ts-cli"]
-	path = template-ts-cli
+	path = templates/template-ts-cli
 	url = https://github.com/marius-patrik/template-ts-cli.git
 	branch = main
 [submodule "template-native"]
-	path = template-native
+	path = templates/template-native
 	url = https://github.com/marius-patrik/template-native.git
 	branch = main
 [submodule "template-web-app"]
-	path = template-web-app
+	path = templates/template-web-app
 	url = https://github.com/marius-patrik/template-web-app.git
 	branch = main
 [submodule "template-agent-monorepo"]
-	path = template-agent-monorepo
+	path = templates/template-agent-monorepo
 	url = https://github.com/marius-patrik/template-agent-monorepo.git
 	branch = main
 [submodule "template-agent-mcp"]
-	path = template-agent-mcp
+	path = templates/template-agent-mcp
 	url = https://github.com/marius-patrik/template-agent-mcp.git
 	branch = main
 [submodule "template-agent-plugin"]
-	path = template-agent-plugin
+	path = templates/template-agent-plugin
 	url = https://github.com/marius-patrik/template-agent-plugin.git
 	branch = main
 [submodule "mono-OdbornaPrace"]
@@ -229,6 +229,6 @@
 	url = https://github.com/marius-patrik/OdbornaPrace.git
 	branch = main
 [submodule "template-OdbornaPrace"]
-	path = template-OdbornaPrace
+	path = templates/template-OdbornaPrace
 	url = https://github.com/marius-patrik/template-OdbornaPrace.git
 	branch = main
