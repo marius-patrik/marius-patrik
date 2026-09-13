@@ -37,13 +37,8 @@ Layout rules:
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
-| `private/agents-super` | `marius-patrik/agents-super` | Private | `main` |
-| `private/Citizen` | `marius-patrik/Citizen` | Private | `main` |
 | `private/data-agents` | `marius-patrik/data-agents` | Private | `main` |
 | `private/data-claude` | `marius-patrik/data-claude` | Private | `main` |
-| `private/Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
-| `private/MMO` | `marius-patrik/MMO` | Private | `main` |
-| `private/PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
 | `private/tax-archive` | `marius-patrik/tax-archive` | Private | `main` |
 
 ## Template repositories
@@ -78,8 +73,11 @@ that matters is folded into an active repository first.
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
 | `archive/accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Private | `main` |
+| `archive/agents-super` | `marius-patrik/agents-super` | Private | `main` |
 | `archive/Andromeda` | `marius-patrik/Andromeda` | Private | `main` |
+| `archive/Citizen` | `marius-patrik/Citizen` | Private | `main` |
 | `archive/DarkFactory-old` | `marius-patrik/DarkFactory-old` | Private | `main` |
+| `archive/Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
 | `archive/froq` | `marius-patrik/froq` | Private | `main` |
 | `archive/genesis-os` | `marius-patrik/genesis-os` | Private | `main` |
 | `archive/LifeQuest` | `marius-patrik/LifeQuest` | Private | `main` |
@@ -87,8 +85,10 @@ that matters is folded into an active repository first.
 | `archive/livequest` | `marius-patrik/livequest` | Private | `main` |
 | `archive/Memory` | `marius-patrik/Memory` | Private | `main` |
 | `archive/messenger` | `marius-patrik/messenger` | Private | `main` |
+| `archive/MMO` | `marius-patrik/MMO` | Private | `main` |
 | `archive/mssgs` | `marius-patrik/mssgs` | Private | `main` |
 | `archive/paes` | `marius-patrik/paes` | Private | `main` |
+| `archive/PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
 | `archive/Rommie` | `marius-patrik/Rommie` | Private | `main` |
 | `archive/RSCode` | `marius-patrik/RSCode` | Private | `main` |
 | `archive/StatusLine` | `marius-patrik/StatusLine` | Private | `master` |
