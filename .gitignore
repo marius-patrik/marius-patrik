@@ -19,21 +19,21 @@
 !dsh-stack
 !MediaStream
 !MoneyMaker
-!mono-OdbornaPrace
-!OdbornaPrace
+!OdbornaPrace-mono
+!OdbornaPrace-paper
 !omnis
 !PersonalCode
 !SkyAgent
 !super-orca
-!singularity
 !TransparentPhone
+!vsc-utils
 !workspace-darkfactory
 
-!archive
-!archive/*
+!_archive
+!_archive/*
 
-!private
-!private/*
+!_private
+!_private/*
 
-!templates
-!templates/*
+!_templates
+!_templates/*

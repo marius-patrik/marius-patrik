@@ -10,9 +10,9 @@ repositories. `.github/scripts/verify-umbrella.mjs` fails the build if this tabl
 `.gitmodules` disagree.
 
 Layout rules:
-- Archived repositories live under `archive/`.
-- Private repositories (active) live under `private/`.
-- Template repositories live under `templates/`.
+- Archived repositories live under `_archive/`.
+- Private repositories (active) live under `_private/`.
+- Template repositories live under `_templates/`.
 - Active public repositories live at the root.
 
 ## Active repositories
@@ -24,46 +24,46 @@ Layout rules:
 | `dsh-stack` | `marius-patrik/dsh-stack` | Public | `main` |
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
 | `MoneyMaker` | `marius-patrik/MoneyMaker` | Public | `main` |
-| `mono-OdbornaPrace` | `marius-patrik/mono-OdbornaPrace` | Public | `main` |
-| `OdbornaPrace` | `marius-patrik/OdbornaPrace` | Public | `main` |
+| `OdbornaPrace-mono` | `marius-patrik/OdbornaPrace-mono` | Public | `main` |
+| `OdbornaPrace-paper` | `marius-patrik/OdbornaPrace-paper` | Public | `main` |
 | `omnis` | `marius-patrik/omnis` | Public | `main` |
 | `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
-| `singularity` | `marius-patrik/singularity` | Public | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `super-orca` | `marius-patrik/super-orca` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
+| `vsc-utils` | `marius-patrik/vsc-utils` | Public | `main` |
 
 ## Private repositories
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
-| `private/data-agents` | `marius-patrik/data-agents` | Private | `main` |
-| `private/data-claude` | `marius-patrik/data-claude` | Private | `main` |
-| `private/tax-archive` | `marius-patrik/tax-archive` | Private | `main` |
+| `_private/data-agents` | `marius-patrik/data-agents` | Private | `main` |
+| `_private/data-claude` | `marius-patrik/data-claude` | Private | `main` |
+| `_private/data-tax` | `marius-patrik/data-tax` | Private | `main` |
 
 ## Template repositories
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
-| `templates/template-agent-mcp` | `marius-patrik/template-agent-mcp` | Public | `main` |
-| `templates/template-agent-monorepo` | `marius-patrik/template-agent-monorepo` | Public | `main` |
-| `templates/template-agent-plugin` | `marius-patrik/template-agent-plugin` | Public | `main` |
-| `templates/template-go-api` | `marius-patrik/template-go-api` | Public | `main` |
-| `templates/template-go-cli` | `marius-patrik/template-go-cli` | Public | `main` |
-| `templates/template-go-lib` | `marius-patrik/template-go-lib` | Public | `main` |
-| `templates/template-go-tui` | `marius-patrik/template-go-tui` | Public | `main` |
-| `templates/template-native` | `marius-patrik/template-native` | Public | `main` |
-| `templates/template-OdbornaPrace` | `marius-patrik/template-OdbornaPrace` | Public | `main` |
-| `templates/template-py-api` | `marius-patrik/template-py-api` | Public | `main` |
-| `templates/template-py-cli` | `marius-patrik/template-py-cli` | Public | `main` |
-| `templates/template-py-lib` | `marius-patrik/template-py-lib` | Public | `main` |
-| `templates/template-py-ml` | `marius-patrik/template-py-ml` | Public | `main` |
-| `templates/templates-super` | `marius-patrik/templates-super` | Public | `main` |
-| `templates/template-ts-cli` | `marius-patrik/template-ts-cli` | Public | `main` |
-| `templates/template-ts-lib` | `marius-patrik/template-ts-lib` | Public | `main` |
-| `templates/template-ts-monorepo` | `marius-patrik/template-ts-monorepo` | Public | `main` |
-| `templates/template-ts-tui` | `marius-patrik/template-ts-tui` | Public | `main` |
-| `templates/template-web-app` | `marius-patrik/template-web-app` | Public | `main` |
+| `_templates/template-agent-mcp` | `marius-patrik/template-agent-mcp` | Public | `main` |
+| `_templates/template-agent-monorepo` | `marius-patrik/template-agent-monorepo` | Public | `main` |
+| `_templates/template-agent-plugin` | `marius-patrik/template-agent-plugin` | Public | `main` |
+| `_templates/template-go-api` | `marius-patrik/template-go-api` | Public | `main` |
+| `_templates/template-go-cli` | `marius-patrik/template-go-cli` | Public | `main` |
+| `_templates/template-go-lib` | `marius-patrik/template-go-lib` | Public | `main` |
+| `_templates/template-go-tui` | `marius-patrik/template-go-tui` | Public | `main` |
+| `_templates/template-native` | `marius-patrik/template-native` | Public | `main` |
+| `_templates/template-OdbornaPrace` | `marius-patrik/template-OdbornaPrace` | Public | `main` |
+| `_templates/template-py-api` | `marius-patrik/template-py-api` | Public | `main` |
+| `_templates/template-py-cli` | `marius-patrik/template-py-cli` | Public | `main` |
+| `_templates/template-py-lib` | `marius-patrik/template-py-lib` | Public | `main` |
+| `_templates/template-py-ml` | `marius-patrik/template-py-ml` | Public | `main` |
+| `_templates/templates-super` | `marius-patrik/templates-super` | Public | `main` |
+| `_templates/template-ts-cli` | `marius-patrik/template-ts-cli` | Public | `main` |
+| `_templates/template-ts-lib` | `marius-patrik/template-ts-lib` | Public | `main` |
+| `_templates/template-ts-monorepo` | `marius-patrik/template-ts-monorepo` | Public | `main` |
+| `_templates/template-ts-tui` | `marius-patrik/template-ts-tui` | Public | `main` |
+| `_templates/template-web-app` | `marius-patrik/template-web-app` | Public | `main` |
 
 ## Archived repositories
 
@@ -72,26 +72,26 @@ that matters is folded into an active repository first.
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
-| `archive/accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Private | `main` |
-| `archive/agents-super` | `marius-patrik/agents-super` | Private | `main` |
-| `archive/Andromeda` | `marius-patrik/Andromeda` | Private | `main` |
-| `archive/Citizen` | `marius-patrik/Citizen` | Private | `main` |
-| `archive/DarkFactory-old` | `marius-patrik/DarkFactory-old` | Private | `main` |
-| `archive/Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
-| `archive/froq` | `marius-patrik/froq` | Private | `main` |
-| `archive/genesis-os` | `marius-patrik/genesis-os` | Private | `main` |
-| `archive/LifeQuest` | `marius-patrik/LifeQuest` | Private | `main` |
-| `archive/life-support` | `marius-patrik/life-support` | Private | `main` |
-| `archive/livequest` | `marius-patrik/livequest` | Private | `main` |
-| `archive/Memory` | `marius-patrik/Memory` | Private | `main` |
-| `archive/messenger` | `marius-patrik/messenger` | Private | `main` |
-| `archive/MMO` | `marius-patrik/MMO` | Private | `main` |
-| `archive/mssgs` | `marius-patrik/mssgs` | Private | `main` |
-| `archive/paes` | `marius-patrik/paes` | Private | `main` |
-| `archive/PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
-| `archive/Rommie` | `marius-patrik/Rommie` | Private | `main` |
-| `archive/RSCode` | `marius-patrik/RSCode` | Private | `main` |
-| `archive/StatusLine` | `marius-patrik/StatusLine` | Private | `master` |
-| `archive/vsc-utils` | `marius-patrik/vsc-utils` | Private | `main` |
-| `archive/Wrkspace` | `marius-patrik/Wrkspace` | Private | `main` |
-| `archive/yacht` | `marius-patrik/yacht` | Private | `main` |
+| `_archive/accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Private | `main` |
+| `_archive/agents-super` | `marius-patrik/agents-super` | Private | `main` |
+| `_archive/Andromeda` | `marius-patrik/Andromeda` | Private | `main` |
+| `_archive/Citizen` | `marius-patrik/Citizen` | Private | `main` |
+| `_archive/DarkFactory-old` | `marius-patrik/DarkFactory-old` | Private | `main` |
+| `_archive/Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
+| `_archive/froq` | `marius-patrik/froq` | Private | `main` |
+| `_archive/genesis-os` | `marius-patrik/genesis-os` | Private | `main` |
+| `_archive/LifeQuest` | `marius-patrik/LifeQuest` | Private | `main` |
+| `_archive/life-support` | `marius-patrik/life-support` | Private | `main` |
+| `_archive/livequest` | `marius-patrik/livequest` | Private | `main` |
+| `_archive/Memory` | `marius-patrik/Memory` | Private | `main` |
+| `_archive/messenger` | `marius-patrik/messenger` | Private | `main` |
+| `_archive/MMO` | `marius-patrik/MMO` | Private | `main` |
+| `_archive/mssgs` | `marius-patrik/mssgs` | Private | `main` |
+| `_archive/paes` | `marius-patrik/paes` | Private | `main` |
+| `_archive/PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
+| `_archive/Rommie` | `marius-patrik/Rommie` | Private | `main` |
+| `_archive/RSCode` | `marius-patrik/RSCode` | Private | `main` |
+| `_archive/singularity` | `marius-patrik/singularity` | Private | `main` |
+| `_archive/StatusLine` | `marius-patrik/StatusLine` | Private | `master` |
+| `_archive/Wrkspace` | `marius-patrik/Wrkspace` | Private | `main` |
+| `_archive/yacht` | `marius-patrik/yacht` | Private | `main` |
