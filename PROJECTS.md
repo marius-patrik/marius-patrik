@@ -6,7 +6,7 @@ omitted from the gitlink tables.
 
 This repository is a workspace index, not a product: it owns submodule pointers
 and this map. Build, test, and release validation belongs to the nested
-repositories. `scripts/verify-umbrella.mjs` fails the build if this table and
+repositories. `.github/scripts/verify-umbrella.mjs` fails the build if this table and
 `.gitmodules` disagree.
 
 Layout rule: archived repositories always live under `archive/`; active

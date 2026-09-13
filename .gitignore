@@ -9,8 +9,10 @@
 !.agents/.project/*.md
 !.github/
 !.github/scripts/
-!.github/scripts/run-kimi-review.mjs
-!.github/scripts/run-kimi-review.test.mjs
+!.github/scripts/*
+!.github/workflows/
+!.github/workflows/*
+
 !data-agents
 !agents-super
 !ChessWithQuests

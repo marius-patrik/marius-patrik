@@ -29,4 +29,4 @@ jobs:
       # pointer hygiene and project-map accuracy; package build, test, and
       # release validation belongs to the nested repositories.
       - name: Verify workspace pointers and project map
-        run: node scripts/verify-umbrella.mjs
+        run: node .github/scripts/verify-umbrella.mjs
