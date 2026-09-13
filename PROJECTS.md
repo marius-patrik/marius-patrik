@@ -9,39 +9,47 @@ and this map. Build, test, and release validation belongs to the nested
 repositories. `.github/scripts/verify-umbrella.mjs` fails the build if this table and
 `.gitmodules` disagree.
 
-Layout rule: archived repositories always live under `archive/`; active
-repositories never do.
+Layout rules:
+- Archived repositories live under `archive/`.
+- Private repositories (active) live under `private/`.
+- Template repositories live under `templates/`.
+- Active public repositories live at the root.
 
 ## Active repositories
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
 | `accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Public | `main` |
-| `data-claude` | `marius-patrik/data-claude` | Private | `main` |
-| `data-agents` | `marius-patrik/data-agents` | Private | `main` |
-| `agents-super` | `marius-patrik/agents-super` | Private | `main` |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
-| `Citizen` | `marius-patrik/Citizen` | Private | `main` |
 | `DarkFactory` | `marius-patrik/DarkFactory` | Public | `darkfactory` |
 | `DarkFactory-old` | `marius-patrik/DarkFactory-old` | Public | `main` |
 | `dsh-stack` | `marius-patrik/dsh-stack` | Public | `main` |
-| `Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
+| `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
+| `livequest` | `marius-patrik/livequest` | Public | `main` |
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
-| `MMO` | `marius-patrik/MMO` | Private | `main` |
+| `Memory` | `marius-patrik/Memory` | Public | `main` |
 | `MoneyMaker` | `marius-patrik/MoneyMaker` | Public | `main` |
 | `mono-OdbornaPrace` | `marius-patrik/mono-OdbornaPrace` | Public | `main` |
 | `OdbornaPrace` | `marius-patrik/OdbornaPrace` | Public | `main` |
 | `omnis` | `marius-patrik/omnis` | Public | `main` |
-| `PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
 | `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
+| `singularity` | `marius-patrik/singularity` | Public | `main` |
 | `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
 | `super-orca` | `marius-patrik/super-orca` | Public | `main` |
-| `tax-archive` | `marius-patrik/tax-archive` | Private | `main` |
-| `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
-| `livequest` | `marius-patrik/livequest` | Public | `main` |
-| `Memory` | `marius-patrik/Memory` | Public | `main` |
-| `singularity` | `marius-patrik/singularity` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
+
+## Private repositories
+
+| Path | Repository | Visibility | Default branch |
+| --- | --- | --- | --- |
+| `private/agents-super` | `marius-patrik/agents-super` | Private | `main` |
+| `private/Citizen` | `marius-patrik/Citizen` | Private | `main` |
+| `private/data-agents` | `marius-patrik/data-agents` | Private | `main` |
+| `private/data-claude` | `marius-patrik/data-claude` | Private | `main` |
+| `private/Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
+| `private/MMO` | `marius-patrik/MMO` | Private | `main` |
+| `private/PAES-enterprise` | `marius-patrik/PAES-enterprise` | Private | `main` |
+| `private/tax-archive` | `marius-patrik/tax-archive` | Private | `main` |
 
 ## Template repositories
 
