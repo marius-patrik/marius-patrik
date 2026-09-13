@@ -107,19 +107,19 @@
 	url = https://github.com/marius-patrik/singularity.git
 	branch = main
 [submodule "genesis-os"]
-	path = genesis-os
+	path = archive/genesis-os
 	url = https://github.com/marius-patrik/genesis-os.git
 	branch = main
 [submodule "livequest"]
-	path = livequest
+	path = archive/livequest
 	url = https://github.com/marius-patrik/livequest.git
 	branch = main
 [submodule "Memory"]
-	path = Memory
+	path = archive/Memory
 	url = https://github.com/marius-patrik/Memory.git
 	branch = main
 [submodule "accumulative-matrix-sweeping"]
-	path = accumulative-matrix-sweeping
+	path = archive/accumulative-matrix-sweeping
 	url = https://github.com/marius-patrik/accumulative-matrix-sweeping.git
 	branch = main
 [submodule "PAES-enterprise"]

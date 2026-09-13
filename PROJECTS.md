@@ -19,14 +19,10 @@ Layout rules:
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
-| `accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Public | `main` |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
 | `DarkFactory` | `marius-patrik/DarkFactory` | Public | `darkfactory` |
 | `dsh-stack` | `marius-patrik/dsh-stack` | Public | `main` |
-| `genesis-os` | `marius-patrik/genesis-os` | Public | `main` |
-| `livequest` | `marius-patrik/livequest` | Public | `main` |
 | `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
-| `Memory` | `marius-patrik/Memory` | Public | `main` |
 | `MoneyMaker` | `marius-patrik/MoneyMaker` | Public | `main` |
 | `mono-OdbornaPrace` | `marius-patrik/mono-OdbornaPrace` | Public | `main` |
 | `OdbornaPrace` | `marius-patrik/OdbornaPrace` | Public | `main` |
@@ -81,11 +77,15 @@ that matters is folded into an active repository first.
 
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
+| `archive/accumulative-matrix-sweeping` | `marius-patrik/accumulative-matrix-sweeping` | Private | `main` |
 | `archive/Andromeda` | `marius-patrik/Andromeda` | Private | `main` |
 | `archive/DarkFactory-old` | `marius-patrik/DarkFactory-old` | Private | `main` |
 | `archive/froq` | `marius-patrik/froq` | Private | `main` |
+| `archive/genesis-os` | `marius-patrik/genesis-os` | Private | `main` |
 | `archive/LifeQuest` | `marius-patrik/LifeQuest` | Private | `main` |
 | `archive/life-support` | `marius-patrik/life-support` | Private | `main` |
+| `archive/livequest` | `marius-patrik/livequest` | Private | `main` |
+| `archive/Memory` | `marius-patrik/Memory` | Private | `main` |
 | `archive/messenger` | `marius-patrik/messenger` | Private | `main` |
 | `archive/mssgs` | `marius-patrik/mssgs` | Private | `main` |
 | `archive/paes` | `marius-patrik/paes` | Private | `main` |
