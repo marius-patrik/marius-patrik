@@ -232,3 +232,7 @@
 	path = _templates/template-OdbornaPrace
 	url = https://github.com/marius-patrik/template-OdbornaPrace.git
 	branch = main
+[submodule "_private/data-gemini"]
+	path = _private/data-gemini
+	url = https://github.com/marius-patrik/data-gemini.git
+	branch = main

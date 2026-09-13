@@ -39,6 +39,7 @@ Layout rules:
 | --- | --- | --- | --- |
 | `_private/data-agents` | `marius-patrik/data-agents` | Private | `main` |
 | `_private/data-claude` | `marius-patrik/data-claude` | Private | `main` |
+| `_private/data-gemini` | `marius-patrik/data-gemini` | Private | `main` |
 | `_private/data-tax` | `marius-patrik/data-tax` | Private | `main` |
 
 ## Template repositories
