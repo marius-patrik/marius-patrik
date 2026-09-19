@@ -1,134 +1,31 @@
-[submodule "Andromeda"]
-	path = _archive/Andromeda
-	url = https://github.com/marius-patrik/Andromeda.git
-	branch = main
-[submodule "data-agents"]
-	path = _private/data-agents
-	url = https://github.com/marius-patrik/data-agents.git
-	branch = main
-[submodule "Fabrica"]
-	path = _archive/Fabrica
-	url = https://github.com/marius-patrik/Fabrica.git
-	branch = dev
-[submodule "LifeQuest"]
-	path = _archive/LifeQuest
-	url = https://github.com/marius-patrik/LifeQuest.git
-	branch = main
-[submodule "MediaStream"]
-	path = MediaStream
-	url = https://github.com/marius-patrik/MediaStream.git
-	branch = main
-[submodule "mssgs"]
-	path = _archive/mssgs
-	url = https://github.com/marius-patrik/mssgs.git
-	branch = main
-[submodule "SkyAgent"]
-	path = SkyAgent
-	url = https://github.com/marius-patrik/SkyAgent.git
-	branch = main
-[submodule "StatusLine"]
-	path = _archive/StatusLine
-	url = https://github.com/marius-patrik/StatusLine.git
-	branch = master
-[submodule "vsc-utils"]
-	path = vsc-utils
-	url = https://github.com/marius-patrik/vsc-utils.git
-	branch = main
-[submodule "yacht"]
-	path = _archive/yacht
-	url = https://github.com/marius-patrik/yacht.git
-	branch = main
-
-[submodule "_archive/Citizen"]
-	path = _archive/Citizen
-	url = https://github.com/marius-patrik/Citizen.git
-	branch = main
-[submodule "_archive/MMO"]
-	path = _archive/MMO
-	url = https://github.com/marius-patrik/MMO.git
-	branch = main
-[submodule "_archive/Rommie"]
-	path = _archive/Rommie
-	url = https://github.com/marius-patrik/Rommie.git
-	branch = main
-[submodule "RSCode"]
-	path = _archive/RSCode
-	url = https://github.com/marius-patrik/RSCode.git
-	branch = main
-[submodule "_archive/Wrkspace"]
-	path = _archive/Wrkspace
-	url = https://github.com/marius-patrik/Wrkspace.git
-	branch = main
-[submodule "agentx"]
-	path = _archive/froq
-	url = https://github.com/marius-patrik/froq.git
-[submodule "life-support"]
-	path = _archive/life-support
-	url = https://github.com/marius-patrik/life-support.git
-	branch = main
-[submodule "_archive/messenger"]
-	path = _archive/messenger
-	url = https://github.com/marius-patrik/messenger.git
-	branch = main
-[submodule "_archive/paes"]
-	path = _archive/paes
-	url = https://github.com/marius-patrik/paes.git
-	branch = main
 [submodule "ChessWithQuests"]
 	path = ChessWithQuests
 	url = https://github.com/marius-patrik/ChessWithQuests.git
 	branch = main
+
 [submodule "DarkFactory"]
 	path = DarkFactory
 	url = https://github.com/marius-patrik/DarkFactory.git
 	branch = darkfactory
+
+[submodule "DarkFactory-Paper"]
+	path = DarkFactory-Paper
+	url = https://github.com/marius-patrik/DarkFactory-Paper.git
+	branch = main
+
 [submodule "dsh-stack"]
 	path = dsh-stack
 	url = https://github.com/marius-patrik/dsh-stack.git
 	branch = main
-[submodule "PersonalCode"]
-	path = PersonalCode
-	url = https://github.com/marius-patrik/PersonalCode.git
-	branch = dev
+
+[submodule "MediaStream"]
+	path = MediaStream
+	url = https://github.com/marius-patrik/MediaStream.git
+	branch = main
+
 [submodule "MoneyMaker"]
 	path = MoneyMaker
 	url = https://github.com/marius-patrik/MoneyMaker.git
-	branch = main
-[submodule "TransparentPhone"]
-	path = TransparentPhone
-	url = https://github.com/marius-patrik/TransparentPhone.git
-	branch = main
-[submodule "agents-super"]
-	path = _archive/agents-super
-	url = https://github.com/marius-patrik/agents-super.git
-	branch = main
-[submodule "singularity"]
-	path = _archive/singularity
-	url = https://github.com/marius-patrik/singularity.git
-	branch = main
-[submodule "genesis-os"]
-	path = _archive/genesis-os
-	url = https://github.com/marius-patrik/genesis-os.git
-	branch = main
-[submodule "livequest"]
-	path = _archive/livequest
-	url = https://github.com/marius-patrik/livequest.git
-	branch = main
-[submodule "Memory"]
-	path = _archive/Memory
-	url = https://github.com/marius-patrik/Memory.git
-	branch = main
-[submodule "accumulative-matrix-sweeping"]
-	path = _archive/accumulative-matrix-sweeping
-	url = https://github.com/marius-patrik/accumulative-matrix-sweeping.git
-	branch = main
-[submodule "PAES-enterprise"]
-	path = _archive/PAES-enterprise
-	url = https://github.com/marius-patrik/PAES-enterprise.git
-	branch = main
-[submodule "data-claude"]
-	path = _private/data-claude
-	url = https://github.com/marius-patrik/data-claude.git
 	branch = main
 
 [submodule "omnis"]
@@ -136,103 +33,282 @@
 	url = https://github.com/marius-patrik/omnis.git
 	branch = main
 
-[submodule "DarkFactory-old"]
-	path = _archive/DarkFactory-old
-	url = https://github.com/marius-patrik/DarkFactory-old.git
+[submodule "PersonalCode"]
+	path = PersonalCode
+	url = https://github.com/marius-patrik/PersonalCode.git
+	branch = dev
+
+[submodule "SkyAgent"]
+	path = SkyAgent
+	url = https://github.com/marius-patrik/SkyAgent.git
 	branch = main
+
 [submodule "super-orca"]
 	path = super-orca
 	url = https://github.com/marius-patrik/super-orca.git
 	branch = main
-[submodule "data-tax"]
-	path = _private/data-tax
-	url = https://github.com/marius-patrik/data-tax.git
+
+[submodule "TransparentPhone"]
+	path = TransparentPhone
+	url = https://github.com/marius-patrik/TransparentPhone.git
 	branch = main
-[submodule "templates-super"]
-	path = _templates/templates-super
-	url = https://github.com/marius-patrik/templates-super.git
+
+[submodule "vsc-utils"]
+	path = vsc-utils
+	url = https://github.com/marius-patrik/vsc-utils.git
 	branch = main
-[submodule "template-go-lib"]
-	path = _templates/template-go-lib
-	url = https://github.com/marius-patrik/template-go-lib.git
+
+[submodule "_private/data-agents"]
+	path = _private/data-agents
+	url = https://github.com/marius-patrik/data-agents.git
 	branch = main
-[submodule "template-go-api"]
-	path = _templates/template-go-api
-	url = https://github.com/marius-patrik/template-go-api.git
+
+[submodule "_private/data-claude"]
+	path = _private/data-claude
+	url = https://github.com/marius-patrik/data-claude.git
 	branch = main
-[submodule "template-go-tui"]
-	path = _templates/template-go-tui
-	url = https://github.com/marius-patrik/template-go-tui.git
+
+[submodule "_private/data-codex"]
+	path = _private/data-codex
+	url = https://github.com/marius-patrik/data-codex.git
 	branch = main
-[submodule "template-go-cli"]
-	path = _templates/template-go-cli
-	url = https://github.com/marius-patrik/template-go-cli.git
+
+[submodule "_private/data-cursor"]
+	path = _private/data-cursor
+	url = https://github.com/marius-patrik/data-cursor.git
 	branch = main
-[submodule "template-py-ml"]
-	path = _templates/template-py-ml
-	url = https://github.com/marius-patrik/template-py-ml.git
-	branch = main
-[submodule "template-py-api"]
-	path = _templates/template-py-api
-	url = https://github.com/marius-patrik/template-py-api.git
-	branch = main
-[submodule "template-py-lib"]
-	path = _templates/template-py-lib
-	url = https://github.com/marius-patrik/template-py-lib.git
-	branch = main
-[submodule "template-py-cli"]
-	path = _templates/template-py-cli
-	url = https://github.com/marius-patrik/template-py-cli.git
-	branch = main
-[submodule "template-ts-monorepo"]
-	path = _templates/template-ts-monorepo
-	url = https://github.com/marius-patrik/template-ts-monorepo.git
-	branch = main
-[submodule "template-ts-lib"]
-	path = _templates/template-ts-lib
-	url = https://github.com/marius-patrik/template-ts-lib.git
-	branch = main
-[submodule "template-ts-tui"]
-	path = _templates/template-ts-tui
-	url = https://github.com/marius-patrik/template-ts-tui.git
-	branch = main
-[submodule "template-ts-cli"]
-	path = _templates/template-ts-cli
-	url = https://github.com/marius-patrik/template-ts-cli.git
-	branch = main
-[submodule "template-native"]
-	path = _templates/template-native
-	url = https://github.com/marius-patrik/template-native.git
-	branch = main
-[submodule "template-web-app"]
-	path = _templates/template-web-app
-	url = https://github.com/marius-patrik/template-web-app.git
-	branch = main
-[submodule "template-agent-monorepo"]
-	path = _templates/template-agent-monorepo
-	url = https://github.com/marius-patrik/template-agent-monorepo.git
-	branch = main
-[submodule "template-agent-mcp"]
-	path = _templates/template-agent-mcp
-	url = https://github.com/marius-patrik/template-agent-mcp.git
-	branch = main
-[submodule "template-agent-plugin"]
-	path = _templates/template-agent-plugin
-	url = https://github.com/marius-patrik/template-agent-plugin.git
-	branch = main
-[submodule "OdbornaPrace-mono"]
-	path = OdbornaPrace-mono
-	url = https://github.com/marius-patrik/OdbornaPrace-mono.git
-	branch = main
-[submodule "OdbornaPrace-paper"]
-	path = OdbornaPrace-paper
-	url = https://github.com/marius-patrik/OdbornaPrace-paper.git
-	branch = main
-[submodule "template-OdbornaPrace"]
-	path = _templates/template-OdbornaPrace
-	url = https://github.com/marius-patrik/template-OdbornaPrace.git
-	branch = main
+
 [submodule "_private/data-gemini"]
 	path = _private/data-gemini
 	url = https://github.com/marius-patrik/data-gemini.git
+	branch = main
+
+[submodule "_private/data-grok"]
+	path = _private/data-grok
+	url = https://github.com/marius-patrik/data-grok.git
+	branch = main
+
+[submodule "_private/data-kimi"]
+	path = _private/data-kimi
+	url = https://github.com/marius-patrik/data-kimi.git
+	branch = main
+
+[submodule "_private/data-tax"]
+	path = _private/data-tax
+	url = https://github.com/marius-patrik/data-tax.git
+	branch = main
+
+[submodule "_templates/template-agent-mcp"]
+	path = _templates/template-agent-mcp
+	url = https://github.com/marius-patrik/template-agent-mcp.git
+	branch = main
+
+[submodule "_templates/template-agent-monorepo"]
+	path = _templates/template-agent-monorepo
+	url = https://github.com/marius-patrik/template-agent-monorepo.git
+	branch = main
+
+[submodule "_templates/template-agent-plugin"]
+	path = _templates/template-agent-plugin
+	url = https://github.com/marius-patrik/template-agent-plugin.git
+	branch = main
+
+[submodule "_templates/template-go-api"]
+	path = _templates/template-go-api
+	url = https://github.com/marius-patrik/template-go-api.git
+	branch = main
+
+[submodule "_templates/template-go-cli"]
+	path = _templates/template-go-cli
+	url = https://github.com/marius-patrik/template-go-cli.git
+	branch = main
+
+[submodule "_templates/template-go-lib"]
+	path = _templates/template-go-lib
+	url = https://github.com/marius-patrik/template-go-lib.git
+	branch = main
+
+[submodule "_templates/template-go-tui"]
+	path = _templates/template-go-tui
+	url = https://github.com/marius-patrik/template-go-tui.git
+	branch = main
+
+[submodule "_templates/template-native"]
+	path = _templates/template-native
+	url = https://github.com/marius-patrik/template-native.git
+	branch = main
+
+[submodule "_templates/template-py-api"]
+	path = _templates/template-py-api
+	url = https://github.com/marius-patrik/template-py-api.git
+	branch = main
+
+[submodule "_templates/template-py-cli"]
+	path = _templates/template-py-cli
+	url = https://github.com/marius-patrik/template-py-cli.git
+	branch = main
+
+[submodule "_templates/template-py-lib"]
+	path = _templates/template-py-lib
+	url = https://github.com/marius-patrik/template-py-lib.git
+	branch = main
+
+[submodule "_templates/template-py-ml"]
+	path = _templates/template-py-ml
+	url = https://github.com/marius-patrik/template-py-ml.git
+	branch = main
+
+[submodule "_templates/template-ts-cli"]
+	path = _templates/template-ts-cli
+	url = https://github.com/marius-patrik/template-ts-cli.git
+	branch = main
+
+[submodule "_templates/template-ts-lib"]
+	path = _templates/template-ts-lib
+	url = https://github.com/marius-patrik/template-ts-lib.git
+	branch = main
+
+[submodule "_templates/template-ts-monorepo"]
+	path = _templates/template-ts-monorepo
+	url = https://github.com/marius-patrik/template-ts-monorepo.git
+	branch = main
+
+[submodule "_templates/template-ts-tui"]
+	path = _templates/template-ts-tui
+	url = https://github.com/marius-patrik/template-ts-tui.git
+	branch = main
+
+[submodule "_templates/template-web-app"]
+	path = _templates/template-web-app
+	url = https://github.com/marius-patrik/template-web-app.git
+	branch = main
+
+[submodule "_templates/templates-super"]
+	path = _templates/templates-super
+	url = https://github.com/marius-patrik/templates-super.git
+	branch = main
+
+[submodule "_archive/accumulative-matrix-sweeping"]
+	path = _archive/accumulative-matrix-sweeping
+	url = https://github.com/marius-patrik/accumulative-matrix-sweeping.git
+	branch = main
+
+[submodule "_archive/agents-super"]
+	path = _archive/agents-super
+	url = https://github.com/marius-patrik/agents-super.git
+	branch = main
+
+[submodule "_archive/Andromeda"]
+	path = _archive/Andromeda
+	url = https://github.com/marius-patrik/Andromeda.git
+	branch = main
+
+[submodule "_archive/Citizen"]
+	path = _archive/Citizen
+	url = https://github.com/marius-patrik/Citizen.git
+	branch = main
+
+[submodule "_archive/DarkFactory-old"]
+	path = _archive/DarkFactory-old
+	url = https://github.com/marius-patrik/DarkFactory-old.git
+	branch = main
+
+[submodule "_archive/Fabrica"]
+	path = _archive/Fabrica
+	url = https://github.com/marius-patrik/Fabrica.git
+	branch = dev
+
+[submodule "_archive/froq"]
+	path = _archive/froq
+	url = https://github.com/marius-patrik/froq.git
+	branch = main
+
+[submodule "_archive/genesis-os"]
+	path = _archive/genesis-os
+	url = https://github.com/marius-patrik/genesis-os.git
+	branch = main
+
+[submodule "_archive/LifeQuest"]
+	path = _archive/LifeQuest
+	url = https://github.com/marius-patrik/LifeQuest.git
+	branch = main
+
+[submodule "_archive/life-support"]
+	path = _archive/life-support
+	url = https://github.com/marius-patrik/life-support.git
+	branch = main
+
+[submodule "_archive/livequest"]
+	path = _archive/livequest
+	url = https://github.com/marius-patrik/livequest.git
+	branch = main
+
+[submodule "_archive/Memory"]
+	path = _archive/Memory
+	url = https://github.com/marius-patrik/Memory.git
+	branch = main
+
+[submodule "_archive/messenger"]
+	path = _archive/messenger
+	url = https://github.com/marius-patrik/messenger.git
+	branch = main
+
+[submodule "_archive/MMO"]
+	path = _archive/MMO
+	url = https://github.com/marius-patrik/MMO.git
+	branch = main
+
+[submodule "_archive/mssgs"]
+	path = _archive/mssgs
+	url = https://github.com/marius-patrik/mssgs.git
+	branch = main
+
+[submodule "_archive/OdbornaPrace-mono"]
+	path = _archive/OdbornaPrace-mono
+	url = https://github.com/marius-patrik/OdbornaPrace-mono.git
+	branch = main
+
+[submodule "_archive/paes"]
+	path = _archive/paes
+	url = https://github.com/marius-patrik/paes.git
+	branch = main
+
+[submodule "_archive/PAES-enterprise"]
+	path = _archive/PAES-enterprise
+	url = https://github.com/marius-patrik/PAES-enterprise.git
+	branch = main
+
+[submodule "_archive/Rommie"]
+	path = _archive/Rommie
+	url = https://github.com/marius-patrik/Rommie.git
+	branch = main
+
+[submodule "_archive/RSCode"]
+	path = _archive/RSCode
+	url = https://github.com/marius-patrik/RSCode.git
+	branch = main
+
+[submodule "_archive/singularity"]
+	path = _archive/singularity
+	url = https://github.com/marius-patrik/singularity.git
+	branch = main
+
+[submodule "_archive/StatusLine"]
+	path = _archive/StatusLine
+	url = https://github.com/marius-patrik/StatusLine.git
+	branch = master
+
+[submodule "_archive/template-OdbornaPrace"]
+	path = _archive/template-OdbornaPrace
+	url = https://github.com/marius-patrik/template-OdbornaPrace.git
+	branch = main
+
+[submodule "_archive/Wrkspace"]
+	path = _archive/Wrkspace
+	url = https://github.com/marius-patrik/Wrkspace.git
+	branch = main
+
+[submodule "_archive/yacht"]
+	path = _archive/yacht
+	url = https://github.com/marius-patrik/yacht.git
 	branch = main
