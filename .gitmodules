@@ -192,123 +192,148 @@
 	path = _archive/accumulative-matrix-sweeping
 	url = https://github.com/marius-patrik/accumulative-matrix-sweeping.git
 	branch = main
+	update = none
 
 [submodule "_archive/agents-super"]
 	path = _archive/agents-super
 	url = https://github.com/marius-patrik/agents-super.git
 	branch = main
+	update = none
 
 [submodule "_archive/Andromeda"]
 	path = _archive/Andromeda
 	url = https://github.com/marius-patrik/Andromeda.git
 	branch = main
+	update = none
 
 [submodule "_archive/Citizen"]
 	path = _archive/Citizen
 	url = https://github.com/marius-patrik/Citizen.git
 	branch = main
+	update = none
 
 [submodule "_archive/DarkFactory-old"]
 	path = _archive/DarkFactory-old
 	url = https://github.com/marius-patrik/DarkFactory-old.git
 	branch = main
+	update = none
 
 [submodule "_archive/Fabrica"]
 	path = _archive/Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
+	update = none
 
 [submodule "_archive/froq"]
 	path = _archive/froq
 	url = https://github.com/marius-patrik/froq.git
 	branch = main
+	update = none
 
 [submodule "_archive/genesis-os"]
 	path = _archive/genesis-os
 	url = https://github.com/marius-patrik/genesis-os.git
 	branch = main
+	update = none
 
 [submodule "_archive/LifeQuest"]
 	path = _archive/LifeQuest
 	url = https://github.com/marius-patrik/LifeQuest.git
 	branch = main
+	update = none
 
 [submodule "_archive/life-support"]
 	path = _archive/life-support
 	url = https://github.com/marius-patrik/life-support.git
 	branch = main
+	update = none
 
 [submodule "_archive/livequest"]
 	path = _archive/livequest
 	url = https://github.com/marius-patrik/livequest.git
 	branch = main
+	update = none
 
 [submodule "_archive/Memory"]
 	path = _archive/Memory
 	url = https://github.com/marius-patrik/Memory.git
 	branch = main
+	update = none
 
 [submodule "_archive/messenger"]
 	path = _archive/messenger
 	url = https://github.com/marius-patrik/messenger.git
 	branch = main
+	update = none
 
 [submodule "_archive/MMO"]
 	path = _archive/MMO
 	url = https://github.com/marius-patrik/MMO.git
 	branch = main
+	update = none
 
 [submodule "_archive/mssgs"]
 	path = _archive/mssgs
 	url = https://github.com/marius-patrik/mssgs.git
 	branch = main
+	update = none
 
 [submodule "_archive/OdbornaPrace-mono"]
 	path = _archive/OdbornaPrace-mono
 	url = https://github.com/marius-patrik/OdbornaPrace-mono.git
 	branch = main
+	update = none
 
 [submodule "_archive/paes"]
 	path = _archive/paes
 	url = https://github.com/marius-patrik/paes.git
 	branch = main
+	update = none
 
 [submodule "_archive/PAES-enterprise"]
 	path = _archive/PAES-enterprise
 	url = https://github.com/marius-patrik/PAES-enterprise.git
 	branch = main
+	update = none
 
 [submodule "_archive/Rommie"]
 	path = _archive/Rommie
 	url = https://github.com/marius-patrik/Rommie.git
 	branch = main
+	update = none
 
 [submodule "_archive/RSCode"]
 	path = _archive/RSCode
 	url = https://github.com/marius-patrik/RSCode.git
 	branch = main
+	update = none
 
 [submodule "_archive/singularity"]
 	path = _archive/singularity
 	url = https://github.com/marius-patrik/singularity.git
 	branch = main
+	update = none
 
 [submodule "_archive/StatusLine"]
 	path = _archive/StatusLine
 	url = https://github.com/marius-patrik/StatusLine.git
 	branch = master
+	update = none
 
 [submodule "_archive/template-OdbornaPrace"]
 	path = _archive/template-OdbornaPrace
 	url = https://github.com/marius-patrik/template-OdbornaPrace.git
 	branch = main
+	update = none
 
 [submodule "_archive/Wrkspace"]
 	path = _archive/Wrkspace
 	url = https://github.com/marius-patrik/Wrkspace.git
 	branch = main
+	update = none
 
 [submodule "_archive/yacht"]
 	path = _archive/yacht
 	url = https://github.com/marius-patrik/yacht.git
 	branch = main
+	update = none
