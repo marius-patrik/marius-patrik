@@ -15,14 +15,6 @@
 
 !ChessWithQuests
 !DarkFactory
-!DarkFactory-Paper
-!dsh-stack
-!MediaStream
-!MoneyMaker
-!omnis
-!PersonalCode
-!SkyAgent
-!super-orca
 !TransparentPhone
 !vsc-utils
 
@@ -31,6 +23,3 @@
 
 !_private
 !_private/*
-
-!_templates
-!_templates/*

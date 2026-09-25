@@ -1,6 +1,6 @@
 # Repository Map
 
-Live inventory of repositories owned by `marius-patrik`, refreshed on 2026-09-19.
+Live inventory of repositories owned by `marius-patrik`, refreshed on 2026-09-25.
 Paths match the umbrella `.gitmodules` file. The umbrella repository itself is
 omitted from the gitlink tables.
 
@@ -20,15 +20,7 @@ Layout rules:
 | Path | Repository | Visibility | Default branch |
 | --- | --- | --- | --- |
 | `ChessWithQuests` | `marius-patrik/ChessWithQuests` | Public | `main` |
-| `DarkFactory` | `marius-patrik/DarkFactory` | Public | `darkfactory` |
-| `DarkFactory-Paper` | `marius-patrik/DarkFactory-Paper` | Public | `main` |
-| `dsh-stack` | `marius-patrik/dsh-stack` | Public | `main` |
-| `MediaStream` | `marius-patrik/MediaStream` | Public | `main` |
-| `MoneyMaker` | `marius-patrik/MoneyMaker` | Public | `main` |
-| `omnis` | `marius-patrik/omnis` | Public | `main` |
-| `PersonalCode` | `marius-patrik/PersonalCode` | Public | `dev` |
-| `SkyAgent` | `marius-patrik/SkyAgent` | Public | `main` |
-| `super-orca` | `marius-patrik/super-orca` | Public | `main` |
+| `DarkFactory` | `marius-patrik/DarkFactory` | Public | `main` |
 | `TransparentPhone` | `marius-patrik/TransparentPhone` | Public | `main` |
 | `vsc-utils` | `marius-patrik/vsc-utils` | Public | `main` |
 
@@ -45,29 +37,6 @@ Layout rules:
 | `_private/data-kimi` | `marius-patrik/data-kimi` | Private | `main` |
 | `_private/data-tax` | `marius-patrik/data-tax` | Private | `main` |
 
-## Template repositories
-
-| Path | Repository | Visibility | Default branch |
-| --- | --- | --- | --- |
-| `_templates/template-agent-mcp` | `marius-patrik/template-agent-mcp` | Public | `main` |
-| `_templates/template-agent-monorepo` | `marius-patrik/template-agent-monorepo` | Public | `main` |
-| `_templates/template-agent-plugin` | `marius-patrik/template-agent-plugin` | Public | `main` |
-| `_templates/template-go-api` | `marius-patrik/template-go-api` | Public | `main` |
-| `_templates/template-go-cli` | `marius-patrik/template-go-cli` | Public | `main` |
-| `_templates/template-go-lib` | `marius-patrik/template-go-lib` | Public | `main` |
-| `_templates/template-go-tui` | `marius-patrik/template-go-tui` | Public | `main` |
-| `_templates/template-native` | `marius-patrik/template-native` | Public | `main` |
-| `_templates/template-py-api` | `marius-patrik/template-py-api` | Public | `main` |
-| `_templates/template-py-cli` | `marius-patrik/template-py-cli` | Public | `main` |
-| `_templates/template-py-lib` | `marius-patrik/template-py-lib` | Public | `main` |
-| `_templates/template-py-ml` | `marius-patrik/template-py-ml` | Public | `main` |
-| `_templates/template-ts-cli` | `marius-patrik/template-ts-cli` | Public | `main` |
-| `_templates/template-ts-lib` | `marius-patrik/template-ts-lib` | Public | `main` |
-| `_templates/template-ts-monorepo` | `marius-patrik/template-ts-monorepo` | Public | `main` |
-| `_templates/template-ts-tui` | `marius-patrik/template-ts-tui` | Public | `main` |
-| `_templates/template-web-app` | `marius-patrik/template-web-app` | Public | `main` |
-| `_templates/templates-super` | `marius-patrik/templates-super` | Public | `main` |
-
 ## Archived repositories
 
 Read-only evidence. Archived repositories are never revived in place; work
@@ -80,6 +49,32 @@ that matters is folded into an active repository first.
 | `_archive/Andromeda` | `marius-patrik/Andromeda` | Private | `main` |
 | `_archive/Citizen` | `marius-patrik/Citizen` | Private | `main` |
 | `_archive/DarkFactory-old` | `marius-patrik/DarkFactory-old` | Private | `main` |
+| `_archive/DarkFactory-Paper` | `marius-patrik/DarkFactory-Paper` | Private | `main` |
+| `_archive/MediaStream` | `marius-patrik/MediaStream` | Private | `main` |
+| `_archive/MoneyMaker` | `marius-patrik/MoneyMaker` | Private | `main` |
+| `_archive/omnis` | `marius-patrik/omnis` | Private | `main` |
+| `_archive/PersonalCode` | `marius-patrik/PersonalCode` | Private | `dev` |
+| `_archive/SkyAgent` | `marius-patrik/SkyAgent` | Private | `main` |
+| `_archive/super-orca` | `marius-patrik/super-orca` | Private | `main` |
+| `_archive/dsh-stack` | `marius-patrik/dsh-stack` | Private | `main` |
+| `_archive/template-agent-mcp` | `marius-patrik/template-agent-mcp` | Private | `main` |
+| `_archive/template-agent-monorepo` | `marius-patrik/template-agent-monorepo` | Private | `main` |
+| `_archive/template-agent-plugin` | `marius-patrik/template-agent-plugin` | Private | `main` |
+| `_archive/template-go-api` | `marius-patrik/template-go-api` | Private | `main` |
+| `_archive/template-go-cli` | `marius-patrik/template-go-cli` | Private | `main` |
+| `_archive/template-go-lib` | `marius-patrik/template-go-lib` | Private | `main` |
+| `_archive/template-go-tui` | `marius-patrik/template-go-tui` | Private | `main` |
+| `_archive/template-native` | `marius-patrik/template-native` | Private | `main` |
+| `_archive/template-py-api` | `marius-patrik/template-py-api` | Private | `main` |
+| `_archive/template-py-cli` | `marius-patrik/template-py-cli` | Private | `main` |
+| `_archive/template-py-lib` | `marius-patrik/template-py-lib` | Private | `main` |
+| `_archive/template-py-ml` | `marius-patrik/template-py-ml` | Private | `main` |
+| `_archive/template-ts-cli` | `marius-patrik/template-ts-cli` | Private | `main` |
+| `_archive/template-ts-lib` | `marius-patrik/template-ts-lib` | Private | `main` |
+| `_archive/template-ts-monorepo` | `marius-patrik/template-ts-monorepo` | Private | `main` |
+| `_archive/template-ts-tui` | `marius-patrik/template-ts-tui` | Private | `main` |
+| `_archive/template-web-app` | `marius-patrik/template-web-app` | Private | `main` |
+| `_archive/templates-super` | `marius-patrik/templates-super` | Private | `main` |
 | `_archive/Fabrica` | `marius-patrik/Fabrica` | Private | `dev` |
 | `_archive/froq` | `marius-patrik/froq` | Private | `main` |
 | `_archive/genesis-os` | `marius-patrik/genesis-os` | Private | `main` |

@@ -6,47 +6,50 @@
 [submodule "DarkFactory"]
 	path = DarkFactory
 	url = https://github.com/marius-patrik/DarkFactory.git
-	branch = darkfactory
-
-[submodule "DarkFactory-Paper"]
-	path = DarkFactory-Paper
-	url = https://github.com/marius-patrik/DarkFactory-Paper.git
 	branch = main
 
-[submodule "dsh-stack"]
-	path = dsh-stack
+
+[submodule "_archive/dsh-stack"]
+	path = _archive/dsh-stack
 	url = https://github.com/marius-patrik/dsh-stack.git
 	branch = main
+	update = none
 
-[submodule "MediaStream"]
-	path = MediaStream
+[submodule "_archive/MediaStream"]
+	path = _archive/MediaStream
 	url = https://github.com/marius-patrik/MediaStream.git
 	branch = main
+	update = none
 
-[submodule "MoneyMaker"]
-	path = MoneyMaker
+[submodule "_archive/MoneyMaker"]
+	path = _archive/MoneyMaker
 	url = https://github.com/marius-patrik/MoneyMaker.git
 	branch = main
+	update = none
 
-[submodule "omnis"]
-	path = omnis
+[submodule "_archive/omnis"]
+	path = _archive/omnis
 	url = https://github.com/marius-patrik/omnis.git
 	branch = main
+	update = none
 
-[submodule "PersonalCode"]
-	path = PersonalCode
+[submodule "_archive/PersonalCode"]
+	path = _archive/PersonalCode
 	url = https://github.com/marius-patrik/PersonalCode.git
 	branch = dev
+	update = none
 
-[submodule "SkyAgent"]
-	path = SkyAgent
+[submodule "_archive/SkyAgent"]
+	path = _archive/SkyAgent
 	url = https://github.com/marius-patrik/SkyAgent.git
 	branch = main
+	update = none
 
-[submodule "super-orca"]
-	path = super-orca
+[submodule "_archive/super-orca"]
+	path = _archive/super-orca
 	url = https://github.com/marius-patrik/super-orca.git
 	branch = main
+	update = none
 
 [submodule "TransparentPhone"]
 	path = TransparentPhone
@@ -98,95 +101,119 @@
 	url = https://github.com/marius-patrik/data-tax.git
 	branch = main
 
-[submodule "_templates/template-agent-mcp"]
-	path = _templates/template-agent-mcp
+[submodule "_archive/template-agent-mcp"]
+	path = _archive/template-agent-mcp
 	url = https://github.com/marius-patrik/template-agent-mcp.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-agent-monorepo"]
-	path = _templates/template-agent-monorepo
+[submodule "_archive/template-agent-monorepo"]
+	path = _archive/template-agent-monorepo
 	url = https://github.com/marius-patrik/template-agent-monorepo.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-agent-plugin"]
-	path = _templates/template-agent-plugin
+[submodule "_archive/template-agent-plugin"]
+	path = _archive/template-agent-plugin
 	url = https://github.com/marius-patrik/template-agent-plugin.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-go-api"]
-	path = _templates/template-go-api
+[submodule "_archive/template-go-api"]
+	path = _archive/template-go-api
 	url = https://github.com/marius-patrik/template-go-api.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-go-cli"]
-	path = _templates/template-go-cli
+[submodule "_archive/template-go-cli"]
+	path = _archive/template-go-cli
 	url = https://github.com/marius-patrik/template-go-cli.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-go-lib"]
-	path = _templates/template-go-lib
+[submodule "_archive/template-go-lib"]
+	path = _archive/template-go-lib
 	url = https://github.com/marius-patrik/template-go-lib.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-go-tui"]
-	path = _templates/template-go-tui
+[submodule "_archive/template-go-tui"]
+	path = _archive/template-go-tui
 	url = https://github.com/marius-patrik/template-go-tui.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-native"]
-	path = _templates/template-native
+[submodule "_archive/template-native"]
+	path = _archive/template-native
 	url = https://github.com/marius-patrik/template-native.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-py-api"]
-	path = _templates/template-py-api
+[submodule "_archive/template-py-api"]
+	path = _archive/template-py-api
 	url = https://github.com/marius-patrik/template-py-api.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-py-cli"]
-	path = _templates/template-py-cli
+[submodule "_archive/template-py-cli"]
+	path = _archive/template-py-cli
 	url = https://github.com/marius-patrik/template-py-cli.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-py-lib"]
-	path = _templates/template-py-lib
+[submodule "_archive/template-py-lib"]
+	path = _archive/template-py-lib
 	url = https://github.com/marius-patrik/template-py-lib.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-py-ml"]
-	path = _templates/template-py-ml
+[submodule "_archive/template-py-ml"]
+	path = _archive/template-py-ml
 	url = https://github.com/marius-patrik/template-py-ml.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-ts-cli"]
-	path = _templates/template-ts-cli
+[submodule "_archive/template-ts-cli"]
+	path = _archive/template-ts-cli
 	url = https://github.com/marius-patrik/template-ts-cli.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-ts-lib"]
-	path = _templates/template-ts-lib
+[submodule "_archive/template-ts-lib"]
+	path = _archive/template-ts-lib
 	url = https://github.com/marius-patrik/template-ts-lib.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-ts-monorepo"]
-	path = _templates/template-ts-monorepo
+[submodule "_archive/template-ts-monorepo"]
+	path = _archive/template-ts-monorepo
 	url = https://github.com/marius-patrik/template-ts-monorepo.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-ts-tui"]
-	path = _templates/template-ts-tui
+[submodule "_archive/template-ts-tui"]
+	path = _archive/template-ts-tui
 	url = https://github.com/marius-patrik/template-ts-tui.git
 	branch = main
+	update = none
 
-[submodule "_templates/template-web-app"]
-	path = _templates/template-web-app
+[submodule "_archive/template-web-app"]
+	path = _archive/template-web-app
 	url = https://github.com/marius-patrik/template-web-app.git
 	branch = main
+	update = none
 
-[submodule "_templates/templates-super"]
-	path = _templates/templates-super
+[submodule "_archive/templates-super"]
+	path = _archive/templates-super
 	url = https://github.com/marius-patrik/templates-super.git
 	branch = main
+	update = none
+
+[submodule "_archive/DarkFactory-Paper"]
+	path = _archive/DarkFactory-Paper
+	url = https://github.com/marius-patrik/DarkFactory-Paper.git
+	branch = main
+	update = none
 
 [submodule "_archive/accumulative-matrix-sweeping"]
 	path = _archive/accumulative-matrix-sweeping
