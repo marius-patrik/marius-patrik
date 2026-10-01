@@ -9,11 +9,10 @@
 	branch = main
 
 
-[submodule "_archive/dsh-stack"]
-	path = _archive/dsh-stack
+[submodule "dsh-stack"]
+	path = dsh-stack
 	url = https://github.com/marius-patrik/dsh-stack.git
 	branch = main
-	update = none
 
 [submodule "_archive/MediaStream"]
 	path = _archive/MediaStream
