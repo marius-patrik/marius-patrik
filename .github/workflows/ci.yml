@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - bot/sync-workspace
   pull_request:
     branches:
       - main
@@ -20,13 +21,42 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      # The validator needs to read every repository in the workspace, including
+      # the private ones. GITHUB_TOKEN cannot: it is scoped to this repository and
+      # returns 404 on the private submodules. A GitHub App installation token is
+      # minted here instead, and is read-only.
+      - name: Mint GitHub App installation token
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-metadata: read
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
+      # Offline, no token needed. Guards the classification rule itself, so a
+      # change to repo-index.mjs cannot quietly redefine where a repository
+      # belongs.
+      - name: Test the classification rule
+        run: node .github/scripts/test-repo-index.mjs
+
       # This repository is a workspace index, not a package. It owns submodule
-      # pointer hygiene and project-map accuracy; package build, test, and
-      # release validation belongs to the nested repositories.
-      - name: Verify workspace pointers and project map
-        run: node .github/scripts/verify-umbrella.mjs
+      # pointer hygiene and layout accuracy; package build, test, and release
+      # validation belongs to the nested repositories.
+      #
+      # Pointer freshness is reported but not enforced. The bot advances pointers
+      # on its own schedule, so failing here would race it and produce red builds
+      # for a state that is already being fixed. This check proves the workspace is
+      # well-formed: one submodule per GitHub repository, each at the path its
+      # archived/private/public state requires.
+      - name: Verify workspace matches the GitHub repository list
+        env:
+          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
+        run: node .github/scripts/verify-workspace.mjs
