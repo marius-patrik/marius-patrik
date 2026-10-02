@@ -1,0 +1,80 @@
+name: Open workspace PR
+
+# Opens or updates the pull request for bot/sync-workspace. Separate from the
+# sync itself so the pull request can be reopened, re-labelled, or have
+# auto-merge toggled without recomputing the whole reconciliation.
+#
+# When the branch is ahead of main this does what the sync workflow's PR step
+# does, so the two are interchangeable.
+on:
+  workflow_dispatch:
+    inputs:
+      force_review:
+        description: "Require review even if the diff is pointer-only"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-workspace
+  cancel-in-progress: false
+
+jobs:
+  pull-request:
+    name: Open pull request
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Mint GitHub App installation token
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-metadata: read
+          permission-pull-requests: write
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Structural is derived from the branch contents rather than taken on trust
+      # from the sync run, so dispatching this workflow by hand produces the same
+      # decision the sync would have made.
+      - name: Decide merge policy and open the pull request
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
+          FORCE_REVIEW: ${{ inputs.force_review }}
+        run: |
+          set -o pipefail
+          git fetch --quiet origin bot/sync-workspace || {
+            echo "bot/sync-workspace does not exist yet. Run the Sync workspace workflow first." >&2
+            exit 1
+          }
+          ahead="$(git rev-list --count origin/main..origin/bot/sync-workspace)"
+          if [ "$ahead" -eq 0 ]; then
+            echo "bot/sync-workspace is not ahead of main. Run the Sync workspace workflow first."
+            exit 0
+          fi
+          structural=false
+          if git log --format=%s origin/main..origin/bot/sync-workspace | grep -q 'reconcile submodule layout'; then
+            structural=true
+          fi
+          if [ "${{ inputs.force_review }}" = "true" ]; then
+            structural=true
+          fi
+          echo "commits ahead: $ahead, structural: $structural"
+          STRUCTURAL="$structural" node .github/scripts/open-workspace-pr.mjs

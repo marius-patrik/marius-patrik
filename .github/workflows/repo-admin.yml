@@ -1,0 +1,92 @@
+name: Repo admin
+
+# One entry point for the repository lifecycle operations the umbrella owns:
+# archive, unarchive, privatize, publicize, rename, delete.
+#
+# These are all a single PATCH to /repos/{owner}/{repo} with one field in the body,
+# except delete. They are exposed as one workflow with a dropdown rather than six
+# workflows so there is one place where the refusals live and one place to read
+# what each operation will do.
+#
+# Every operation that changes lifecycle or visibility changes where a repository
+# belongs in the workspace. Run Sync workspace afterwards, then Open workspace PR:
+# that pull request will be labelled needs-review rather than auto-merging.
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Operation to perform"
+        type: choice
+        required: true
+        options:
+          - archive
+          - unarchive
+          - privatize
+          - publicize
+          - rename
+          - delete
+      repo:
+        description: "Repository name (e.g. Study)"
+        type: string
+        required: true
+      new_name:
+        description: "Required for rename: the new repository name"
+        type: string
+        required: false
+      confirm_name:
+        description: "Required for delete: retype the repository name exactly"
+        type: string
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repo-admin
+  cancel-in-progress: false
+
+jobs:
+  admin:
+    name: ${{ inputs.operation }} ${{ inputs.repo }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # administration:write is what PATCH and DELETE /repos require. This job
+      # holds it deliberately and does nothing else, so the scope is auditable in
+      # one place.
+      - name: Mint GitHub App installation token
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-administration: write
+          permission-metadata: read
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Refusals live in the script and exit non-zero with an explanation: a fork
+      # cannot change visibility, a Pages repository cannot be privatized, and a
+      # delete must be preceded by an archive and confirmed by name.
+      - name: Perform operation
+        env:
+          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
+        run: |
+          node .github/scripts/repo-admin.mjs \
+            "${{ inputs.operation }}" \
+            "${{ inputs.repo }}" \
+            "${{ inputs.operation == 'rename' && inputs.new_name || inputs.confirm_name }}"
+
+      # Never chain automatically. A human decides whether the resulting layout
+      # change is wanted; the sync pull request is where that review happens.
+      - name: Summarise next step
+        run: |
+          echo "Operation applied. If this changed where a repository belongs:"
+          echo "  1. run the Sync workspace workflow"
+          echo "  2. run the Open workspace PR workflow"
+          echo "  3. review and merge the resulting needs-review pull request"

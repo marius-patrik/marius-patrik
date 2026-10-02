@@ -1,0 +1,87 @@
+name: Sync workspace
+
+# Reconciles the umbrella workspace with the GitHub repository list every six
+# hours, plus on demand. This workflow only computes and pushes a branch; opening
+# the pull request is a separate step so the PR can be reopened without
+# recomputing anything.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Never let two runs race over .gitmodules and the gitlink index. Without this a
+# scheduled run and a manual dispatch can both be mid-write.
+concurrency:
+  group: sync-workspace
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Reconcile submodules
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          # Pointers only. The sync never needs the submodules themselves, and
+          # they are mostly private and archived, so cloning them would be slow
+          # and would need credentials the job has no reason to hold.
+          submodules: false
+
+      # Read access across all repositories, to enumerate them and resolve each
+      # default branch head. Deliberately not granted administration:write, so
+      # this unattended job cannot archive or delete anything.
+      - name: Mint GitHub App installation token
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-metadata: read
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # The script reports CHANGED and STRUCTURAL on stdout; both are captured as
+      # step outputs so later steps can branch on them. Without these the PR step
+      # would either never run or would run on a run that changed nothing.
+      - name: Reconcile
+        id: sync
+        env:
+          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
+        run: |
+          set -o pipefail
+          output="$(node .github/scripts/sync-workspace.mjs 2>&1 | tee /dev/stderr)"
+          if grep -q '^CHANGED=true$' <<<"$output"; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+          if grep -q '^STRUCTURAL=true$' <<<"$output"; then
+            echo "structural=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "structural=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update the pull request
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
+          STRUCTURAL: ${{ steps.sync.outputs.structural }}
+        run: node .github/scripts/open-workspace-pr.mjs
+
+      - name: Report when nothing changed
+        if: steps.sync.outputs.changed != 'true'
+        run: echo "Workspace already matches GitHub; no pull request needed."
