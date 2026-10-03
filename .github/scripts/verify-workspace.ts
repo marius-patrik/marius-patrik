@@ -1,17 +1,17 @@
 // Read-only check of the umbrella workspace, run by CI on every push and pull
-// request. It shares `repo-index.mjs` with the sync bot so the two cannot
+// request. It shares `repo-index.ts` with the sync bot so the two cannot
 // disagree about what the workspace is supposed to look like.
 //
 // It needs a token that can see private repositories. The workflow-provided
 // GITHUB_TOKEN cannot (it 404s on `Study`), so CI mints a GitHub App
 // installation token and passes it as UMBRELLA_APP_TOKEN.
-import { headSha, listRepos } from "./github-api.mjs";
-import { desiredState, diffWorkspace, expectedPath, readGitmodules, readGitlinks } from "./repo-index.mjs";
+import { headSha, listRepos } from "./github-api.ts";
+import { desiredState, diffWorkspace, expectedPath, readGitmodules, readGitlinks } from "./repo-index.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 
-async function main() {
+async function main(): Promise<void> {
   const { repos: allRepos, source } = await listRepos();
   if (!allRepos.some((repo) => repo.name === SELF)) {
     console.error(
@@ -48,7 +48,7 @@ async function main() {
     process.exit(1);
   }
 
-  const problems = [];
+  const problems: string[] = [];
 
   // Every discrepancy is reported with the expected value. A validator that only
   // says "mismatch" makes the reader derive the fix; one that says
@@ -85,25 +85,26 @@ async function main() {
   }
 
   // Layout is derived from GitHub state, so it is worth stating explicitly even
-  // when the path happens to be correct for the wrong reason.
-  const gitlinks = readGitlinks();
+  // when the path happens to be correct for the wrong reason. The stanza is keyed
+  // by the *declared* name, so a repository that has moved reports both its old
+  // and its expected location.
+  const gitmodulesByName = readGitmodules();
   for (const repo of tracked) {
     const want = expectedPath(repo);
-    const declared = readGitmodules().get(repo.name);
-    if (declared && declared.path !== want) {
+    const declared = gitmodulesByName.get(repo.name);
+    if (declared?.path && declared.path !== want) {
       problems.push(
         `${repo.name}: located at ${declared.path}, but ${repo.archived ? "archived" : repo.private ? "private" : "public"} ` +
           `repositories belong at ${want}`
       );
     }
-    if (!gitlinks.has(want)) continue;
   }
 
   // Pointer freshness is reported but not fatal: the bot advances these on its
   // own schedule, and a failing check would race it. CI proves the workspace is
   // well-formed; the bot proves it is current.
   if (pointerDrift.length > 0) {
-    const stale = [];
+    const stale: string[] = [];
     for (const item of pointerDrift) {
       const head = await headSha(OWNER, item.repo, item.want.branch);
       if (head && head !== item.current) {

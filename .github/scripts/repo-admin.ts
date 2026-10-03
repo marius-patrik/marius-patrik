@@ -9,13 +9,13 @@
 // reconciliation the scheduled bot performs, because archiving a repository
 // changes where it belongs in the workspace. The caller is expected to then open
 // a pull request, which is gated on the diff being structural.
-import { deleteRepo, getRepo, headSha, listRepos, patchRepo } from "./github-api.mjs";
-import { expectedPath, removeGitlink } from "./repo-index.mjs";
+import { deleteRepo, getRepo, headSha, patchRepo, type Repo } from "./github-api.ts";
+import { expectedPath } from "./repo-index.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 
-const OPERATIONS = new Set([
+const OPERATIONS = new Set<string>([
   "archive",
   "unarchive",
   "privatize",
@@ -42,13 +42,13 @@ function assertNotSelf(name) {
   }
 }
 
-async function requireRepo(name) {
+async function requireRepo(name: string): Promise<Repo> {
   const repo = await getRepo(OWNER, name);
   if (!repo) throw new Refusal(`${OWNER}/${name} does not exist or is not visible to this token`);
   return repo;
 }
 
-async function archive(name) {
+async function archive(name: string): Promise<{ changed: boolean }> {
   assertNotSelf(name);
   const repo = await requireRepo(name);
   if (repo.archived) {
@@ -61,7 +61,7 @@ async function archive(name) {
   return { changed: true };
 }
 
-async function unarchive(name) {
+async function unarchive(name: string): Promise<{ changed: boolean }> {
   assertNotSelf(name);
   const repo = await requireRepo(name);
   if (!repo.archived) {
@@ -74,7 +74,7 @@ async function unarchive(name) {
   return { changed: true };
 }
 
-async function privatize(name) {
+async function privatize(name: string): Promise<{ changed: boolean }> {
   assertNotSelf(name);
   const repo = await requireRepo(name);
   if (repo.private) {
@@ -108,7 +108,7 @@ async function privatize(name) {
   return { changed: true };
 }
 
-async function publicize(name) {
+async function publicize(name: string): Promise<{ changed: boolean }> {
   assertNotSelf(name);
   const repo = await requireRepo(name);
   if (!repo.private) {
@@ -125,7 +125,7 @@ async function publicize(name) {
   return { changed: true };
 }
 
-async function rename(name, newName) {
+async function rename(name: string, newName: string | undefined): Promise<{ changed: boolean }> {
   assertNotSelf(name);
   if (!newName) throw new Refusal("rename requires a new name");
   if (!/^[A-Za-z0-9._-]+$/.test(newName)) {
@@ -150,7 +150,7 @@ async function rename(name, newName) {
   return { changed: true };
 }
 
-async function remove(name, confirmName) {
+async function remove(name: string, confirmName: string | undefined): Promise<{ changed: boolean; removed?: string }> {
   assertNotSelf(name);
   const repo = await getRepo(OWNER, name);
   if (!repo) {
@@ -181,7 +181,7 @@ async function remove(name, confirmName) {
   return { changed: true, removed: expectedPath(repo) };
 }
 
-async function main() {
+async function main(): Promise<void> {
   const [operation, name, thirdArg] = process.argv.slice(2);
 
   if (!OPERATIONS.has(operation)) {
@@ -189,7 +189,7 @@ async function main() {
     process.exit(2);
   }
 
-  const runners = {
+  const runners: Record<string, () => Promise<{ changed: boolean }>> = {
     archive: () => archive(name),
     unarchive: () => unarchive(name),
     privatize: () => privatize(name),

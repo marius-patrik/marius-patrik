@@ -6,14 +6,21 @@
 // The archived-pins case is the one that matters most: those submodules are
 // `update = none` and never cloned, so nothing here may assume a working tree.
 import { execFileSync } from "node:child_process";
+import { parseGitlinkLine } from "./repo-index.ts";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const script = process.argv[2] ?? path.resolve(process.cwd(), ".github/scripts/repo-index.mjs");
+const script = process.argv[2] ?? path.resolve(process.cwd(), ".github/scripts/repo-index.ts");
 
 const OWNER = "marius-patrik";
-const CASES = [
+const CASES: {
+  name: string;
+  repos: TestRepo[];
+  gitmodules: Record<string, Record<string, string>>;
+  links: Record<string, string>;
+  expect: { kind: string; path: string }[];
+}[] = [
   {
     name: "active public repository sits at the root",
     repos: [{ name: "alpha", archived: false, private: false, default_branch: "main" }],
@@ -78,14 +85,63 @@ const CASES = [
   }
 ];
 
+// Guards the gitlink parsing, which is where a silent corruption cost the most
+// time to find. `git ls-files --stage` lines were parsed with a hardcoded column
+// offset; a short object id was read back verbatim and passed straight to
+// `git update-index --cacheinfo`, which reported "expects <mode>,<sha1>,<path>"
+// -- an error naming all three arguments and none of the real problem.
+//
+// The parser is exercised directly rather than through a real index, because git
+// refuses to write a malformed object id in the first place: the whole point is
+// the values git would never produce on its own.
+const GITLINK_PARSING: { name: string; line: string; expected: string | null }[] = [
+  {
+    name: "a 40-character object id is read back intact",
+    line: `160000 ${"a".repeat(40)} 0\tx`,
+    expected: "a".repeat(40)
+  },
+  {
+    name: "a short object id is rejected, not passed through",
+    line: "160000 abc1234 0\tx",
+    expected: null
+  },
+  {
+    name: "a line with no tab is skipped rather than mis-sliced",
+    line: `160000 ${"b".repeat(40)} 0`,
+    expected: null
+  },
+  {
+    name: "a non-hex object id is rejected",
+    line: `160000 zzzz${"b".repeat(36)} 0\tx`,
+    expected: null
+  },
+  {
+    name: "a non-gitlink mode is ignored entirely",
+    line: `100644 ${"c".repeat(40)} 0\t.gitmodules`,
+    expected: null
+  }
+];
+
 let failures = 0;
+
+for (const testCase of GITLINK_PARSING) {
+  const actual = parseGitlinkLine(testCase.line);
+  if (actual === testCase.expected) {
+    console.log(`ok    ${testCase.name}`);
+  } else {
+    failures += 1;
+    console.log(`FAIL  ${testCase.name}`);
+    console.log(`        expected ${JSON.stringify(testCase.expected)}`);
+    console.log(`        actual   ${JSON.stringify(actual)}`);
+  }
+}
 
 for (const testCase of CASES) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "repo-index-"));
   try {
     buildFixture(dir, testCase);
 
-    const actual = runDiff(script, dir, OWNER, testCase.repos);
+    const actual = runDiff(script, dir, OWNER, testCase.repos as TestRepo[]);
     const expected = [...testCase.expect].sort();
     const got = actual.sort();
 
@@ -103,11 +159,8 @@ for (const testCase of CASES) {
   }
 }
 
-console.log(failures === 0 ? `\n${CASES.length} passed` : `\n${failures} failed`);
-process.exit(failures === 0 ? 0 : 1);
-
-function buildFixture(dir, testCase) {
-  const git = (...args) => execFileSync("git", ["-C", dir, ...args], { stdio: "pipe" });
+function buildFixture(dir: string, testCase: (typeof CASES)[number]): void {
+  const git = (...args: string[]) => execFileSync("git", ["-C", dir, ...args], { stdio: "pipe" });
   git("init", "-q", "-b", "main");
   git("config", "user.email", "t@example.com");
   git("config", "user.name", "test");
@@ -131,8 +184,15 @@ function buildFixture(dir, testCase) {
 
 // The fixture writes its own copy of the module with ROOT pointed at the temp
 // directory, so importing the real one would operate on the real repository.
-function runDiff(scriptPath, dir, owner, repos) {
-  const shim = path.join(dir, "repo-index.mjs");
+interface TestRepo {
+  name: string;
+  archived: boolean;
+  private: boolean;
+  default_branch: string;
+}
+
+function runDiff(scriptPath: string, dir: string, owner: string, repos: TestRepo[]): unknown[] {
+  const shim = path.join(dir, "repo-index.ts");
   const source = fs
     .readFileSync(scriptPath, "utf8")
     .replace(
@@ -156,9 +216,9 @@ function runDiff(scriptPath, dir, owner, repos) {
       pointerDrift: pointerDrift.map((p) => ({ path: p.path, current: p.current }))
     }));
   `;
-  fs.writeFileSync(path.join(dir, "run.mjs"), runner);
+  fs.writeFileSync(path.join(dir, "run.ts"), runner);
 
-  const output = execFileSync("node", [path.join(dir, "run.mjs")], { encoding: "utf8" });
+  const output = execFileSync("node", [path.join(dir, "run.ts")], { encoding: "utf8" });
   const parsed = JSON.parse(output);
   return parsed.structural;
 }

@@ -65,7 +65,7 @@ jobs:
           UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: |
           set -o pipefail
-          output="$(node .github/scripts/sync-workspace.mjs 2>&1 | tee /dev/stderr)"
+          output="$(node .github/scripts/sync-workspace.ts 2>&1 | tee /dev/stderr)"
           if grep -q '^CHANGED=true$' <<<"$output"; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           else
@@ -85,7 +85,7 @@ jobs:
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
           STRUCTURAL: ${{ steps.sync.outputs.structural }}
-        run: node .github/scripts/open-workspace-pr.mjs
+        run: node .github/scripts/open-workspace-pr.ts
 
       - name: Report when nothing changed
         if: steps.sync.outputs.changed != 'true'

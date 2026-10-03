@@ -18,14 +18,14 @@ import {
   removeLabel,
   setLabels,
   updatePullRequest
-} from "./github-api.mjs";
-import { REVIEW_LABEL, SYNC_BRANCH, git } from "./repo-index.mjs";
+} from "./github-api.ts";
+import { REVIEW_LABEL, SYNC_BRANCH, git } from "./repo-index.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 const STRUCTURAL = process.env.STRUCTURAL === "true";
 
-async function main() {
+async function main(): Promise<void> {
   const commits = git("log", "--oneline", `${git("rev-parse", "origin/main").trim()}..${SYNC_BRANCH}`)
     .split(/\r?\n/)
     .filter(Boolean);
@@ -36,8 +36,6 @@ async function main() {
   }
 
   const existing = await findOpenPullRequest(OWNER, SELF, `${OWNER}:${SYNC_BRANCH}`);
-  const summary = commits.map((line) => `- ${line}`).join("\n");
-
   let pullRequest = existing;
   if (pullRequest) {
     console.log(`Reusing pull request #${pullRequest.number}.`);
@@ -67,14 +65,14 @@ async function main() {
   console.log("Auto-merge enabled: pointer-only changes merge once the Validate check passes.");
 }
 
-function titleFor(commits) {
+function titleFor(commits: string[]): string {
   const structural = commits.some((line) => line.includes("reconcile submodule layout"));
   return structural
     ? "chore(workspace): reconcile submodule layout with GitHub"
     : `chore(submodules): advance pointers to default branch heads (${commits.length} commit)`;
 }
 
-function bodyFor(commits) {
+function bodyFor(commits: string[]): string {
   const lines = [
     "Opened by the `Sync workspace` workflow. Submodule pointers are derived from the",
     `GitHub repository list for \`${OWNER}\`; this pull request is regenerated every six hours.`,

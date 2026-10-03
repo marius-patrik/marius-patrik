@@ -82,4 +82,4 @@ jobs:
             structural=true
           fi
           echo "commits ahead: $ahead, structural: $structural"
-          STRUCTURAL="$structural" node .github/scripts/open-workspace-pr.mjs
+          STRUCTURAL="$structural" node .github/scripts/open-workspace-pr.ts

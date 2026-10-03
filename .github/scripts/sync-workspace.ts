@@ -8,7 +8,7 @@
 //   2. active pointers    (the repositories you actually work in)
 //   3. archived pointers  (frozen history, high churn, low interest)
 // Separating archive churn from real changes keeps the reviewable diff readable.
-import { headSha, listRepos } from "./github-api.mjs";
+import { headSha, listRepos, type Repo } from "./github-api.ts";
 import {
   SYNC_BRANCH,
   commit,
@@ -24,12 +24,12 @@ import {
   writeGitignore,
   writeGitlink,
   writeGitmodules
-} from "./repo-index.mjs";
+} from "./repo-index.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 
-async function main() {
+async function main(): Promise<SyncResult> {
   const dryRun = process.argv.includes("--dry-run");
 
   const { repos: allRepos, source } = await listRepos();
@@ -65,7 +65,7 @@ async function main() {
   git("reset", "--quiet");
   git("clean", "--quiet", "--force", "--", ".gitmodules", ".gitignore");
 
-  const commits = [];
+  const commits: string[] = [];
 
   // Each stage stages its own files, checks the index actually changed, then
   // commits. No reset between stages: a commit already leaves the index equal to
@@ -110,7 +110,15 @@ async function main() {
     console.log(`\n--dry-run: nothing committed, nothing pushed.`);
     console.log(`${structural.length} structural change(s):`);
     for (const change of structural) {
-      console.log(`  ${change.kind} ${change.path}${change.expected ? ` (expected ${change.expected})` : ""}`);
+      // Only the "wrong-*" kinds carry an expected value; the rest are pure
+      // presence checks. Narrowing on `kind` keeps that distinction explicit.
+      const expected =
+        change.kind === "wrong-url" ||
+        change.kind === "wrong-branch" ||
+        change.kind === "wrong-update-mode"
+          ? ` (expected ${change.expected})`
+          : "";
+      console.log(`  ${change.kind} ${change.path}${expected}`);
     }
     return { changed: true, structural: structural.length > 0, dryRun: true };
   }
@@ -123,10 +131,10 @@ async function main() {
 // The index knows every submodule the workspace tracks. If the token's repository
 // list is missing one of them, the token cannot see that repository, and treating
 // the omission as a deletion would remove a live submodule.
-function assertInstallationCoversSubmodules(allRepos) {
+function assertInstallationCoversSubmodules(allRepos: Repo[]): void {
   const visible = new Set(allRepos.map((repo) => repo.name));
   const invisible = [...readGitlinks().keys()]
-    .map((path) => path.split("/").pop())
+    .map((path) => path.split("/").pop() ?? path)
     .filter((name) => !visible.has(name));
 
   if (invisible.length > 0) {
@@ -142,7 +150,7 @@ function assertInstallationCoversSubmodules(allRepos) {
 // The umbrella repository must never be classified as a submodule of itself, and
 // must never appear in .gitmodules. If it somehow does, the next sync would write
 // a self-referential gitlink that no clone can satisfy.
-function assertUmbrellaNotClassified(desired) {
+function assertUmbrellaNotClassified(desired: DesiredState): void {
   if (desired.byPath.has(SELF)) {
     throw new Error(`${OWNER}/${SELF} was classified as its own submodule; refusing to write that`);
   }
@@ -152,22 +160,23 @@ function assertUmbrellaNotClassified(desired) {
 // gitlinks whose path changed. A move is force-remove of the old path plus a
 // write of the new one, so relocating `Study` to `_private/Study` needs neither a
 // checkout nor a clone.
-function applyLayout({ structural, tracked }) {
+function applyLayout(options: { structural: StructuralChange[]; tracked: Repo[] }): { changed: boolean; summary: string } {
+  const { structural, tracked } = options;
   if (structural.length === 0) return { changed: false, summary: "" };
 
   const existing = readGitlinks();
 
   // Carry the pin across a move by repository name, not by path. Looking the SHA
   // up under the new path would find nothing and silently reset the pointer.
-  const shaByName = new Map();
+  const shaByName = new Map<string, string>();
   for (const [path, sha] of existing) {
-    shaByName.set(path.split("/").pop(), sha);
+    shaByName.set(path.split("/").pop() ?? path, sha);
   }
 
   writeGitmodules(OWNER, tracked);
   writeGitignore(tracked);
 
-  const notes = [];
+  const notes: string[] = [];
   for (const change of structural) {
     switch (change.kind) {
       case "stale-gitlink":
@@ -204,8 +213,8 @@ function applyLayout({ structural, tracked }) {
 // Every SHA comes from the API. Nothing is cloned, which is what makes advancing
 // the archived pointers possible at all: they use `update = none`, are never
 // checked out, and have no working tree to fetch into.
-async function advancePointers(pins, label) {
-  const writes = [];
+async function advancePointers(pins: PointerDrift[], label: string): Promise<number> {
+  const writes: string[] = [];
   for (const item of pins) {
     const sha = await headSha(OWNER, item.repo, item.want.branch);
     if (!sha || sha === item.current) continue;
@@ -219,7 +228,7 @@ async function advancePointers(pins, label) {
   return writes.length;
 }
 
-function record(message, dryRun) {
+function record(message: string, dryRun: boolean): string {
   if (dryRun) {
     // Leave the working tree as the last stage left it, but drop it from the
     // index so a subsequent real run starts clean. A dry run must not leave the
@@ -231,7 +240,7 @@ function record(message, dryRun) {
 }
 
 main()
-  .then((result) => {
+  .then((result: SyncResult | undefined) => {
     // Machine-readable summary. The workflow captures these two lines as step
     // outputs to decide whether to open a pull request and whether that pull
     // request may merge itself.
