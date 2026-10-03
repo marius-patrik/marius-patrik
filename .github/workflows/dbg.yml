@@ -19,10 +19,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: inspect
+      - name: run validator
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: |
-          node -e 'const k=Object.keys(process.env).filter(x=>/UMBRELLA/.test(x));console.log("keys:",JSON.stringify(k));console.log("len:",(process.env.UMBRELLA_APP_TOKEN||"MISSING").length)'
+          node -e '
+            const m = await import("./.github/scripts/github-api.mjs");
+            const c = m.resolveCredential();
+            console.log("credential source:", c.source, "len:", c.token.length);
+            const {repos, source} = await m.listRepos();
+            console.log("listRepos:", source, repos.length);
+          ' --input-type=module
