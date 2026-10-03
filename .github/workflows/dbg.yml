@@ -1,0 +1,23 @@
+name: dbg
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+      - name: inspect
+        env:
+          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          T: ${{ steps.app.outputs.token }}
+        run: |
+          echo "len_UMBRELLA=${#UMBRELLA_APP_TOKEN}"
+          echo "len_T=${#T}"
+          echo "node_sees=$(node -e 'console.log((process.env.UMBRELLA_APP_TOKEN||"MISSING").length)')"
