@@ -1,22 +1,25 @@
-// Opens (or updates) the pull request for bot/sync-workspace and decides whether
-// it may merge itself.
+// Opens (or updates) the pull request for bot/sync-workspace and lets it merge
+// itself.
 //
-// The gate is the whole point of this script. Pointer movement is mechanical and
-// safe to merge unattended. Anything that adds, removes, or relocates a submodule
-// changes the shape of the workspace, and a new repository appearing or a
-// deletion slipping through is exactly the kind of thing a human should see. So:
+// There is no human gate here any more. A layout change -- a submodule added,
+// removed, or relocated because a repository was archived, unarchived, made
+// private or public -- merges unattended exactly like pointer movement does, so
+// that a lifecycle operation closes its own loop without a manual follow-up.
 //
-//   STRUCTURAL=false -> enable auto-merge, the PR merges when CI is green
-//   STRUCTURAL=true  -> apply the needs-review label and stop
+// What replaced the gate is CI, not nothing. `Validate` is a required status
+// check with strict branch protection, and verify-workspace.ts refuses to treat
+// repositories the token cannot see as deletions. So the failure the gate used
+// to catch by hand -- an under-installed App reporting a short repository list,
+// which the sync would otherwise act on by deleting submodules -- now fails the
+// required check and blocks the merge instead.
 //
-// Kept separate from the sync itself so the pull request can be reopened or its
-// label adjusted without recomputing anything.
+// STRUCTURAL is still read, but only to describe the diff accurately in the
+// title and body. It no longer decides whether the pull request merges.
 import {
   createPullRequest,
   enableAutoMerge,
   findOpenPullRequest,
   removeLabel,
-  setLabels,
   updatePullRequest
 } from "./github-api.ts";
 import { REVIEW_LABEL, SYNC_BRANCH, git } from "./repo-index.ts";
@@ -50,19 +53,16 @@ async function main(): Promise<void> {
     console.log(`Opened pull request #${pullRequest.number}.`);
   }
 
-  if (STRUCTURAL) {
-    // Structural changes stay open. Auto-merge is deliberately not enabled even
-    // if a previous run had enabled it on this pull request.
-    await setLabels(OWNER, SELF, pullRequest.number, [REVIEW_LABEL]);
-    console.log(
-      `Labelled ${REVIEW_LABEL}: this diff changes the shape of the workspace, so it needs review before merging.`
-    );
-    return;
-  }
-
+  // Clear the label rather than set it: pull requests opened before the gate was
+  // removed may still be carrying it, and a stale needs-review on a pull request
+  // that merges itself reads as a contradiction.
   await removeLabel(OWNER, SELF, pullRequest.number, REVIEW_LABEL);
   await enableAutoMerge(OWNER, SELF, pullRequest.number);
-  console.log("Auto-merge enabled: pointer-only changes merge once the Validate check passes.");
+  console.log(
+    STRUCTURAL
+      ? "Auto-merge enabled: this diff changes the workspace layout, and merges once Validate passes."
+      : "Auto-merge enabled: pointer-only changes merge once the Validate check passes."
+  );
 }
 
 function titleFor(commits: string[]): string {
@@ -81,8 +81,10 @@ function bodyFor(commits: string[]): string {
 
   if (STRUCTURAL) {
     lines.push(
-      "> **Needs review.** This diff adds, removes, or relocates a submodule, which changes",
-      "> the shape of the workspace. Auto-merge is off until you merge it.",
+      "> **Layout change.** This diff adds, removes, or relocates a submodule, which changes",
+      "> the shape of the workspace. It merges unattended once `Validate` passes -- that check",
+      "> re-derives the expected layout from the GitHub repository list and fails if this diff",
+      "> is wrong, including when the App installation is under-installed.",
       ""
     );
   } else {

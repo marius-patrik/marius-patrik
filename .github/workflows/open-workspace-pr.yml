@@ -1,18 +1,14 @@
 name: Open workspace PR
 
 # Opens or updates the pull request for bot/sync-workspace. Separate from the
-# sync itself so the pull request can be reopened, re-labelled, or have
-# auto-merge toggled without recomputing the whole reconciliation.
+# sync itself so the pull request can be reopened or re-described without
+# recomputing the whole reconciliation.
 #
 # When the branch is ahead of main this does what the sync workflow's PR step
-# does, so the two are interchangeable.
+# does, so the two are interchangeable. Every diff merges unattended once
+# Validate passes; there is no review gate left to toggle.
 on:
   workflow_dispatch:
-    inputs:
-      force_review:
-        description: "Require review even if the diff is pointer-only"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -54,15 +50,14 @@ jobs:
           node-version: 22
 
       # Structural is derived from the branch contents rather than taken on trust
-      # from the sync run, so dispatching this workflow by hand produces the same
-      # decision the sync would have made.
-      - name: Decide merge policy and open the pull request
+      # from the sync run, so dispatching this workflow by hand describes the diff
+      # the same way the sync would have. It no longer gates the merge.
+      - name: Describe the diff and open the pull request
         env:
           GH_TOKEN: ${{ steps.app.outputs.token }}
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
-          FORCE_REVIEW: ${{ inputs.force_review }}
         run: |
           set -o pipefail
           git fetch --quiet origin bot/sync-workspace || {
@@ -76,9 +71,6 @@ jobs:
           fi
           structural=false
           if git log --format=%s origin/main..origin/bot/sync-workspace | grep -q 'reconcile submodule layout'; then
-            structural=true
-          fi
-          if [ "${{ inputs.force_review }}" = "true" ]; then
             structural=true
           fi
           echo "commits ahead: $ahead, structural: $structural"

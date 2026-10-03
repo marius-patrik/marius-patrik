@@ -311,15 +311,6 @@ export async function deleteBranch(owner: string, repo: string, branch: string):
   return request("DELETE", `/repos/${owner}/${repo}/git/refs/heads/${branch}`, { allow404: true });
 }
 
-export async function setLabels(
-  owner: string,
-  repo: string,
-  pullNumber: number,
-  labels: string[]
-): Promise<unknown> {
-  return request("POST", `/repos/${owner}/${repo}/issues/${pullNumber}/labels`, { body: { labels } });
-}
-
 export async function removeLabel(
   owner: string,
   repo: string,

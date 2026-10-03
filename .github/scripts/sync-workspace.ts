@@ -1,7 +1,7 @@
 // Reconciles the umbrella workspace with the GitHub repository list and pushes
 // the result to a branch. This script never touches `main`: it commits to
-// bot/sync-workspace, and the open-workspace-pr workflow decides whether that
-// pull request may merge itself or must wait for review.
+// bot/sync-workspace, and the open-workspace-pr workflow opens a pull request
+// that merges itself once Validate passes.
 //
 // Three commits, deliberately separated:
 //   1. active layout      (Study relocated to _private/, any add/remove/relocate)
