@@ -233,6 +233,16 @@ export function hasStagedChanges() {
     .trim() !== "";
 }
 
+// Commits whatever is currently staged and returns the new SHA.
+//
+// This deliberately does NOT reset the index afterwards. `git reset` discards
+// staged content, and the sync stages the next group of pointers immediately
+// after this returns -- so a reset here silently threw away the archived
+// pointers, and the archived commit then failed with "nothing to commit,
+// working tree clean". The three commit groups are separate because they are
+// committed separately, not because they need the index cleared in between: a
+// successful commit already leaves the index equal to HEAD, so each stage's
+// writes are the only staged content.
 export function commit(message) {
   git(
     "-c",
@@ -243,8 +253,6 @@ export function commit(message) {
     "-m",
     message
   );
-  // Clear the index so the next stage in the sync commits only its own files.
-  git("reset", "--quiet");
   return git("rev-parse", "HEAD").trim();
 }
 

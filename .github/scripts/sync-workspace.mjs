@@ -67,10 +67,11 @@ async function main() {
 
   const commits = [];
 
-  // Each stage stages its own files, checks the index actually changed, commits,
-  // then clears the index so the next stage starts from a clean base. Clearing
-  // after the commit is what keeps the three commits from bleeding into each
-  // other; `--dry-run` skips the commit so nothing is lost.
+  // Each stage stages its own files, checks the index actually changed, then
+  // commits. No reset between stages: a commit already leaves the index equal to
+  // HEAD, so the next stage's writes are the only staged content. Resetting here
+  // discarded the following stage's gitlinks, which is why the archived commit
+  // failed with "nothing to commit, working tree clean".
   const layout = applyLayout({ structural, tracked });
   if (layout.changed) {
     commits.push(
