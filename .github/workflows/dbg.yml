@@ -14,15 +14,14 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
+          permission-contents: read
+          permission-metadata: read
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: probe
+      - name: exact-validator
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
-        run: |
-          node --input-type=module -e '
-            const m = await import("./.github/scripts/github-api.mjs");
-            console.log("exported_names:", Object.keys(m).sort().join(","));
-            console.log("toString:", m.resolveCredential.toString().slice(0,160).replace(/\n/g," "));
-          '
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
+        run: node .github/scripts/verify-workspace.mjs
