@@ -17,18 +17,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: trim-probe
+      - name: instrument
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
         run: |
           node -e '
-            const raw = process.env.UMBRELLA_APP_TOKEN;
-            console.log("raw_len:", raw.length);
-            let t;
-            try { t = raw.trim(); console.log("trim_ok:", t.length); }
-            catch(e){ console.log("trim_threw:", e.name, e.message.slice(0,60)); }
-            console.log("falsy_after_trim:", !t);
-            console.log("type:", typeof raw, "isString:", typeof raw === "string");
-            console.log("has_ghs_prefix:", String(raw).slice(0,4) === "ghs_");
-            console.log("trim_still_ghs:", String(t).slice(0,4) === "ghs_");
+            const fs=require("fs");
+            let s=fs.readFileSync(".github/scripts/github-api.mjs","utf8");
+            s=s.replace("export function resolveCredential() {",
+              "export function resolveCredential() {\n  console.error(\"INSIDE len=\"+(process.env.UMBRELLA_APP_TOKEN||\"MISSING\").length+\" typeof_env=\"+typeof process.env);");
+            fs.writeFileSync("/tmp/inst.mjs",s);
+            let v=fs.readFileSync(".github/scripts/verify-workspace.mjs","utf8");
+            v=v.replace("./github-api.mjs","/tmp/inst.mjs");
+            fs.writeFileSync("/tmp/vw.mjs",v);
           '
+          node /tmp/vw.mjs 2>&1 | head -8
