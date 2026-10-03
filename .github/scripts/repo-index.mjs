@@ -35,8 +35,21 @@ export function expectedCloneUrl(owner, repoName) {
   return `https://github.com/${owner}/${repoName}.git`;
 }
 
+// stderr is captured and rethrown with git's own message. execFileSync's default
+// error text is only "Command failed: git ...", which names the failing command
+// but not the reason -- and "reason" is the entire content of every git failure
+// here. Diagnosing the archived-pointer commit took a dozen probe runs purely
+// because this discarded the one useful line.
 export function git(...args) {
-  return execFileSync("git", ["-C", ROOT, ...args], { encoding: "utf8" });
+  try {
+    return execFileSync("git", ["-C", ROOT, ...args], { encoding: "utf8" });
+  } catch (error) {
+    const detail = [error.stderr, error.stdout].filter(Boolean).join("").trim();
+    throw new Error(
+      `git ${args.join(" ")} failed${detail ? `: ${detail}` : ""}` +
+        (error.status ? ` (exit ${error.status})` : "")
+    );
+  }
 }
 
 export function gitIn(dir, ...args) {
