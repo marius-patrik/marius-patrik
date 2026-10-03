@@ -12,14 +12,41 @@ const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 
 async function main() {
-  const allRepos = await listRepos();
+  const { repos: allRepos, source } = await listRepos();
   if (!allRepos.some((repo) => repo.name === SELF)) {
-    console.error(`error: cannot see ${OWNER}/${SELF}; the token in use cannot read this workspace`);
+    console.error(
+      source === "installation"
+        ? `error: ${OWNER}/${SELF} is not visible to the App installation. An installation token ` +
+          `sees only repositories the App is installed on.`
+        : `error: cannot see ${OWNER}/${SELF}; the token in use cannot read this workspace`
+    );
     process.exit(1);
   }
 
   const desired = desiredState(OWNER, allRepos, { selfName: SELF });
   const { structural, pointerDrift, tracked } = diffWorkspace(desired);
+
+  // An under-installed App returns a short list rather than an error. Reporting
+  // that as "these submodules should be deleted" would be a false accusation, so
+  // say what is actually wrong instead.
+  const visible = new Set(allRepos.map((repo) => repo.name));
+  const invisible = [...readGitlinks().keys()]
+    .map((path) => path.split("/").pop())
+    .filter((name) => !visible.has(name));
+
+  if (invisible.length > 0) {
+    console.error(
+      `error: the token cannot see ${invisible.length} tracked submodule(s) ` +
+        `(${invisible.slice(0, 5).join(", ")}${invisible.length > 5 ? ", ..." : ""}).`
+    );
+    console.error(
+      source === "installation"
+        ? `  The App installation does not cover all repositories. Install it on all of them ` +
+          `and this check will pass. Refusing to report these as deletions.`
+        : `  The token in use cannot read these repositories.`
+    );
+    process.exit(1);
+  }
 
   const problems = [];
 

@@ -10,14 +10,32 @@ import { execFileSync } from "node:child_process";
 
 const API = "https://api.github.com";
 
-export function authToken() {
+// Resolves the credential and, with it, which enumeration endpoint is legal.
+//
+// This must be decided once and used consistently. An earlier version let
+// `authToken()` silently fall back to `gh auth token` when UMBRELLA_APP_TOKEN was
+// missing, so a run that believed it was using an installation token actually
+// used a user token -- and a user token sees every repository, which defeats the
+// under-installation guard entirely. The fallback is now explicit: it only
+// happens when no token was supplied at all, and the returned `source` always
+// describes the credential actually in use.
+export function resolveCredential() {
   const appToken = process.env.UMBRELA_APP_TOKEN?.trim();
-  if (appToken) return appToken;
+  if (appToken) return { token: appToken, source: "installation" };
+
   const workflowToken = process.env.GITHUB_TOKEN?.trim();
-  if (workflowToken) return workflowToken;
-  // Local runs fall back to the credential gh already has, so the scripts are
-  // runnable on a laptop without any environment setup.
-  return execFileSync("gh", ["auth", "token"], { encoding: "utf8" }).trim();
+  if (workflowToken) {
+    // In Actions, GITHUB_TOKEN is also an installation token.
+    return { token: workflowToken, source: "installation" };
+  }
+
+  // Local runs fall back to the credential gh already has. That is a
+  // user-to-server token and sees every repository the user owns.
+  return { token: execFileSync("gh", ["auth", "token"], { encoding: "utf8" }).trim(), source: "user" };
+}
+
+export function authToken() {
+  return resolveCredential().token;
 }
 
 export class GitHubError extends Error {
@@ -33,7 +51,7 @@ async function request(method, path, { body, allow404 = false } = {}) {
   const response = await fetch(`${API}${path}`, {
     method,
     headers: {
-      authorization: `Bearer ${authToken()}`,
+      authorization: `Bearer ${resolveCredential().token}`,
       accept: "application/vnd.github+json",
       "x-github-api-version": "2022-11-28",
       "user-agent": "marius-patrik-umbrella",
@@ -65,19 +83,51 @@ function safeParse(text) {
   }
 }
 
-// One page of the owner's repository list. Pagination is handled by listRepos
-// so no caller ever has to think about per_page.
-async function listReposPage(page) {
-  return request(
-    "GET",
-    `/user/repos?per_page=100&page=${page}&affiliation=owner&sort=full_name`
-  );
+// Two different endpoints are needed, and picking the wrong one fails silently
+// in a way that looks like "the repositories do not exist".
+//
+//   A user-to-server token (PAT, or `gh auth token` locally) can call
+//   /user/repos and enumerate every repository the user owns.
+//
+//   An installation token cannot. /user/repos is user-to-server only and returns
+//   403 "Resource not accessible by integration". An installation must enumerate
+//   through /installation/repositories, which returns only the repositories the
+//   App is installed on -- a subset, silently, with no error.
+//
+// The distinction matters here: an App installed on a subset produces a short
+// repo list rather than an error, and the sync would then try to delete every
+// submodule it cannot see. `repositoriesVisibleTo` is returned alongside the list
+// so callers can detect an under-installed App instead of acting on a lie.
+export async function listRepos() {
+  const { source } = resolveCredential();
+  if (source === "installation") {
+    return { repos: await enumerateViaInstallation(), source };
+  }
+  return { repos: await enumerateViaUser(), source };
 }
 
-export async function listRepos() {
+async function enumerateViaUser() {
   const repos = [];
   for (let page = 1; ; page += 1) {
-    const batch = await listReposPage(page);
+    const batch = await request(
+      "GET",
+      `/user/repos?per_page=100&page=${page}&affiliation=owner&sort=full_name`
+    );
+    if (!batch || batch.length === 0) break;
+    repos.push(...batch);
+    if (batch.length < 100) break;
+  }
+  return repos;
+}
+
+async function enumerateViaInstallation() {
+  const repos = [];
+  for (let page = 1; ; page += 1) {
+    const response = await request(
+      "GET",
+      `/installation/repositories?per_page=100&page=${page}`
+    );
+    const batch = response?.repositories;
     if (!batch || batch.length === 0) break;
     repos.push(...batch);
     if (batch.length < 100) break;
@@ -136,7 +186,7 @@ export async function enableAutoMerge(owner, repo, pullNumber, mergeMethod = "ME
   const response = await fetch(`${API}/graphql`, {
     method: "POST",
     headers: {
-      authorization: `Bearer ${authToken()}`,
+      authorization: `Bearer ${resolveCredential().token}`,
       accept: "application/vnd.github+json",
       "content-type": "application/json",
       "user-agent": "marius-patrik-umbrella"

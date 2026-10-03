@@ -32,16 +32,30 @@ const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 async function main() {
   const dryRun = process.argv.includes("--dry-run");
 
-  const allRepos = await listRepos();
+  const { repos: allRepos, source } = await listRepos();
   if (!allRepos.some((repo) => repo.name === SELF)) {
-    throw new Error(`Cannot read ${OWNER}/${SELF} with the available token`);
+    throw new Error(
+      source === "installation"
+        ? `${OWNER}/${SELF} is not visible to the App installation. An installation token sees ` +
+          `only repositories the App is installed on; install it on all repositories and retry.`
+        : `Cannot read ${OWNER}/${SELF} with the available token`
+    );
   }
 
+  // Checked before any diff is computed, because an incomplete repo list turns
+  // every invisible repository into an apparent deletion. This is the one failure
+  // mode of this script that destroys data rather than merely failing, so it is
+  // asserted up front rather than as a post-hoc check.
+  if (source === "installation") assertInstallationCoversSubmodules(allRepos);
+
   const desired = desiredState(OWNER, allRepos, { selfName: SELF });
+  assertUmbrellaNotClassified(desired);
+
   const { structural, pointerDrift, tracked } = diffWorkspace(desired);
 
   console.log(
-    `workspace: ${tracked.length} tracked repositories, ${structural.length} structural change(s), ${pointerDrift.length} pointer(s) to check`
+    `workspace: ${tracked.length} tracked repositories (via ${source} token), ` +
+      `${structural.length} structural change(s), ${pointerDrift.length} pointer(s) to check`
   );
 
   // Build from the current main with a clean index, so every commit below is
@@ -103,6 +117,34 @@ async function main() {
   git("push", "--force-with-lease", "origin", `${SYNC_BRANCH}:${SYNC_BRANCH}`);
   console.log(`\nPushed to ${SYNC_BRANCH}.`);
   return { changed: true, structural: structural.length > 0 };
+}
+
+// The index knows every submodule the workspace tracks. If the token's repository
+// list is missing one of them, the token cannot see that repository, and treating
+// the omission as a deletion would remove a live submodule.
+function assertInstallationCoversSubmodules(allRepos) {
+  const visible = new Set(allRepos.map((repo) => repo.name));
+  const invisible = [...readGitlinks().keys()]
+    .map((path) => path.split("/").pop())
+    .filter((name) => !visible.has(name));
+
+  if (invisible.length > 0) {
+    throw new Error(
+      `The App installation cannot see ${invisible.length} tracked submodule(s), ` +
+        `including ${invisible.slice(0, 5).join(", ")}${invisible.length > 5 ? ", ..." : ""}. ` +
+        `The sync will not treat these as deleted. Install the App on all repositories ` +
+        `(Settings -> Your Account -> Installations -> Configure -> All repositories) and retry.`
+    );
+  }
+}
+
+// The umbrella repository must never be classified as a submodule of itself, and
+// must never appear in .gitmodules. If it somehow does, the next sync would write
+// a self-referential gitlink that no clone can satisfy.
+function assertUmbrellaNotClassified(desired) {
+  if (desired.byPath.has(SELF)) {
+    throw new Error(`${OWNER}/${SELF} was classified as its own submodule; refusing to write that`);
+  }
 }
 
 // Rewrites .gitmodules and .gitignore from the GitHub list, then relocates
