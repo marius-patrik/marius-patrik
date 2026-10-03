@@ -31,6 +31,11 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          # `owner` is required. Without it the action scopes the token to this
+          # repository alone, and /installation/repositories then reports a single
+          # repository instead of every one the App is installed on -- which the
+          # validator correctly refuses to treat as authoritative.
+          owner: ${{ github.repository_owner }}
           permission-contents: read
           permission-metadata: read
 
