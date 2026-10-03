@@ -17,14 +17,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: probe-stack
+      - name: probe-owners
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: |
           node --input-type=module -e '
+            console.log("outer_len:", (process.env.UMBRELLA_APP_TOKEN||"MISSING").length);
             const m = await import("./.github/scripts/github-api.mjs");
-            try { m.resolveCredential(); console.log("resolve OK"); }
-            catch(e){ console.log("STACK:", e.stack.split("\n").slice(0,6).join(" || ")); }
-            const v = await import("./.github/scripts/verify-workspace.mjs").catch(e=>e);
-            console.log("verify threw?", v && v.message ? v.message.slice(0,80) : "no");
-          ' 2>&1 | head -20
+            console.log("inner_len:", (process.env.UMBRELLA_APP_TOKEN||"MISSING").length);
+            console.log("keys:", Object.keys(process.env).filter(k=>k.startsWith("UMBRELLA")).join(","));
+            console.log("descriptor_writable:", Object.getOwnPropertyDescriptor(process.env,"UMBRELLA_APP_TOKEN") ? "own-prop" : "absent");
+            console.log("via_get:", process.env.UMBRELLA_APP_TOKEN === undefined ? "UNDEF" : "len:"+process.env.UMBRELLA_APP_TOKEN.length);
+          '
