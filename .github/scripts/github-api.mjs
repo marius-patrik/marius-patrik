@@ -31,7 +31,20 @@ export function resolveCredential() {
 
   // Local runs fall back to the credential gh already has. That is a
   // user-to-server token and sees every repository the user owns.
-  return { token: execFileSync("gh", ["auth", "token"], { encoding: "utf8" }).trim(), source: "user" };
+  //
+  // If gh has no credential, fail with something actionable. An earlier version
+  // let the execFileSync error escape as "Command failed: gh auth token", which
+  // says nothing about what to do next.
+  try {
+    const token = execFileSync("gh", ["auth", "token"], { encoding: "utf8" }).trim();
+    if (token) return { token, source: "user" };
+  } catch {
+    // Fall through to the explicit error below.
+  }
+  throw new Error(
+    "No GitHub credential available. Set UMBRELLA_APP_TOKEN to a GitHub App installation " +
+      "token, or run `gh auth login` to authenticate the gh CLI for local use."
+  );
 }
 
 export function authToken() {
