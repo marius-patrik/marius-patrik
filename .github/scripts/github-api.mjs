@@ -19,11 +19,37 @@ const API = "https://api.github.com";
 // under-installation guard entirely. The fallback is now explicit: it only
 // happens when no token was supplied at all, and the returned `source` always
 // describes the credential actually in use.
+// Reads a token from the environment.
+//
+// `process.env.X` is the string "undefined" when X is unset, not undefined, so a
+// plain truthiness check passes on a missing variable. The value is also
+// whitespace-sensitive: a token arriving with surrounding whitespace trims to
+// empty and would otherwise be sent to the API as an empty credential, which
+// fails as a 401 rather than as "you forgot to set the variable".
+//
+// So this validates rather than trusts: a token must be a non-empty string after
+// trimming, and must actually look like a GitHub token.
+export function readToken(name) {
+  const raw = process.env[name];
+  if (typeof raw !== "string") return null;
+
+  const token = raw.trim();
+  if (!token) return null;
+
+  if (!/^(ghs_|ghp_|github_pat_)/.test(token)) {
+    throw new Error(
+      `${name} is set but is not a GitHub token (it starts with "${token.slice(0, 4)}"). ` +
+        `Expected a token beginning ghs_, ghp_, or github_pat_.`
+    );
+  }
+  return token;
+}
+
 export function resolveCredential() {
-  const appToken = process.env.UMBRELA_APP_TOKEN?.trim();
+  const appToken = readToken("UMBRELLA_APP_TOKEN");
   if (appToken) return { token: appToken, source: "installation" };
 
-  const workflowToken = process.env.GITHUB_TOKEN?.trim();
+  const workflowToken = readToken("GITHUB_TOKEN");
   if (workflowToken) {
     // In Actions, GITHUB_TOKEN is also an installation token.
     return { token: workflowToken, source: "installation" };
@@ -31,10 +57,6 @@ export function resolveCredential() {
 
   // Local runs fall back to the credential gh already has. That is a
   // user-to-server token and sees every repository the user owns.
-  //
-  // If gh has no credential, fail with something actionable. An earlier version
-  // let the execFileSync error escape as "Command failed: gh auth token", which
-  // says nothing about what to do next.
   try {
     const token = execFileSync("gh", ["auth", "token"], { encoding: "utf8" }).trim();
     if (token) return { token, source: "user" };
