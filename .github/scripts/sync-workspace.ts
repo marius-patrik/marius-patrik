@@ -72,7 +72,7 @@ async function main(): Promise<SyncResult> {
   // HEAD, so the next stage's writes are the only staged content. Resetting here
   // discarded the following stage's gitlinks, which is why the archived commit
   // failed with "nothing to commit, working tree clean".
-  const layout = applyLayout({ structural, tracked });
+  const layout = await applyLayout({ structural, tracked });
   if (layout.changed) {
     commits.push(
       record(`chore(workspace): reconcile submodule layout with GitHub (${layout.summary})`, dryRun)
@@ -180,7 +180,7 @@ function assertUmbrellaNotClassified(desired: DesiredState): void {
 // gitlinks whose path changed. A move is force-remove of the old path plus a
 // write of the new one, so relocating `Study` to `_private/Study` needs neither a
 // checkout nor a clone.
-function applyLayout(options: { structural: StructuralChange[]; tracked: Repo[] }): { changed: boolean; summary: string } {
+async function applyLayout(options: { structural: StructuralChange[]; tracked: Repo[] }): Promise<{ changed: boolean; summary: string }> {
   const { structural, tracked } = options;
   if (structural.length === 0) return { changed: false, summary: "" };
 
@@ -204,12 +204,16 @@ function applyLayout(options: { structural: StructuralChange[]; tracked: Repo[] 
         removeGitlink(change.path);
         notes.push(`remove ${change.path}`);
         break;
+      case "missing-submodule":
+        // A repository with no .gitmodules stanza at all. writeGitmodules above has
+        // just created the stanza, so all that remains is the gitlink -- and the
+        // head has to be resolved, because there is no old path to carry a pin
+        // from. Without this the repository was declared but had nothing behind it,
+        // and the validator said so on the pull request.
+        await placeNewGitlink(change.path, change.repo, change.branch, shaByName, notes);
+        break;
       case "missing-gitlink": {
-        const sha = shaByName.get(change.repo);
-        if (sha) {
-          writeGitlink(change.path, sha);
-          notes.push(`place ${change.path}`);
-        }
+        await placeNewGitlink(change.path, change.repo, change.branch, shaByName, notes);
         break;
       }
       case "wrong-url":
@@ -228,6 +232,41 @@ function applyLayout(options: { structural: StructuralChange[]; tracked: Repo[] 
 
   stageGeneratedFiles();
   return { changed: hasStagedChanges(), summary: notes.slice(0, 4).join(", ") };
+}
+
+// Writes the gitlink for a repository that has no pin at its expected path.
+//
+// Two situations land here, and they need different SHAs.
+//
+// A move: the repository already existed and only its path changed, so its current
+// pin is carried across. Looked up by name, because the SHA is recorded under the
+// old path and reading it from the new one finds nothing.
+//
+// A genuinely new repository: nothing to carry, so the head is resolved from the
+// API. An empty repository has no commits and therefore no head; the .gitmodules
+// entry is left in place and the next run picks it up once there is a commit,
+// rather than fabricating a SHA that points at nothing.
+async function placeNewGitlink(
+  repoPath: string,
+  repoName: string,
+  branch: string,
+  shaByName: Map<string, string>,
+  notes: string[]
+): Promise<void> {
+  const carried = shaByName.get(repoName);
+  if (carried) {
+    writeGitlink(repoPath, carried);
+    notes.push(`move ${repoPath}`);
+    return;
+  }
+
+  const head = await headSha(OWNER, repoName, branch);
+  if (head) {
+    writeGitlink(repoPath, head);
+    notes.push(`add ${repoPath} at ${head.slice(0, 7)}`);
+  } else {
+    notes.push(`add ${repoPath} (no commits yet, deferred)`);
+  }
 }
 
 // Every SHA comes from the API. Nothing is cloned, which is what makes advancing

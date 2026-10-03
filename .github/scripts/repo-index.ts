@@ -392,8 +392,8 @@ export function desiredState(
 // discriminated union so callers must handle each case explicitly and a new kind
 // is a compile error rather than a silently unhandled branch.
 export type StructuralChange =
-  | { kind: "missing-submodule"; repo: string; path: string }
-  | { kind: "missing-gitlink"; repo: string; path: string }
+  | { kind: "missing-submodule"; repo: string; path: string; branch: string }
+  | { kind: "missing-gitlink"; repo: string; path: string; branch: string }
   | { kind: "stale-submodule"; repo: string; path: string }
   | { kind: "stale-gitlink"; repo: string; path: string }
   | { kind: "wrong-url"; repo: string; path: string; expected: string; actual: string | undefined }
@@ -434,7 +434,7 @@ export function diffWorkspace(desired: DesiredState): WorkspaceDiff {
   for (const [repoPath, want] of byPath) {
     const declared = declaredPaths.get(repoPath);
     if (!declared) {
-      structural.push({ kind: "missing-submodule", repo: want.name, path: repoPath });
+      structural.push({ kind: "missing-submodule", repo: want.name, path: repoPath, branch: want.branch });
       continue;
     }
     const { entry } = declared;
@@ -471,7 +471,7 @@ export function diffWorkspace(desired: DesiredState): WorkspaceDiff {
 
     const pin = gitlinks.get(repoPath);
     if (!pin) {
-      structural.push({ kind: "missing-gitlink", repo: want.name, path: repoPath });
+      structural.push({ kind: "missing-gitlink", repo: want.name, path: repoPath, branch: want.branch });
       continue;
     }
     pointerDrift.push({ kind: "pointer", repo: want.name, path: repoPath, current: pin, want });
