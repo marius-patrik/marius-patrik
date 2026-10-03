@@ -14,21 +14,21 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          permission-contents: read
-          permission-metadata: read
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: run validator
+      - name: probe
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
-          UMBRELLA_OWNER: ${{ github.repository_owner }}
-          UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: |
-          node -e '
+          node --input-type=module -e '
+            const v = process.env.UMBRELLA_APP_TOKEN;
+            console.log("typeof:", typeof v);
+            console.log("raw_len:", v === undefined ? "UNDEF" : v.length);
+            console.log("first4:", JSON.stringify(String(v).slice(0,4)));
+            console.log("is_stars:", v === "***");
+            console.log("has_newline:", /[\r\n]/.test(String(v)));
             const m = await import("./.github/scripts/github-api.mjs");
-            const c = m.resolveCredential();
-            console.log("credential source:", c.source, "len:", c.token.length);
-            const {repos, source} = await m.listRepos();
-            console.log("listRepos:", source, repos.length);
-          ' --input-type=module
+            try { console.log("resolved:", JSON.stringify({...m.resolveCredential(), token: "X"})); }
+            catch(e){ console.log("resolve threw:", e.message.slice(0,60)); }
+          '
