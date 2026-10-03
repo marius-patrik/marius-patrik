@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: instrument
+      - name: count-calls
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
         run: |
@@ -26,11 +26,9 @@ jobs:
             const fs=require("fs");
             let s=fs.readFileSync(".github/scripts/github-api.mjs","utf8");
             s=s.replace("export function resolveCredential() {",
-              "export function resolveCredential() {\n  console.error(\"INSIDE len=\"+(process.env.UMBRELLA_APP_TOKEN||\"MISSING\").length);");
+              "let __n=0;\nexport function resolveCredential() {\n  console.error(\"CALL \"+(++__n)+\" len=\"+(process.env.UMBRELLA_APP_TOKEN||\"MISSING\").length);");
             fs.writeFileSync("inst/github-api.mjs",s);
             fs.copyFileSync(".github/scripts/repo-index.mjs","inst/repo-index.mjs");
-            let v=fs.readFileSync(".github/scripts/verify-workspace.mjs","utf8");
-            v=v.replace("./github-api.mjs","./github-api.mjs").replace("./repo-index.mjs","./repo-index.mjs");
-            fs.writeFileSync("inst/verify-workspace.mjs",v);
+            fs.copyFileSync(".github/scripts/verify-workspace.mjs","inst/verify-workspace.mjs");
           '
-          node inst/verify-workspace.mjs 2>&1 | head -8
+          node inst/verify-workspace.mjs 2>&1 | head -12
