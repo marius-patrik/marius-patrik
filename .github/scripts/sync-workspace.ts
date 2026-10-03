@@ -123,9 +123,29 @@ async function main(): Promise<SyncResult> {
     return { changed: true, structural: structural.length > 0, dryRun: true };
   }
 
-  git("push", "--force-with-lease", "origin", `${SYNC_BRANCH}:${SYNC_BRANCH}`);
+  pushSyncBranch();
   console.log(`\nPushed to ${SYNC_BRANCH}.`);
   return { changed: true, structural: structural.length > 0 };
+}
+
+// The sync branch is rebuilt from scratch on every run, so the push is a force.
+// `--force-with-lease` is still what makes that safe: it refuses to overwrite a
+// branch that moved since the last fetch, so a concurrent run -- or a human
+// pushing to the branch -- cannot be silently clobbered.
+//
+// The lease is only meaningful if the remote branch was actually fetched. A
+// checkout that only fetched `main` has no remote-tracking ref for the sync
+// branch, and the push fails with "stale info" rather than overwriting anything.
+// That is the safe failure, but it makes the sync unable to ever run twice.
+function pushSyncBranch(): void {
+  try {
+    git("fetch", "--quiet", "origin", `${SYNC_BRANCH}:refs/remotes/origin/${SYNC_BRANCH}`);
+  } catch {
+    // No remote branch yet. That is the normal first-run case, and
+    // --force-with-lease treats a missing remote ref as "create it".
+    console.log(`${SYNC_BRANCH} does not exist on the remote yet.`);
+  }
+  git("push", "--force-with-lease", "origin", `${SYNC_BRANCH}:${SYNC_BRANCH}`);
 }
 
 // The index knows every submodule the workspace tracks. If the token's repository
