@@ -22,11 +22,7 @@ jobs:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
         run: |
           node --input-type=module -e '
-            const before = process.env.UMBRELLA_APP_TOKEN?.length;
-            console.log("before_import:", before);
             const m = await import("./.github/scripts/github-api.mjs");
-            const after = process.env.UMBRELLA_APP_TOKEN?.length;
-            console.log("after_import:", after);
-            console.log("same_value:", before === after);
-            console.log("env_keys_with_token:", Object.keys(process.env).filter(k=>/TOKEN|token/i.test(k)).join(","));
+            console.log("exported_names:", Object.keys(m).sort().join(","));
+            console.log("toString:", m.resolveCredential.toString().slice(0,160).replace(/\n/g," "));
           '
