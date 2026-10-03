@@ -51,6 +51,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # The operation script lives in this repository, so the repository has to be
+      # on disk before node can run it. Every other workflow in .github/workflows
+      # already does this; without it node fails with MODULE_NOT_FOUND on a path
+      # that exists in the commit.
+      - uses: actions/checkout@v4
+
       # administration:write is what PATCH and DELETE /repos require. This job
       # holds it deliberately and does nothing else, so the scope is auditable in
       # one place.
