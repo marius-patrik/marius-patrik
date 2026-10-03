@@ -21,14 +21,16 @@ jobs:
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
         run: |
+          mkdir -p inst
           node -e '
             const fs=require("fs");
             let s=fs.readFileSync(".github/scripts/github-api.mjs","utf8");
             s=s.replace("export function resolveCredential() {",
-              "export function resolveCredential() {\n  console.error(\"INSIDE len=\"+(process.env.UMBRELLA_APP_TOKEN||\"MISSING\").length+\" typeof_env=\"+typeof process.env);");
-            fs.writeFileSync("/tmp/inst.mjs",s);
+              "export function resolveCredential() {\n  console.error(\"INSIDE len=\"+(process.env.UMBRELLA_APP_TOKEN||\"MISSING\").length);");
+            fs.writeFileSync("inst/github-api.mjs",s);
+            fs.copyFileSync(".github/scripts/repo-index.mjs","inst/repo-index.mjs");
             let v=fs.readFileSync(".github/scripts/verify-workspace.mjs","utf8");
-            v=v.replace("./github-api.mjs","/tmp/inst.mjs");
-            fs.writeFileSync("/tmp/vw.mjs",v);
+            v=v.replace("./github-api.mjs","./github-api.mjs").replace("./repo-index.mjs","./repo-index.mjs");
+            fs.writeFileSync("inst/verify-workspace.mjs",v);
           '
-          node /tmp/vw.mjs 2>&1 | head -8
+          node inst/verify-workspace.mjs 2>&1 | head -8
