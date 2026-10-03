@@ -1,0 +1,28 @@
+name: dbg
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          permission-contents: read
+          permission-metadata: read
+      - name: inspect
+        env:
+          T: ${{ steps.app.outputs.token }}
+        run: |
+          echo "len=${#T}"
+          echo "brace_nonempty=${{ steps.app.outputs.token != '' }}"
+          if [ -n "$T" ]; then
+            echo "prefix=${T:0:10}"
+            echo "listing:"
+            curl -s -H "Authorization: Bearer $T" -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/installation/repositories?per_page=5" | head -c 200
+          fi
