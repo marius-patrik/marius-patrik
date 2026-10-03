@@ -9,8 +9,8 @@ name: Repo admin
 # what each operation will do.
 #
 # Every operation that changes lifecycle or visibility changes where a repository
-# belongs in the workspace. Run Sync workspace afterwards, then Open workspace PR:
-# that pull request will be labelled needs-review rather than auto-merging.
+# belongs in the workspace. Run Sync workspace afterwards; it opens a pull request
+# that merges itself once Validate passes, so the operation closes its own loop.
 on:
   workflow_dispatch:
     inputs:
@@ -93,11 +93,12 @@ jobs:
             "${{ inputs.repo }}" \
             "${{ inputs.operation == 'rename' && inputs.new_name || inputs.confirm_name }}"
 
-      # Never chain automatically. A human decides whether the resulting layout
-      # change is wanted; the sync pull request is where that review happens.
+      # Not chained automatically, but nothing here needs a human afterwards: the sync
+      # opens a pull request that merges itself once Validate re-derives the
+      # expected layout and agrees.
       - name: Summarise next step
         run: |
           echo "Operation applied. If this changed where a repository belongs:"
           echo "  1. run the Sync workspace workflow"
-          echo "  2. run the Open workspace PR workflow"
-          echo "  3. review and merge the resulting needs-review pull request"
+          echo "  2. it opens a pull request that merges itself once Validate passes"
+          echo "  3. the next scheduled run does this on its own, every six hours"

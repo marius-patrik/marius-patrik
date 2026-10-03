@@ -202,8 +202,8 @@ async function main(): Promise<void> {
     const result = await runners[operation]();
     if (result?.changed) {
       console.log(
-        `\nWorkspace layout is now out of date. Run the Sync workspace workflow, then Open workspace PR: ` +
-          `the change is structural, so that pull request will require review.`
+        `\nWorkspace layout is now out of date. Run the Sync workspace workflow: it opens a ` +
+          `pull request that merges itself once Validate passes.`
       );
     }
   } catch (error) {
