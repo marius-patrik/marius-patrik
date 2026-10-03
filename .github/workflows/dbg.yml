@@ -14,14 +14,17 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          permission-contents: read
-          permission-metadata: read
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: exact-validator
+      - name: probe
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
-          UMBRELLA_OWNER: ${{ github.repository_owner }}
-          UMBRELLA_REPO: ${{ github.event.repository.name }}
-        run: node .github/scripts/verify-workspace.mjs
+        run: |
+          cat > /tmp/p.mjs <<'INNER'
+          console.log("len_in_mjs:", (process.env.UMBRELLA_APP_TOKEN||"MISSING").length);
+          INNER
+          echo 'console.log("len_via_eval:", (process.env.UMBRELLA_APP_TOKEN||"MISSING").length);' > /tmp/q.mjs
+          echo "--- run /tmp/p.mjs ---"; node /tmp/p.mjs
+          echo "--- run /tmp/q.mjs ---"; node /tmp/q.mjs
+          echo "--- run -e ---"; node -e 'console.log("len_e:", (process.env.UMBRELLA_APP_TOKEN||"MISSING").length)'
