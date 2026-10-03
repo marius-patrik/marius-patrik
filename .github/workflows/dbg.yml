@@ -17,19 +17,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: probe-internal
+      - name: trim-probe
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
         run: |
-          cat > /tmp/t.mjs <<'INNER'
-          const seen = [];
-          const realEnv = process.env;
-          const proxy = new Proxy(realEnv, {
-            get(t, k){ seen.push(String(k)); return t[k]; }
-          });
-          Object.defineProperty(process, "env", { value: proxy, configurable: true });
-          const m = await import("/home/runner/work/marius-patrik/marius-patrik/.github/scripts/github-api.mjs");
-          try { const c = m.resolveCredential(); console.log("OK:", c.source); }
-          catch(e){ console.log("THREW after reads:", JSON.stringify([...new Set(seen)])); }
-          INNER
-          node /tmp/t.mjs
+          node -e '
+            const raw = process.env.UMBRELLA_APP_TOKEN;
+            console.log("raw_len:", raw.length);
+            let t;
+            try { t = raw.trim(); console.log("trim_ok:", t.length); }
+            catch(e){ console.log("trim_threw:", e.name, e.message.slice(0,60)); }
+            console.log("falsy_after_trim:", !t);
+            console.log("type:", typeof raw, "isString:", typeof raw === "string");
+            console.log("has_ghs_prefix:", String(raw).slice(0,4) === "ghs_");
+            console.log("trim_still_ghs:", String(t).slice(0,4) === "ghs_");
+          '
