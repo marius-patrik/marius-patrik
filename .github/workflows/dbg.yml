@@ -7,17 +7,22 @@ jobs:
   t:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - id: app
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
+          permission-contents: read
+          permission-metadata: read
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - name: inspect
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
-          T: ${{ steps.app.outputs.token }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+          UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: |
-          echo "len_UMBRELLA=${#UMBRELLA_APP_TOKEN}"
-          echo "len_T=${#T}"
-          echo "node_sees=$(node -e 'console.log((process.env.UMBRELLA_APP_TOKEN||"MISSING").length)')"
+          node -e 'const k=Object.keys(process.env).filter(x=>/UMBRELLA/.test(x));console.log("keys:",JSON.stringify(k));console.log("len:",(process.env.UMBRELLA_APP_TOKEN||"MISSING").length)'
