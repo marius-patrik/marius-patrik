@@ -46,7 +46,14 @@ jobs:
           # repository instead of every one the App is installed on -- which the
           # validator correctly refuses to treat as authoritative.
           owner: ${{ github.repository_owner }}
-          permission-contents: read
+          # contents:write to push the branch, pull_requests:write to open the pull
+          # request. The reconcile step only reads, but the same token serves the PR
+          # step below, and the token is minted once for the whole job.
+          #
+          # Deliberately not granted: administration. This job is unattended and
+          # runs every six hours; it must not be able to archive or delete anything.
+          permission-contents: write
+          permission-pull-requests: write
           permission-metadata: read
 
       - name: Set up Node.js
