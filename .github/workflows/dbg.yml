@@ -17,13 +17,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: verify-hash
+      - name: verbatim
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
         run: |
-          echo "--- sha256 of checked-out file ---"
-          sha256sum .github/scripts/github-api.mjs
-          echo "--- sha256 computed locally for origin/main ---"
-          git show origin/main:.github/scripts/github-api.mjs | sha256sum
-          echo "--- does checkout have the instrumented or original? ---"
-          grep -c 'CALL' .github/scripts/github-api.mjs || true
+          mkdir -p inst
+          node -e '
+            const fs=require("fs");
+            let s=fs.readFileSync(".github/scripts/github-api.mjs","utf8");
+            s=s.replace(
+              "  const appToken = process.env.UMBRELA_APP_TOKEN?.trim();",
+              "  console.error(\"VERBATIM typeof=\"+(typeof process.env.UMBRELLA_APP_TOKEN)+\" truthy=\"+(!!process.env.UMBRELLA_APP_TOKEN)+\" trimmed_len=\"+(process.env.UMBRELA_APP_TOKEN?.trim()?.length));\n  const appToken = process.env.UMBRELA_APP_TOKEN?.trim();"
+            );
+            fs.writeFileSync("inst/github-api.mjs",s);
+            fs.copyFileSync(".github/scripts/repo-index.mjs","inst/repo-index.mjs");
+            fs.copyFileSync(".github/scripts/verify-workspace.mjs","inst/verify-workspace.mjs");
+          '
+          node inst/verify-workspace.mjs 2>&1 | head -6
