@@ -3,10 +3,15 @@
 // synthetic index, to prove the classification and pointer logic without touching
 // the real repository or spending API calls.
 //
+// The enforcement boundary gets its own cases below. Every classification case runs
+// against a complete list, so none of them can observe what happens when the list
+// cannot be believed -- which is the only situation where enforcing the wrong thing
+// costs live submodules rather than merely failing.
+//
 // The archived-pins case is the one that matters most: those submodules are
 // `update = none` and never cloned, so nothing here may assume a working tree.
 import { execFileSync } from "node:child_process";
-import { parseGitlinkLine } from "./repo-index.ts";
+import { assertDesiredStateTrusted, parseGitlinkLine } from "./repo-index.ts";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -156,6 +161,114 @@ for (const testCase of CASES) {
     }
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+// The enforcement boundary, exercised directly. These are the cases where getting
+// it wrong costs live submodules, and none of them is observable from the
+// classification cases above: those all run with a complete list.
+const GUARD_CASES: {
+  name: string;
+  repoNames: string[];
+  trackedNames: string[];
+  complete: boolean;
+  expect: "accept" | "reject";
+  expectMentions?: string;
+}[] = [
+  {
+    name: "a complete list is enforced",
+    repoNames: ["marius-patrik", "alpha", "beta"],
+    trackedNames: ["alpha", "beta"],
+    complete: true,
+    expect: "accept"
+  },
+  {
+    // The live situation for an hour on 2026-10-04: six repositories renamed and
+    // two deleted, all intentional. With completeness proven these are just paths
+    // the list no longer accounts for, and enforcing them is the entire job.
+    name: "with completeness proven, a name the list dropped is enforced, not refused",
+    repoNames: ["marius-patrik", "andromeda-old-2"],
+    trackedNames: ["Andromeda", "froq"],
+    complete: true,
+    expect: "accept"
+  },
+  {
+    name: "an unproven list is refused even when nothing is absent",
+    repoNames: ["marius-patrik", "alpha", "beta"],
+    trackedNames: ["alpha", "beta"],
+    complete: false,
+    expect: "reject",
+    expectMentions: "may or may not be all of them"
+  },
+  {
+    name: "an unproven list is refused, and names what it cannot see",
+    repoNames: ["marius-patrik", "alpha"],
+    trackedNames: ["alpha", "Andromeda", "froq", "super-orca"],
+    complete: false,
+    expect: "reject",
+    expectMentions: "Andromeda"
+  },
+  {
+    // An under-installed App is the failure this exists for. It returns 200 with a
+    // short list, so nothing but the coverage assertion distinguishes it from a
+    // correct enumeration.
+    name: "a partial list is refused rather than enforced as the workspace",
+    repoNames: ["marius-patrik", "alpha"],
+    trackedNames: ["alpha", "beta", "gamma", "delta"],
+    complete: false,
+    expect: "reject"
+  },
+  {
+    name: "a list missing the umbrella is refused even when marked complete",
+    repoNames: ["alpha", "beta"],
+    trackedNames: ["alpha", "beta"],
+    complete: true,
+    expect: "reject",
+    expectMentions: "not in the repository list"
+  },
+  {
+    // A repo-scoped GITHUB_TOKEN sees exactly this, and nothing else would stop
+    // it being enforced as if it were the whole account.
+    name: "a list of only the umbrella is refused once submodules are tracked",
+    repoNames: ["marius-patrik"],
+    trackedNames: ["alpha", "beta"],
+    complete: true,
+    expect: "reject",
+    expectMentions: "repository-scoped credential"
+  },
+  {
+    name: "an account that really has one repository is not obstructed",
+    repoNames: ["marius-patrik"],
+    trackedNames: [],
+    complete: true,
+    expect: "accept"
+  }
+];
+
+for (const testCase of GUARD_CASES) {
+  let message: string | null = null;
+  try {
+    assertDesiredStateTrusted({
+      repoNames: testCase.repoNames,
+      trackedNames: testCase.trackedNames,
+      selfName: OWNER,
+      complete: testCase.complete
+    });
+  } catch (error) {
+    message = (error as Error).message;
+  }
+
+  const accepted = message === null;
+  const wantAccepted = testCase.expect === "accept";
+  const mentions = !testCase.expectMentions || (message?.includes(testCase.expectMentions) ?? false);
+
+  if (accepted === wantAccepted && mentions) {
+    console.log(`ok    ${testCase.name}`);
+  } else {
+    failures += 1;
+    console.log(`FAIL  ${testCase.name}`);
+    console.log(`        expected ${testCase.expect}${testCase.expectMentions ? ` mentioning ${JSON.stringify(testCase.expectMentions)}` : ""}`);
+    console.log(`        actual   ${accepted ? "accept" : `reject: ${message}`}`);
   }
 }
 
