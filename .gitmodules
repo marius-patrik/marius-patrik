@@ -164,12 +164,6 @@
 	branch = main
 	update = none
 
-[submodule "StatusLine"]
-	path = _archive/StatusLine
-	url = https://github.com/marius-patrik/StatusLine.git
-	branch = master
-	update = none
-
 [submodule "super-orca"]
 	path = _archive/super-orca
 	url = https://github.com/marius-patrik/super-orca.git
@@ -346,6 +340,11 @@
 	path = _private/omnis
 	url = https://github.com/marius-patrik/omnis.git
 	branch = main
+
+[submodule "StatusLine"]
+	path = _private/StatusLine
+	url = https://github.com/marius-patrik/StatusLine.git
+	branch = master
 
 [submodule "Study"]
 	path = _private/Study
