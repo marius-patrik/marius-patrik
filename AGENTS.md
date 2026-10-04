@@ -34,13 +34,14 @@ on every run; a hand edit is reverted or duplicated, not respected.
 
 ## 3. Renames And Deletions Reconcile Automatically
 
-Do not treat a rename or a deletion as special. From the index's point of view
-both are the same event: a name that used to appear has stopped. A rename adds a
-second event, a name that has started appearing, and the new submodule gets its
-pointer resolved from the new repository rather than inherited from the old one.
+There is nothing to do by hand. Do not reason about renames and deletions as
+events at all: the repository list *is* the workspace, and the sync's only job is
+to make the index match it. A name that has stopped appearing is not a repository
+being removed, it is a path the list no longer accounts for — the same category
+as a wrong URL or a pointer that has fallen behind. Enforcement corrects all of
+them the same way.
 
-There is nothing to do by hand after either operation. Run the sync and let it
-reconcile. Two things are still worth knowing:
+Two things are still worth knowing:
 
 - **Rename one repository at a time.** GitHub's redirect chain will not tell you
   which old name became which new one once they are interleaved, so a batch of
@@ -103,7 +104,7 @@ named repositories and work out which case applies:
 | Message | Meaning | Action |
 | --- | --- | --- |
 | `the repository list is not proven complete` | the assertion did not run, or the installation is narrow | check the `Assert every installation covers all repositories` step; widen the installation only if it genuinely is narrow |
-| `... but marius-patrik/X no longer exists` | a real deletion, once completeness is proven | nothing; reconcile and commit it |
+| `no repository accounts for it` | the index disagrees with the list | nothing; the sync drops the path |
 | `X: located at A, but ... belong at B` | a move | nothing; the sync relocates the gitlink |
 | `X is a GitHub repository but has no .gitmodules entry` | a new repository | nothing; the sync adds it |
 
