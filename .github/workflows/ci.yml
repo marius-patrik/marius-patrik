@@ -21,44 +21,31 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # The validator needs to read every repository in the workspace, including
-      # the private ones. GITHUB_TOKEN cannot: it is scoped to this repository and
-      # returns 404 on the private submodules. A GitHub App installation token is
-      # minted here instead, and is read-only.
-      - name: Mint GitHub App installation token
-        id: app
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          # `owner` is required. Without it the action scopes the token to this
-          # repository alone, and /installation/repositories then reports a single
-          # repository instead of every one the App is installed on -- which the
-          # validator correctly refuses to treat as authoritative.
-          owner: ${{ github.repository_owner }}
-          permission-contents: read
-          permission-metadata: read
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-# Proves the repository list is complete, which is what entitles the
-      # workspace to report an absent repository as a deletion.
+      # The validator needs to read every repository in the workspace, including the
+      # private ones. GITHUB_TOKEN cannot: it is scoped to this repository, so it
+      # sees one repository rather than every one the App is installed on.
       #
-      # A step here rather than a separate job, unlike Sync workspace: `Validate`
-      # is a required status check, so it must run and fail explicitly when the
-      # installation is narrow. A separate job that fails first would skip this
-      # one and leave a merge blocked with no explanation on the pull request.
-      # The isolation Sync workspace wants -- keeping the key out of the job that
-      # pushes -- is not needed here, because this job holds only read scopes.
-      - name: Assert every installation covers all repositories
-        id: scope
+      # Minted from the App this repository already holds credentials for, rather
+      # than through actions/create-github-app-token. Two reasons. That action is a
+      # third-party step whose Node 20 runtime is deprecated, and it hands out a
+      # token without checking that the installation covers the account -- which is
+      # the one fact this check's deletion reporting depends on. This step asserts
+      # coverage and mints from the same installation, so the proof and the
+      # credential cannot come from different places.
+      #
+      # Read-only. The validator must not be able to change anything, and asking
+      # for less than the App holds is a ceiling rather than a grant.
+      - name: Mint installation token and assert coverage
+        id: app
         env:
           APP_ID: ${{ secrets.APP_ID }}
           APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
-        run: node .github/scripts/assert-enumeration-complete.ts
+        run: node .github/scripts/mint-installation-token.ts contents=read metadata=read
 
       # Offline, no token needed. Guards the classification rule itself, so a
       # change to repo-index.ts cannot quietly redefine where a repository
@@ -78,7 +65,7 @@ jobs:
       - name: Verify workspace matches the GitHub repository list
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
-          UMBRELLA_ENUMERATION_COMPLETE: ${{ steps.scope.outputs.complete }}
+          UMBRELLA_ENUMERATION_COMPLETE: ${{ steps.app.outputs.complete }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: node .github/scripts/verify-workspace.ts

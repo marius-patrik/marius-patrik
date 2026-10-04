@@ -10,6 +10,7 @@
 // Separating archive churn from real changes keeps the reviewable diff readable.
 import { headSha, listRepos, type Repo } from "./github-api.ts";
 import {
+  assertEnumerationIsAccountWide,
   SYNC_BRANCH,
   commit,
   desiredState,
@@ -157,6 +158,7 @@ function pushSyncBranch(): void {
 // workflows therefore assert it in a separate job and pass the result in as
 // UMBRELLA_ENUMERATION_COMPLETE.
 function assertEnumerationComplete(allRepos: Repo[]): void {
+  assertEnumerationIsAccountWide(allRepos, SELF);
   const unproven = process.env.UMBRELLA_ENUMERATION_COMPLETE !== "true";
 
   // The umbrella must be visible in any enumeration, whatever its scope. If it

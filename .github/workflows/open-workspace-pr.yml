@@ -29,20 +29,20 @@ jobs:
         with:
           submodules: false
 
-      - name: Mint GitHub App installation token
+      # Minted from the App this repository already holds credentials for. The
+      # coverage assertion rides along with the mint, so a partial installation
+      # can never be mistaken for a set of deletions.
+      #
+      # contents:write to push the branch, pull_requests:write to open the pull
+      # request and enable auto-merge. Asking for less than the App holds is a
+      # ceiling, so this is also the whole of this job's reach.
+      - name: Mint installation token
         id: app
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          # `owner` is required. Without it the action scopes the token to this
-          # repository alone, and /installation/repositories then reports a single
-          # repository instead of every one the App is installed on -- which the
-          # validator correctly refuses to treat as authoritative.
-          owner: ${{ github.repository_owner }}
-          permission-contents: write
-          permission-metadata: read
-          permission-pull-requests: write
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+        run: node .github/scripts/mint-installation-token.ts contents=write metadata=read pull_requests=write
 
       - name: Set up Node.js
         uses: actions/setup-node@v4

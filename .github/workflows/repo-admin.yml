@@ -64,21 +64,18 @@ jobs:
       # administration:write is what PATCH and DELETE /repos require. This job
       # holds it deliberately and does nothing else, so the scope is auditable in
       # one place. Note that this is the *job's* scope; the App itself is shared
-      # with the DarkFactory workflows and holds more, which is why dispatching the
-      # reconciliation is a separate job below rather than a step here.
-      - name: Mint GitHub App installation token
+      # with the DarkFactory workflows and holds more, which is why the dispatch
+      # below mints its own much narrower token.
+      #
+      # Minted from the App this repository already holds credentials for, with the
+      # coverage assertion riding along.
+      - name: Mint installation token
         id: app
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          # `owner` is required. Without it the action scopes the token to this
-          # repository alone, and /installation/repositories then reports a single
-          # repository instead of every one the App is installed on -- which the
-          # validator correctly refuses to treat as authoritative.
-          owner: ${{ github.repository_owner }}
-          permission-administration: write
-          permission-metadata: read
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+        run: node .github/scripts/mint-installation-token.ts administration=write metadata=read
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -119,14 +116,15 @@ jobs:
     permissions: {}
 
     steps:
-      - name: Mint GitHub App installation token
+      # Only what is needed to trigger the next workflow. This job cannot read or
+      # change any repository, so it cannot archive or delete one.
+      - name: Mint installation token
         id: app
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          owner: ${{ github.repository_owner }}
-          permission-actions: write
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+        run: node .github/scripts/mint-installation-token.ts actions=write
 
       - name: Dispatch the sync
         env:

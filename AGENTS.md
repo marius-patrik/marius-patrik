@@ -56,11 +56,15 @@ because an App installed on a subset authenticates normally, returns HTTP 200,
 and returns a short list with no warning. Absence of an error is not evidence
 that a repository is gone.
 
-Completeness is asserted from the App's `repository_selection`, which an
-installation token cannot read -- `GET /app/installations` answers 401 to one.
-So `assert-enumeration-complete.ts` runs as its own step in CI and as its own job
-in the sync, and passes the conclusion down as a boolean. The sync never sees the
-private key.
+Completeness is read from the App installation's `repository_selection`, which an
+installation token cannot see -- `GET /app/installations` answers 401 to one --
+so reading it takes an app-level JWT. `mint-installation-token.ts` does both in
+one step: it asserts coverage and mints the token, from the same installation.
+
+That binding is the point. Proving coverage with one credential and then
+enumerating with another is how a repo-scoped `GITHUB_TOKEN`, which sees exactly
+one repository, would make 65 live submodules look like deletions. One step, one
+credential, no way to pair a proof with the wrong token.
 
 If a run refuses to remove submodules, the list was not proven complete. That is
 the guard working, not an obstacle to route around.

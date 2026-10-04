@@ -219,6 +219,33 @@ export function writeGitignore(repos: Repo[]): void {
 // Exported so it can be tested directly. git refuses to write a malformed object
 // id, so the values worth guarding against cannot be produced through a real
 // index -- only by parsing something else.
+// A repository-scoped credential sees exactly one repository: this one. That is
+// what GITHUB_TOKEN does inside Actions, and it is indistinguishable from a real
+// account that happens to have a single repository -- except that this workspace
+// tracks many submodules, so a one-repository enumeration cannot be describing
+// them.
+//
+// Without this, a workflow that dropped UMBRELLA_APP_TOKEN would fall back to
+// GITHUB_TOKEN, enumerate one repository, see every submodule as absent, and --
+// if completeness had been asserted separately by anything -- delete 65 live
+// submodules. Asserting coverage in the same step that mints the token makes that
+// pairing unlikely; this makes it impossible to execute.
+//
+// Cheap, and it cannot misfire: with nothing tracked there is nothing to remove,
+// and the check is skipped.
+export function assertEnumerationIsAccountWide(repos: Repo[], selfName: string): void {
+  if (readGitlinks().size === 0) return;
+  if (repos.length > 1) return;
+
+  throw new Error(
+    `the repository list contains ${repos.length} repository (${repos.map((r) => r.name).join(", ")}) ` +
+      `while this workspace tracks ${readGitlinks().size} submodules. That is the signature of a ` +
+      `repository-scoped credential -- GITHUB_TOKEN inside Actions, or a token minted without an ` +
+      `owner -- not of an account with one repository. Refusing to treat every tracked submodule ` +
+      `as deleted.`
+  );
+}
+
 export function parseGitlinkLine(line: string): string | null {
   if (!line.startsWith("160000 ")) return null;
   const tab = line.indexOf("\t");

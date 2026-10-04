@@ -56,7 +56,6 @@ bare error. Read it; do not work around it.
 
 ```bash
 node .github/scripts/setup-github-app.ts          # key, permissions, installation scope
-node .github/scripts/assert-enumeration-complete.ts  # is the repository list complete?
 node .github/scripts/verify-workspace.ts          # index matches the repository list
 ```
 
@@ -74,9 +73,10 @@ reconciles like anything else: run the sync.
 The only thing that makes the sync refuse to remove a submodule is not knowing
 that the repository list is complete. That is deliberate -- an App installed on a
 subset returns HTTP 200 with a short list, so a missing repository is not by
-itself evidence that it was deleted. `assert-enumeration-complete.ts` settles it
-from the installation's `repository_selection` and the workflows pass the result
-in, so a correct run never hits this.
+itself evidence that it was deleted. `mint-installation-token.ts` settles it
+from the installation's `repository_selection` and mints the token in the same
+step, so the proof and the credential always come from the same installation and
+a correct run never hits this.
 
 Still rename one repository at a time. GitHub's redirect chain stops being
 readable once renames interleave, so a batch leaves the old-to-new mapping

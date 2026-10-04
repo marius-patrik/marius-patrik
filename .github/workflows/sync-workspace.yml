@@ -19,21 +19,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Proves the repository list is complete before anything is allowed to remove a
-  # submodule. A partial list -- an App installed on a subset -- is returned with
-  # HTTP 200 and no warning, so the sync cannot infer completeness from the absence
-  # of an error and must be told.
+  # Mints the token the sync runs on, and proves the installation covers the whole
+  # account in the same pass.
   #
-  # Its own job, holding no GITHUB_TOKEN and no installation token, because it is
-  # the only step that reads the private key. The sync job pushes a branch and
-  # holds a write-scoped app token; the key has no business being in that job.
-  scope:
-    name: Assert enumeration scope
+  # Its own job so that the private key never enters the job that checks out the
+  # repository and pushes a branch. Previously the token came from
+  # actions/create-github-app-token inside that job, which meant the key sat next
+  # to the code it was protecting. Here the key is confined to a step that reads
+  # two values and calls one endpoint, and hands out a scoped token instead.
+  credential:
+    name: Mint installation token
     runs-on: ubuntu-latest
     permissions: {}
 
     outputs:
-      complete: ${{ steps.scope.outputs.complete }}
+      token: ${{ steps.mint.outputs.token }}
+      complete: ${{ steps.mint.outputs.complete }}
 
     steps:
       - uses: actions/checkout@v4
@@ -42,16 +43,25 @@ jobs:
         with:
           node-version: 22
 
-      - name: Assert every installation covers all repositories
-        id: scope
+      - name: Mint installation token and assert coverage
+        id: mint
         env:
           APP_ID: ${{ secrets.APP_ID }}
           APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
-        run: node .github/scripts/assert-enumeration-complete.ts
+          UMBRELLA_OWNER: ${{ github.repository_owner }}
+        run: |
+          # contents:write to push the branch, pull_requests:write to open the pull
+          # request. The reconcile step only reads, but the same token serves the PR
+          # step below, and one token is minted for the whole job.
+          #
+          # Deliberately not granted: administration. This job is unattended and
+          # runs every six hours; it must not be able to archive or delete anything.
+          node .github/scripts/mint-installation-token.ts \
+            contents=write pull_requests=write metadata=read
 
   sync:
     name: Reconcile submodules
-    needs: scope
+    needs: credential
     runs-on: ubuntu-latest
 
     steps:
@@ -62,30 +72,6 @@ jobs:
           # they are mostly private and archived, so cloning them would be slow
           # and would need credentials the job has no reason to hold.
           submodules: false
-
-      # Read access across all repositories, to enumerate them and resolve each
-      # default branch head. Deliberately not granted administration:write, so
-      # this unattended job cannot archive or delete anything.
-      - name: Mint GitHub App installation token
-        id: app
-        uses: actions/create-github-app-token@v2
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-          # `owner` is required. Without it the action scopes the token to this
-          # repository alone, and /installation/repositories then reports a single
-          # repository instead of every one the App is installed on -- which the
-          # validator correctly refuses to treat as authoritative.
-          owner: ${{ github.repository_owner }}
-          # contents:write to push the branch, pull_requests:write to open the pull
-          # request. The reconcile step only reads, but the same token serves the PR
-          # step below, and the token is minted once for the whole job.
-          #
-          # Deliberately not granted: administration. This job is unattended and
-          # runs every six hours; it must not be able to archive or delete anything.
-          permission-contents: write
-          permission-pull-requests: write
-          permission-metadata: read
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -98,10 +84,10 @@ jobs:
       - name: Reconcile
         id: sync
         env:
-          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_APP_TOKEN: ${{ needs.credential.outputs.token }}
           # The sync removes submodules only when the list is proven complete.
           # Passed as a conclusion, never as a key: this job cannot re-derive it.
-          UMBRELLA_ENUMERATION_COMPLETE: ${{ needs.scope.outputs.complete }}
+          UMBRELLA_ENUMERATION_COMPLETE: ${{ needs.credential.outputs.complete }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: |
@@ -121,8 +107,8 @@ jobs:
       - name: Open or update the pull request
         if: steps.sync.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ steps.app.outputs.token }}
-          UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          GH_TOKEN: ${{ needs.credential.outputs.token }}
+          UMBRELLA_APP_TOKEN: ${{ needs.credential.outputs.token }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
           STRUCTURAL: ${{ steps.sync.outputs.structural }}

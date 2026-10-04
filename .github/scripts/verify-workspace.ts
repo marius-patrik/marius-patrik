@@ -6,13 +6,21 @@
 // GITHUB_TOKEN cannot (it 404s on `Study`), so CI mints a GitHub App
 // installation token and passes it as UMBRELLA_APP_TOKEN.
 import { headSha, listRepos } from "./github-api.ts";
-import { desiredState, diffWorkspace, expectedPath, readGitmodules, readGitlinks } from "./repo-index.ts";
+import {
+  assertEnumerationIsAccountWide,
+  desiredState,
+  diffWorkspace,
+  expectedPath,
+  readGitmodules,
+  readGitlinks
+} from "./repo-index.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 
 async function main(): Promise<void> {
   const { repos: allRepos, source } = await listRepos();
+  assertEnumerationIsAccountWide(allRepos, SELF);
   if (!allRepos.some((repo) => repo.name === SELF)) {
     console.error(
       source === "installation"
