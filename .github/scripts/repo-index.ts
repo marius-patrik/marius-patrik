@@ -219,6 +219,75 @@ export function writeGitignore(repos: Repo[]): void {
 // Exported so it can be tested directly. git refuses to write a malformed object
 // id, so the values worth guarding against cannot be produced through a real
 // index -- only by parsing something else.
+// Whether the repository list may be enforced against at all.
+//
+// There is no deletion here, no rename, no addition. The repository list is the
+// workspace, and the only thing enforcement does is make the index match it. A
+// name that has stopped appearing is not a repository being removed; it is a path
+// the list no longer accounts for, the same category as a wrong URL or a pointer
+// that has fallen behind.
+//
+// So the only question is whether the list can be believed. An App installed on a
+// subset still authenticates, still returns 200, and returns a short list with no
+// warning. An incomplete list is not a slightly wrong desired state, it is not the
+// desired state, and enforcing against it would discard live submodules. That
+// makes completeness a property of the input rather than a permission attached to
+// particular kinds of change -- so when it cannot be proven, nothing is enforced.
+//
+// Pure by design: it reads nothing and is handed both sides of the comparison, so
+// the enforcement boundary is testable without a repository or an API call.
+export function assertDesiredStateTrusted(args: {
+  repoNames: string[];
+  trackedNames: string[];
+  selfName: string;
+  complete: boolean;
+}): void {
+  const { repoNames, trackedNames, selfName, complete } = args;
+
+  // The umbrella must appear in any enumeration, whatever its scope. Absent it,
+  // the credential is wrong rather than merely narrow.
+  if (!repoNames.includes(selfName)) {
+    throw new Error(
+      `${selfName} is not in the repository list, so the list is not the workspace and nothing ` +
+        `can be enforced against it.`
+    );
+  }
+
+  // Submodules *are* repositories. If the index tracks any, the account has at
+  // least that many plus the umbrella, so an enumeration holding only the umbrella
+  // is not a small account -- it is a repository-scoped credential. GITHUB_TOKEN
+  // inside Actions looks exactly like this: HTTP 200, one repository, no warning.
+  // The coverage assertion is made with an app-level token, so believing it while
+  // enumerating with a different, narrower credential would enforce one repository
+  // as if it were the whole workspace. This cannot misfire, because an account
+  // with nothing tracked has nothing to lose.
+  if (complete && trackedNames.length > 0 && repoNames.length <= 1) {
+    throw new Error(
+      `Not enforcing: the repository list contains only ${repoNames.join(", ")} while the index ` +
+        `tracks ${trackedNames.length} submodule(s). That is the signature of a repository-scoped ` +
+        `credential such as GITHUB_TOKEN, not of an account with one repository. The coverage ` +
+        `assertion is made with an app-level token, so this credential is not the one it described.`
+    );
+  }
+
+  if (complete) return;
+
+  const visible = new Set(repoNames);
+  const unseen = trackedNames.filter((name) => !visible.has(name));
+  const detail =
+    unseen.length > 0
+      ? `${unseen.length} tracked submodule(s) are absent from it ` +
+        `(${unseen.slice(0, 5).join(", ")}${unseen.length > 5 ? ", ..." : ""})`
+      : "which may or may not be all of them";
+
+  throw new Error(
+    `Not enforcing: the repository list is not proven complete. It accounts for ${repoNames.length} ` +
+      `repositories, ${detail}. Completeness is asserted by the workflow from the App's installation ` +
+      `scope, which an installation token cannot read; without that assertion a partial list would ` +
+      `be enforced as if it were the whole workspace.`
+  );
+}
+
 export function parseGitlinkLine(line: string): string | null {
   if (!line.startsWith("160000 ")) return null;
   const tab = line.indexOf("\t");

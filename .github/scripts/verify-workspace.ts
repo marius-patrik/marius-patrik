@@ -6,53 +6,36 @@
 // GITHUB_TOKEN cannot (it 404s on `Study`), so CI mints a GitHub App
 // installation token and passes it as UMBRELLA_APP_TOKEN.
 import { headSha, listRepos } from "./github-api.ts";
-import { desiredState, diffWorkspace, expectedPath, readGitmodules, readGitlinks } from "./repo-index.ts";
+import {
+  assertDesiredStateTrusted,
+  desiredState,
+  diffWorkspace,
+  expectedPath,
+  readGitmodules,
+  readGitlinks
+} from "./repo-index.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const SELF = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
 
 async function main(): Promise<void> {
   const { repos: allRepos, source } = await listRepos();
-  if (!allRepos.some((repo) => repo.name === SELF)) {
-    console.error(
-      source === "installation"
-        ? `error: ${OWNER}/${SELF} is not visible to the App installation. An installation token ` +
-          `sees only repositories the App is installed on.`
-        : `error: cannot see ${OWNER}/${SELF}; the token in use cannot read this workspace`
-    );
-    process.exit(1);
-  }
-
   const desired = desiredState(OWNER, allRepos, { selfName: SELF });
   const { structural, pointerDrift, tracked } = diffWorkspace(desired);
 
-  // Completeness of the enumeration, not visibility of any one repository, is
-  // what decides whether an absent name is a real deletion. An under-installed
-  // App returns a short list with no error, so an absent tracked repository is
-  // only reported as a deletion once the workflow has asserted that the
-  // installation covers every repository. Without that proof the honest report
-  // is that the list cannot be trusted, naming the repositories in question.
-  //
-  // Renames need no special handling and get none: a rename is a name that
-  // stopped appearing and another that started, which is a removal plus an
-  // addition, and both are correct to report.
   // Completeness is a property of the input, not a permission attached to
   // particular kinds of mismatch. An incomplete list is not a slightly wrong
   // desired state, it is not the desired state at all, so nothing is reported
   // against it: the honest report is that the list cannot be believed.
-  if (process.env.UMBRELLA_ENUMERATION_COMPLETE !== "true") {
-    const visible = new Set(allRepos.map((repo) => repo.name));
-    const unseen = [...readGitlinks().keys()]
-      .map((path) => path.split("/").pop())
-      .filter((name) => !visible.has(name));
-
-    const detail =
-      unseen.length > 0
-        ? `it accounts for ${allRepos.length} repositories, and ${unseen.length} tracked submodule(s) ` +
-          `are absent from it (${unseen.slice(0, 5).join(", ")}${unseen.length > 5 ? ", ..." : ""})`
-        : `it accounts for ${allRepos.length} repositories, which may or may not be all of them`;
-
-    console.error(`error: not validating. The repository list is not proven complete: ${detail}.`);
+  try {
+    assertDesiredStateTrusted({
+      repoNames: allRepos.map((repo) => repo.name),
+      trackedNames: [...readGitlinks().keys()].map((p) => p.split("/").pop() ?? p),
+      selfName: SELF,
+      complete: process.env.UMBRELLA_ENUMERATION_COMPLETE === "true"
+    });
+  } catch (error) {
+    console.error(`error: ${(error as Error).message}`);
     console.error(
       source === "installation"
         ? "  Either the App installation does not cover all repositories, or the coverage assertion " +
