@@ -31,16 +31,16 @@ const CASES: {
   {
     // A private repository sitting at the root is the live case in this
     // workspace: `Study` was tracked at the root despite being private. Relocating
-    // it must be reported as a missing entry at the new path plus a stale stanza
-    // and stale gitlink at the old one, since all three are separate cleanups.
+    // it must be reported as a missing entry at the new path plus an unbacked
+    // stanza and gitlink at the old one: three separate mismatches to correct.
     name: "active private repository at the root is reported as misplaced",
     repos: [{ name: "beta", archived: false, private: true, default_branch: "main" }],
     gitmodules: { beta: { path: "beta", url: `https://github.com/${OWNER}/beta.git`, branch: "main" } },
     links: { beta: "2".repeat(40) },
     expect: [
       { kind: "missing-submodule", path: "_private/beta" },
-      { kind: "stale-submodule", path: "beta" },
-      { kind: "stale-gitlink", path: "beta" }
+      { kind: "unbacked-submodule", path: "beta" },
+      { kind: "unbacked-gitlink", path: "beta" }
     ]
   },
   {
@@ -67,13 +67,13 @@ const CASES: {
     expect: [{ kind: "wrong-branch", path: "epsilon" }]
   },
   {
-    name: "a deleted repository leaves a stale gitlink behind",
+    name: "a path the list does not account for leaves an unbacked gitlink",
     repos: [],
     gitmodules: { zeta: { path: "_archive/zeta", url: `https://github.com/${OWNER}/zeta.git`, branch: "main" } },
     links: { "_archive/zeta": "6".repeat(40) },
     expect: [
-      { kind: "stale-submodule", path: "_archive/zeta" },
-      { kind: "stale-gitlink", path: "_archive/zeta" }
+      { kind: "unbacked-submodule", path: "_archive/zeta" },
+      { kind: "unbacked-gitlink", path: "_archive/zeta" }
     ]
   },
   {

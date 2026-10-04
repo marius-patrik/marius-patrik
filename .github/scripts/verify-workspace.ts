@@ -36,27 +36,30 @@ async function main(): Promise<void> {
   // Renames need no special handling and get none: a rename is a name that
   // stopped appearing and another that started, which is a removal plus an
   // addition, and both are correct to report.
+  // Completeness is a property of the input, not a permission attached to
+  // particular kinds of mismatch. An incomplete list is not a slightly wrong
+  // desired state, it is not the desired state at all, so nothing is reported
+  // against it: the honest report is that the list cannot be believed.
   if (process.env.UMBRELLA_ENUMERATION_COMPLETE !== "true") {
     const visible = new Set(allRepos.map((repo) => repo.name));
-    const absent = [...readGitlinks().keys()]
+    const unseen = [...readGitlinks().keys()]
       .map((path) => path.split("/").pop())
       .filter((name) => !visible.has(name));
 
-    if (absent.length > 0) {
-      console.error(
-        `error: the repository list is not proven complete, and ${absent.length} tracked ` +
-          `submodule(s) are absent from it (${absent.slice(0, 5).join(", ")}` +
-          `${absent.length > 5 ? ", ..." : ""}).`
-      );
-      console.error(
-        source === "installation"
-          ? `  Either the App installation does not cover all repositories, or these were renamed ` +
-            `or deleted. Completeness is asserted from the installation scope; this run was not ` +
-            `given that assertion, so it will not report them as deletions.`
-          : `  The token in use cannot read these repositories.`
-      );
-      process.exit(1);
-    }
+    const detail =
+      unseen.length > 0
+        ? `it accounts for ${allRepos.length} repositories, and ${unseen.length} tracked submodule(s) ` +
+          `are absent from it (${unseen.slice(0, 5).join(", ")}${unseen.length > 5 ? ", ..." : ""})`
+        : `it accounts for ${allRepos.length} repositories, which may or may not be all of them`;
+
+    console.error(`error: not validating. The repository list is not proven complete: ${detail}.`);
+    console.error(
+      source === "installation"
+        ? "  Either the App installation does not cover all repositories, or the coverage assertion " +
+          "did not run. A partial list must not be enforced as if it were the workspace."
+        : "  The token in use cannot read every repository."
+    );
+    process.exit(1);
   }
 
   const problems: string[] = [];
@@ -69,14 +72,17 @@ async function main(): Promise<void> {
       case "missing-submodule":
         problems.push(`${change.path} is a GitHub repository but has no .gitmodules entry`);
         break;
-      case "stale-submodule":
+      case "unbacked-submodule":
         problems.push(
-          `${change.path} is declared in .gitmodules but ${OWNER}/${change.repo} no longer exists; ` +
-            `run the sync workflow to remove it`
+          `${change.path} is declared in .gitmodules but no repository accounts for it; ` +
+            `the sync workflow will drop it`
         );
         break;
-      case "stale-gitlink":
-        problems.push(`${change.path} is staged as a gitlink but is not a submodule of ${OWNER}/${SELF}`);
+      case "unbacked-gitlink":
+        problems.push(
+          `${change.path} is staged as a gitlink but no repository accounts for it; ` +
+            `the sync workflow will drop it`
+        );
         break;
       case "missing-gitlink":
         problems.push(`${change.path} is declared in .gitmodules but has no gitlink staged`);

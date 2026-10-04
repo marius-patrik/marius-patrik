@@ -64,12 +64,12 @@ node .github/scripts/verify-workspace.ts          # index matches the repository
 value for each, e.g. `StatusLine: located at _archive/StatusLine, but private
 repositories belong at _private/StatusLine`.
 
-## Renames and deletions need no special handling
+## Nothing here is a rename or a deletion
 
-A rename is a name that stopped appearing plus a name that started appearing.
-That is a removal plus an addition, and the addition gets its pointer resolved
-from the new repository rather than inherited from the old gitlink. So a rename
-reconciles like anything else: run the sync.
+The repository list is the workspace. Enforcement makes the index match it, and
+that is the whole of it. A name that stopped appearing is not a repository being
+removed — it is a path the list does not account for, corrected the same way a
+wrong URL is. There is nothing to do by hand.
 
 The only thing that makes the sync refuse to remove a submodule is not knowing
 that the repository list is complete. That is deliberate -- an App installed on a

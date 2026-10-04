@@ -37,7 +37,7 @@ async function main(): Promise<SyncResult> {
   // Checked before any diff is computed. An incomplete repository list turns
   // every unseen repository into an apparent deletion, and that is the one
   // failure mode of this script which destroys data rather than merely failing.
-  assertEnumerationComplete(allRepos);
+  assertDesiredStateTrusted(allRepos);
 
   const desired = desiredState(OWNER, allRepos, { selfName: SELF });
   assertUmbrellaNotClassified(desired);
@@ -147,45 +147,55 @@ function pushSyncBranch(): void {
 // pointer from `headSha`, not from the old gitlink.
 //
 // The one thing that must be established first is that the list is *complete*.
-// An App installed on a subset still authenticates, still returns 200, and
-// returns a short list with no error; treating that as authoritative would delete
-// every submodule the App cannot see. So removals are gated on positive proof of
-// completeness rather than on the absence of an error.
+// There is no deletion here, no rename, no addition. The repository list *is*
+// the workspace, and the only thing enforcement does is make the index match it.
+// A name that has stopped appearing is not a repository being removed; it is a
+// path in the index that the list no longer accounts for, exactly like a wrong
+// URL or a pointer that has fallen behind.
 //
-// That proof cannot come from the installation token: GET /app/installations/{id}
+// So the only question is whether the list can be believed. An App installed on a
+// subset still authenticates, still returns 200, and returns a short list with no
+// warning at all. An incomplete list is not a slightly wrong desired state, it is
+// not the desired state, and enforcing against it would discard live submodules.
+// That makes completeness a property of the *input*, not a permission attached to
+// particular kinds of change -- so when it cannot be proven, nothing is enforced.
+//
+// The proof cannot come from the installation token: GET /app/installations/{id}
 // requires app-level (JWT) auth and answers 401 to an installation token. The
-// workflows therefore assert it in a separate job and pass the result in as
+// workflows therefore assert it separately and pass the result in as
 // UMBRELLA_ENUMERATION_COMPLETE.
-function assertEnumerationComplete(allRepos: Repo[]): void {
-  const unproven = process.env.UMBRELLA_ENUMERATION_COMPLETE !== "true";
-
-  // The umbrella must be visible in any enumeration, whatever its scope. If it
-  // is not, the credential is wrong rather than merely narrow.
+function assertDesiredStateTrusted(allRepos: Repo[]): void {
+  // The umbrella must appear in any enumeration, whatever its scope. Absent it,
+  // the credential is wrong rather than merely narrow.
   if (!allRepos.some((repo) => repo.name === SELF)) {
     throw new Error(
-      `${OWNER}/${SELF} is not in the repository list, so the enumeration cannot be trusted at all.`
+      `${OWNER}/${SELF} is not in the repository list, so the list is not the workspace and ` +
+        `nothing can be enforced against it.`
     );
   }
 
-  if (unproven) {
-    const visible = new Set(allRepos.map((repo) => repo.name));
-    const absent = [...readGitlinks().keys()]
-      .map((path) => path.split("/").pop() ?? path)
-      .filter((name) => !visible.has(name));
+  if (process.env.UMBRELLA_ENUMERATION_COMPLETE === "true") return;
 
-    // With a narrow list it is safe to proceed only when nothing would be
-    // removed, because additions, moves and pointer updates cannot lose a
-    // repository. Refuse with the names so the cause is obvious.
-    if (absent.length > 0) {
-      throw new Error(
-        `Refusing to remove ${absent.length} tracked submodule(s) ` +
-          `(${absent.slice(0, 5).join(", ")}${absent.length > 5 ? ", ..." : ""}) without proof that the ` +
-          `repository list is complete. Completeness is asserted by the workflow from the App's ` +
-          `installation scope; an installation token cannot read it. If these repositories were ` +
-          `renamed or deleted on purpose, run the workflow that asserts completeness.`
-      );
-    }
-  }
+  // Say what the list is actually short by, because that is the diagnostic. These
+  // are not repositories being deleted; they are the ones this credential cannot
+  // see, and until it can see them the list is not the workspace.
+  const visible = new Set(allRepos.map((repo) => repo.name));
+  const unseen = [...readGitlinks().keys()]
+    .map((path) => path.split("/").pop() ?? path)
+    .filter((name) => !visible.has(name));
+
+  const detail =
+    unseen.length > 0
+      ? `${unseen.length} tracked submodule(s) are absent from it ` +
+        `(${unseen.slice(0, 5).join(", ")}${unseen.length > 5 ? ", ..." : ""})`
+      : "which may or may not be all of them";
+
+  throw new Error(
+    `Not enforcing: the repository list is not proven complete. It accounts for ` +
+      `${allRepos.length} repositories, ${detail}. Completeness is asserted by the workflow from the ` +
+      `App's installation scope, which an installation token cannot read; without that assertion a ` +
+      `partial list would be enforced as if it were the whole workspace.`
+  );
 }
 
 // The umbrella repository must never be classified as a submodule of itself, and
@@ -220,10 +230,10 @@ async function applyLayout(options: { structural: StructuralChange[]; tracked: R
   const notes: string[] = [];
   for (const change of structural) {
     switch (change.kind) {
-      case "stale-gitlink":
-      case "stale-submodule":
+      case "unbacked-gitlink":
+      case "unbacked-submodule":
         removeGitlink(change.path);
-        notes.push(`remove ${change.path}`);
+        notes.push(`drop unbacked ${change.path}`);
         break;
       case "missing-submodule":
         // A repository with no .gitmodules stanza at all. writeGitmodules above has

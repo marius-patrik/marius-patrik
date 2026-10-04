@@ -401,8 +401,8 @@ export function desiredState(
 export type StructuralChange =
   | { kind: "missing-submodule"; repo: string; path: string; branch: string }
   | { kind: "missing-gitlink"; repo: string; path: string; branch: string }
-  | { kind: "stale-submodule"; repo: string; path: string }
-  | { kind: "stale-gitlink"; repo: string; path: string }
+  | { kind: "unbacked-submodule"; repo: string; path: string }
+  | { kind: "unbacked-gitlink"; repo: string; path: string }
   | { kind: "wrong-url"; repo: string; path: string; expected: string; actual: string | undefined }
   | { kind: "wrong-branch"; repo: string; path: string; expected: string; actual: string | undefined }
   | { kind: "wrong-update-mode"; repo: string; path: string; expected: string; actual: string | undefined };
@@ -484,17 +484,19 @@ export function diffWorkspace(desired: DesiredState): WorkspaceDiff {
     pointerDrift.push({ kind: "pointer", repo: want.name, path: repoPath, current: pin, want });
   }
 
-  // Anything declared or staged but no longer backed by a repository is a
-  // deletion that still needs cleaning out of the index.
+  // Entries the list does not account for. Same category as a wrong URL or a
+  // stale pointer: the index disagrees with the list and enforcement corrects it.
+  // Nothing is being deleted here -- the path simply is not part of the workspace
+  // the list describes, which is what makes it an enforcement target.
   for (const [repoPath, { name }] of declaredPaths) {
     if (!byPath.has(repoPath)) {
-      structural.push({ kind: "stale-submodule", repo: name, path: repoPath });
+      structural.push({ kind: "unbacked-submodule", repo: name, path: repoPath });
     }
   }
   for (const repoPath of gitlinks.keys()) {
     if (!byPath.has(repoPath)) {
       const name = repoPath.split("/").pop() ?? repoPath;
-      structural.push({ kind: "stale-gitlink", repo: name, path: repoPath });
+      structural.push({ kind: "unbacked-gitlink", repo: name, path: repoPath });
     }
   }
 
