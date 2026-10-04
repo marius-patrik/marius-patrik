@@ -300,6 +300,11 @@
 	url = https://github.com/marius-patrik/Study.git
 	branch = main
 
+[submodule "agent-DarkFactory"]
+	path = agent-DarkFactory
+	url = https://github.com/marius-patrik/agent-DarkFactory.git
+	branch = main
+
 [submodule "agents-super"]
 	path = agents-super
 	url = https://github.com/marius-patrik/agents-super.git
@@ -308,11 +313,6 @@
 [submodule "ChessWithQuests"]
 	path = ChessWithQuests
 	url = https://github.com/marius-patrik/ChessWithQuests.git
-	branch = main
-
-[submodule "DarkFactory"]
-	path = DarkFactory
-	url = https://github.com/marius-patrik/DarkFactory.git
 	branch = main
 
 [submodule "DarkFactory-Paper"]

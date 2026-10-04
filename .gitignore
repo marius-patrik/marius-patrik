@@ -24,7 +24,6 @@
 !.github/workflows/*
 
 !ChessWithQuests
-!DarkFactory
 !DarkFactory-Paper
 !InvariantOrientedEngineering
 !Memory
@@ -33,6 +32,7 @@
 !TransparentPhone
 !UniversalSDK
 !UniversalTranspiler
+!agent-DarkFactory
 !agents-super
 !dsh-stack
 !omnis
