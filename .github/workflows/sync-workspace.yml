@@ -19,8 +19,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Proves the repository list is complete before anything is allowed to remove a
+  # submodule. A partial list -- an App installed on a subset -- is returned with
+  # HTTP 200 and no warning, so the sync cannot infer completeness from the absence
+  # of an error and must be told.
+  #
+  # Its own job, holding no GITHUB_TOKEN and no installation token, because it is
+  # the only step that reads the private key. The sync job pushes a branch and
+  # holds a write-scoped app token; the key has no business being in that job.
+  scope:
+    name: Assert enumeration scope
+    runs-on: ubuntu-latest
+    permissions: {}
+
+    outputs:
+      complete: ${{ steps.scope.outputs.complete }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Assert every installation covers all repositories
+        id: scope
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+        run: node .github/scripts/assert-enumeration-complete.ts
+
   sync:
     name: Reconcile submodules
+    needs: scope
     runs-on: ubuntu-latest
 
     steps:
@@ -68,6 +99,9 @@ jobs:
         id: sync
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          # The sync removes submodules only when the list is proven complete.
+          # Passed as a conclusion, never as a key: this job cannot re-derive it.
+          UMBRELLA_ENUMERATION_COMPLETE: ${{ needs.scope.outputs.complete }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: |

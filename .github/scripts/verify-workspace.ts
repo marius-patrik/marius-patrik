@@ -26,26 +26,37 @@ async function main(): Promise<void> {
   const desired = desiredState(OWNER, allRepos, { selfName: SELF });
   const { structural, pointerDrift, tracked } = diffWorkspace(desired);
 
-  // An under-installed App returns a short list rather than an error. Reporting
-  // that as "these submodules should be deleted" would be a false accusation, so
-  // say what is actually wrong instead.
-  const visible = new Set(allRepos.map((repo) => repo.name));
-  const invisible = [...readGitlinks().keys()]
-    .map((path) => path.split("/").pop())
-    .filter((name) => !visible.has(name));
+  // Completeness of the enumeration, not visibility of any one repository, is
+  // what decides whether an absent name is a real deletion. An under-installed
+  // App returns a short list with no error, so an absent tracked repository is
+  // only reported as a deletion once the workflow has asserted that the
+  // installation covers every repository. Without that proof the honest report
+  // is that the list cannot be trusted, naming the repositories in question.
+  //
+  // Renames need no special handling and get none: a rename is a name that
+  // stopped appearing and another that started, which is a removal plus an
+  // addition, and both are correct to report.
+  if (process.env.UMBRELLA_ENUMERATION_COMPLETE !== "true") {
+    const visible = new Set(allRepos.map((repo) => repo.name));
+    const absent = [...readGitlinks().keys()]
+      .map((path) => path.split("/").pop())
+      .filter((name) => !visible.has(name));
 
-  if (invisible.length > 0) {
-    console.error(
-      `error: the token cannot see ${invisible.length} tracked submodule(s) ` +
-        `(${invisible.slice(0, 5).join(", ")}${invisible.length > 5 ? ", ..." : ""}).`
-    );
-    console.error(
-      source === "installation"
-        ? `  The App installation does not cover all repositories. Install it on all of them ` +
-          `and this check will pass. Refusing to report these as deletions.`
-        : `  The token in use cannot read these repositories.`
-    );
-    process.exit(1);
+    if (absent.length > 0) {
+      console.error(
+        `error: the repository list is not proven complete, and ${absent.length} tracked ` +
+          `submodule(s) are absent from it (${absent.slice(0, 5).join(", ")}` +
+          `${absent.length > 5 ? ", ..." : ""}).`
+      );
+      console.error(
+        source === "installation"
+          ? `  Either the App installation does not cover all repositories, or these were renamed ` +
+            `or deleted. Completeness is asserted from the installation scope; this run was not ` +
+            `given that assertion, so it will not report them as deletions.`
+          : `  The token in use cannot read these repositories.`
+      );
+      process.exit(1);
+    }
   }
 
   const problems: string[] = [];

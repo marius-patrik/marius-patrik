@@ -132,8 +132,10 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app.outputs.token }}
         run: |
+          # github.repository is already "owner/repo"; prefixing the owner again
+          # produces a 404 that reads like a permissions problem.
           gh api -X POST \
-            "repos/${{ github.repository_owner }}/${{ github.repository }}/actions/workflows/sync-workspace.yml/dispatches" \
+            "repos/${{ github.repository }}/actions/workflows/sync-workspace.yml/dispatches" \
             -f ref=main \
             --silent
           echo "Dispatched Sync workspace. It will open a pull request, which merges"

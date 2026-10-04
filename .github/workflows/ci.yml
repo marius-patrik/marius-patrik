@@ -44,8 +44,24 @@ jobs:
         with:
           node-version: 22
 
+# Proves the repository list is complete, which is what entitles the
+      # workspace to report an absent repository as a deletion.
+      #
+      # A step here rather than a separate job, unlike Sync workspace: `Validate`
+      # is a required status check, so it must run and fail explicitly when the
+      # installation is narrow. A separate job that fails first would skip this
+      # one and leave a merge blocked with no explanation on the pull request.
+      # The isolation Sync workspace wants -- keeping the key out of the job that
+      # pushes -- is not needed here, because this job holds only read scopes.
+      - name: Assert every installation covers all repositories
+        id: scope
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+        run: node .github/scripts/assert-enumeration-complete.ts
+
       # Offline, no token needed. Guards the classification rule itself, so a
-      # change to repo-index.mjs cannot quietly redefine where a repository
+      # change to repo-index.ts cannot quietly redefine where a repository
       # belongs.
       - name: Test the classification rule
         run: node .github/scripts/test-repo-index.ts
@@ -62,6 +78,7 @@ jobs:
       - name: Verify workspace matches the GitHub repository list
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
+          UMBRELLA_ENUMERATION_COMPLETE: ${{ steps.scope.outputs.complete }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
           UMBRELLA_REPO: ${{ github.event.repository.name }}
         run: node .github/scripts/verify-workspace.ts
