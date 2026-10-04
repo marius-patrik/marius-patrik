@@ -7,8 +7,10 @@
 //
 // Every operation that changes visibility or lifecycle is followed by the same
 // reconciliation the scheduled bot performs, because archiving a repository
-// changes where it belongs in the workspace. The caller is expected to then open
-// a pull request, which is gated on the diff being structural.
+// changes where it belongs in the workspace. This script reports whether it
+// changed anything as a step output, so the workflow can dispatch that
+// reconciliation itself and the operation needs no human follow-up.
+import { appendFileSync } from "node:fs";
 import { deleteRepo, getRepo, headSha, patchRepo, type Repo } from "./github-api.ts";
 import { expectedPath } from "./repo-index.ts";
 
@@ -185,7 +187,7 @@ async function main(): Promise<void> {
   const [operation, name, thirdArg] = process.argv.slice(2);
 
   if (!OPERATIONS.has(operation)) {
-    console.error(`usage: node repo-admin.mjs <${[...OPERATIONS].join("|")}> <repo> [new-name|confirm-name]`);
+    console.error(`usage: node repo-admin.ts <${[...OPERATIONS].join("|")}> <repo> [new-name|confirm-name]`);
     process.exit(2);
   }
 
@@ -200,11 +202,17 @@ async function main(): Promise<void> {
 
   try {
     const result = await runners[operation]();
-    if (result?.changed) {
-      console.log(
-        `\nWorkspace layout is now out of date. Run the Sync workspace workflow: it opens a ` +
-          `pull request that merges itself once Validate passes.`
-      );
+    const changed = result?.changed === true;
+
+    // A step output, not just stdout. The workflow dispatches the reconciliation
+    // from this, so the operation closes its own loop without a human reading the
+    // log and then running the next workflow by hand.
+    if (process.env.GITHUB_OUTPUT) {
+      appendFileSync(process.env.GITHUB_OUTPUT, `changed=${changed}\n`);
+    }
+
+    if (changed) {
+      console.log(`\nWorkspace layout is now out of date; dispatching the reconciliation.`);
     }
   } catch (error) {
     if (error instanceof Refusal) {
