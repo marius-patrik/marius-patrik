@@ -55,33 +55,32 @@ bare error. Read it; do not work around it.
 ## Verifying
 
 ```bash
-node .github/scripts/setup-github-app.ts   # key, permissions, installation scope
-node .github/scripts/verify-workspace.ts   # index matches the repository list
+node .github/scripts/setup-github-app.ts          # key, permissions, installation scope
+node .github/scripts/assert-enumeration-complete.ts  # is the repository list complete?
+node .github/scripts/verify-workspace.ts          # index matches the repository list
 ```
 
 `verify-workspace.ts` exits non-zero on any mismatch and prints the expected
 value for each, e.g. `StatusLine: located at _archive/StatusLine, but private
 repositories belong at _private/StatusLine`.
 
-## Renames do not converge on their own
+## Renames and deletions need no special handling
 
-This is the one operation that needs hands-on follow-up, and it is a known
-limitation rather than a misuse.
+A rename is a name that stopped appearing plus a name that started appearing.
+That is a removal plus an addition, and the addition gets its pointer resolved
+from the new repository rather than inherited from the old gitlink. So a rename
+reconciles like anything else: run the sync.
 
-After a rename the tracked submodule keeps the old name while the App reports the
-new one. `verify-workspace.ts` treats any tracked repository it cannot see as
-invisible, and invisible repositories make the sync refuse to run — deliberately,
-because that is indistinguishable from an under-installed App, and the
-alternative is the sync deleting submodules it cannot see.
+The only thing that makes the sync refuse to remove a submodule is not knowing
+that the repository list is complete. That is deliberate -- an App installed on a
+subset returns HTTP 200 with a short list, so a missing repository is not by
+itself evidence that it was deleted. `assert-enumeration-complete.ts` settles it
+from the installation's `repository_selection` and the workflows pass the result
+in, so a correct run never hits this.
 
-So after a rename:
-
-1. Dispatch `sync-workspace.yml` once and expect it to refuse.
-2. Establish the old-to-new mapping yourself. GitHub redirects a renamed
-   repository's old URL, but a chain of renames will not tell you which old name
-   became which new one, so rename one repository at a time.
-3. If a tracked repository is invisible with no redirect at all, it was deleted.
-   Confirm that was intended before treating it as such.
+Still rename one repository at a time. GitHub's redirect chain stops being
+readable once renames interleave, so a batch leaves the old-to-new mapping
+unrecoverable even though the sync handles it correctly.
 
 ## Visibility changes are not symmetric
 

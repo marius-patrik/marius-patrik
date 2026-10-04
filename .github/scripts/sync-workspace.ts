@@ -33,20 +33,11 @@ async function main(): Promise<SyncResult> {
   const dryRun = process.argv.includes("--dry-run");
 
   const { repos: allRepos, source } = await listRepos();
-  if (!allRepos.some((repo) => repo.name === SELF)) {
-    throw new Error(
-      source === "installation"
-        ? `${OWNER}/${SELF} is not visible to the App installation. An installation token sees ` +
-          `only repositories the App is installed on; install it on all repositories and retry.`
-        : `Cannot read ${OWNER}/${SELF} with the available token`
-    );
-  }
 
-  // Checked before any diff is computed, because an incomplete repo list turns
-  // every invisible repository into an apparent deletion. This is the one failure
-  // mode of this script that destroys data rather than merely failing, so it is
-  // asserted up front rather than as a post-hoc check.
-  if (source === "installation") assertInstallationCoversSubmodules(allRepos);
+  // Checked before any diff is computed. An incomplete repository list turns
+  // every unseen repository into an apparent deletion, and that is the one
+  // failure mode of this script which destroys data rather than merely failing.
+  assertEnumerationComplete(allRepos);
 
   const desired = desiredState(OWNER, allRepos, { selfName: SELF });
   assertUmbrellaNotClassified(desired);
@@ -148,22 +139,52 @@ function pushSyncBranch(): void {
   git("push", "--force-with-lease", "origin", `${SYNC_BRANCH}:${SYNC_BRANCH}`);
 }
 
-// The index knows every submodule the workspace tracks. If the token's repository
-// list is missing one of them, the token cannot see that repository, and treating
-// the omission as a deletion would remove a live submodule.
-function assertInstallationCoversSubmodules(allRepos: Repo[]): void {
-  const visible = new Set(allRepos.map((repo) => repo.name));
-  const invisible = [...readGitlinks().keys()]
-    .map((path) => path.split("/").pop() ?? path)
-    .filter((name) => !visible.has(name));
+// The index tracks submodules that the repository list may legitimately not
+// contain any more: a repository can be deleted, and a rename shows up as the old
+// name disappearing and the new name appearing. Both are the same event to this
+// script -- an absent name is a removal -- and neither needs distinguishing. A
+// rename reconciles as a removal plus an addition, and the new entry gets its
+// pointer from `headSha`, not from the old gitlink.
+//
+// The one thing that must be established first is that the list is *complete*.
+// An App installed on a subset still authenticates, still returns 200, and
+// returns a short list with no error; treating that as authoritative would delete
+// every submodule the App cannot see. So removals are gated on positive proof of
+// completeness rather than on the absence of an error.
+//
+// That proof cannot come from the installation token: GET /app/installations/{id}
+// requires app-level (JWT) auth and answers 401 to an installation token. The
+// workflows therefore assert it in a separate job and pass the result in as
+// UMBRELLA_ENUMERATION_COMPLETE.
+function assertEnumerationComplete(allRepos: Repo[]): void {
+  const unproven = process.env.UMBRELLA_ENUMERATION_COMPLETE !== "true";
 
-  if (invisible.length > 0) {
+  // The umbrella must be visible in any enumeration, whatever its scope. If it
+  // is not, the credential is wrong rather than merely narrow.
+  if (!allRepos.some((repo) => repo.name === SELF)) {
     throw new Error(
-      `The App installation cannot see ${invisible.length} tracked submodule(s), ` +
-        `including ${invisible.slice(0, 5).join(", ")}${invisible.length > 5 ? ", ..." : ""}. ` +
-        `The sync will not treat these as deleted. Install the App on all repositories ` +
-        `(Settings -> Your Account -> Installations -> Configure -> All repositories) and retry.`
+      `${OWNER}/${SELF} is not in the repository list, so the enumeration cannot be trusted at all.`
     );
+  }
+
+  if (unproven) {
+    const visible = new Set(allRepos.map((repo) => repo.name));
+    const absent = [...readGitlinks().keys()]
+      .map((path) => path.split("/").pop() ?? path)
+      .filter((name) => !visible.has(name));
+
+    // With a narrow list it is safe to proceed only when nothing would be
+    // removed, because additions, moves and pointer updates cannot lose a
+    // repository. Refuse with the names so the cause is obvious.
+    if (absent.length > 0) {
+      throw new Error(
+        `Refusing to remove ${absent.length} tracked submodule(s) ` +
+          `(${absent.slice(0, 5).join(", ")}${absent.length > 5 ? ", ..." : ""}) without proof that the ` +
+          `repository list is complete. Completeness is asserted by the workflow from the App's ` +
+          `installation scope; an installation token cannot read it. If these repositories were ` +
+          `renamed or deleted on purpose, run the workflow that asserts completeness.`
+      );
+    }
   }
 }
 

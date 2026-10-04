@@ -32,25 +32,40 @@ add, move or remove one by hand, and never run `git submodule add` or
 `git mv` on a path the sync owns. The layout is derived from the repository list
 on every run; a hand edit is reverted or duplicated, not respected.
 
-## 3. Renames Are Not Self-Healing. Treat One As A Two-Step Operation
+## 3. Renames And Deletions Reconcile Automatically
 
-A rename leaves the tracked submodule under the old name while the App sees the
-new one. `verify-workspace.ts` classifies any tracked repository it cannot see
-as invisible, and an invisible repository makes the sync refuse to run at all --
-correctly, because that is also what an under-installed App looks like, and the
-alternative is the sync deleting submodules it cannot see.
+Do not treat a rename or a deletion as special. From the index's point of view
+both are the same event: a name that used to appear has stopped. A rename adds a
+second event, a name that has started appearing, and the new submodule gets its
+pointer resolved from the new repository rather than inherited from the old one.
 
-The consequence is that a rename does not converge on its own. The workspace
-stays wedged until the tracked entry is corrected. So:
+There is nothing to do by hand after either operation. Run the sync and let it
+reconcile. Two things are still worth knowing:
 
-- Expect to run the sync manually after a rename and to check the result.
-- Never rename more than one repository at a time. Concurrent renames make the
-  mapping ambiguous, and GitHub's redirect chain will not tell you which old
-  name became which new one.
-- Re-read the tracked paths against the repository list afterwards rather than
-  assuming the mapping.
+- **Rename one repository at a time.** GitHub's redirect chain will not tell you
+  which old name became which new one once they are interleaved, so a batch of
+  renames leaves the mapping genuinely unrecoverable.
+- **Do not widen the App installation to force the sync through.** That is
+  correct only when the App genuinely is not installed everywhere.
 
-## 4. Verify Credentials With The Provided Script, Not By Inspection
+## 4. Completeness Is The Only Thing That Gates Removal
+
+The sync's one destructive operation is removing a submodule whose repository is
+absent from the repository list. That is only safe when the list is *complete*,
+because an App installed on a subset authenticates normally, returns HTTP 200,
+and returns a short list with no warning. Absence of an error is not evidence
+that a repository is gone.
+
+Completeness is asserted from the App's `repository_selection`, which an
+installation token cannot read -- `GET /app/installations` answers 401 to one.
+So `assert-enumeration-complete.ts` runs as its own step in CI and as its own job
+in the sync, and passes the conclusion down as a boolean. The sync never sees the
+private key.
+
+If a run refuses to remove submodules, the list was not proven complete. That is
+the guard working, not an obstacle to route around.
+
+## 5. Verify Credentials With The Provided Script, Not By Inspection
 
 ```bash
 node .github/scripts/setup-github-app.ts            # checks key, permissions, installation scope
@@ -67,29 +82,30 @@ pipeline. Narrowing it to what these workflows need would break that pipeline.
 The narrowing that protects this repository is the per-job `permission-*` on each
 workflow, not the App itself.
 
-## 5. Never Commit Credentials
+## 6. Never Commit Credentials
 
 `APP_ID` and `APP_PRIVATE_KEY` are repository secrets and the private key lives
 outside the repository. No workflow, script or document in this tree may contain
 a private key, a token, or a `.pem` file.
 
-## 6. Commits And Pull Requests
+## 7. Commits And Pull Requests
 
 Conventional Commits, English throughout, one logical change per commit. Changes
 go through a pull request; `main` is protected and `Validate` is a required check
 under strict branch protection. Bot-authored index changes arrive on
 `bot/sync-workspace` and merge themselves.
 
-## 7. When The Sync Refuses To Run
+## 8. When The Sync Refuses To Run
 
 The refusal is a safety property, not an obstacle to route around. Read the
 named repositories and work out which case applies:
 
-| Symptom | Meaning | Action |
+| Message | Meaning | Action |
 | --- | --- | --- |
-| A tracked repository is invisible and its old name 301s to a new name | rename | see rule 3 |
-| A tracked repository is invisible with no redirect | deleted | confirm deletion was intended, then run the sync |
-| The App installation is `selected`, not `all` | under-installed | widen it, or the sync will keep refusing |
+| `the repository list is not proven complete` | the assertion did not run, or the installation is narrow | check the `Assert every installation covers all repositories` step; widen the installation only if it genuinely is narrow |
+| `... but marius-patrik/X no longer exists` | a real deletion, once completeness is proven | nothing; reconcile and commit it |
+| `X: located at A, but ... belong at B` | a move | nothing; the sync relocates the gitlink |
+| `X is a GitHub repository but has no .gitmodules entry` | a new repository | nothing; the sync adds it |
 
-Never widen the installation to work around a rename. Widening is correct only
-when the App genuinely is not installed everywhere.
+Only the first row is a problem, and it is a problem with the installation rather
+than with the index.

@@ -13,8 +13,8 @@
 // Usage: node .github/scripts/setup-github-app.ts
 
 import { execFileSync } from "node:child_process";
-import { createSign } from "node:crypto";
 import { readFileSync } from "node:fs";
+import { appJwt } from "./app-jwt.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
 const REPO = process.env.UMBRELLA_REPO?.trim() || "marius-patrik";
@@ -53,23 +53,6 @@ interface AppInfo {
   permissions: Record<string, string>;
 }
 
-function jwt(privateKey: string): string {
-  const base64url = (input: Buffer | string): string =>
-    Buffer.from(input).toString("base64url");
-
-  const now = Math.floor(Date.now() / 1000);
-  const header = base64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
-  const payload = base64url(
-    JSON.stringify({ iat: now - 60, exp: now + 540, iss: Number(APP_ID) })
-  );
-  const signature = createSign("RSA-SHA256")
-    .update(`${header}.${payload}`)
-    .sign(privateKey)
-    .toString("base64url");
-
-  return `${header}.${payload}.${signature}`;
-}
-
 async function fetchJson<T>(url: string, token: string): Promise<T> {
   const response = await fetch(url, {
     headers: {
@@ -95,7 +78,7 @@ async function main(): Promise<void> {
 
   if (key) {
     try {
-      app = await fetchJson<AppInfo>(`https://api.github.com/app`, jwt(key));
+      app = await fetchJson<AppInfo>(`https://api.github.com/app`, appJwt({ appId: APP_ID, privateKey: key }));
       console.log(`App: ${app.name} (id ${app.id}, slug ${app.slug})`);
     } catch (error) {
       problems.push(
@@ -139,7 +122,7 @@ async function main(): Promise<void> {
     // The installations endpoint returns a bare array, not an object.
     const installations = await fetchJson<
       { id: number; repository_selection: string; account: { login: string } }[]
-    >("https://api.github.com/app/installations", jwt(key as string));
+    >("https://api.github.com/app/installations", appJwt({ appId: APP_ID, privateKey: key as string }));
 
     console.log(`\nInstallations: ${installations.length}`);
     for (const installation of installations) {
