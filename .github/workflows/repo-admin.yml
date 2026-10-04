@@ -9,8 +9,9 @@ name: Repo admin
 # what each operation will do.
 #
 # Every operation that changes lifecycle or visibility changes where a repository
-# belongs in the workspace. Run Sync workspace afterwards; it opens a pull request
-# that merges itself once Validate passes, so the operation closes its own loop.
+# belongs in the workspace, so this workflow dispatches the reconciliation itself
+# whenever the layout actually moved. The resulting pull request merges once
+# Validate passes, so a lifecycle operation needs no human follow-up at all.
 on:
   workflow_dispatch:
     inputs:
@@ -50,6 +51,9 @@ jobs:
     name: ${{ inputs.operation }} ${{ inputs.repo }}
     runs-on: ubuntu-latest
 
+    outputs:
+      changed: ${{ steps.operation.outputs.changed }}
+
     steps:
       # The operation script lives in this repository, so the repository has to be
       # on disk before node can run it. Every other workflow in .github/workflows
@@ -59,7 +63,9 @@ jobs:
 
       # administration:write is what PATCH and DELETE /repos require. This job
       # holds it deliberately and does nothing else, so the scope is auditable in
-      # one place.
+      # one place. Note that this is the *job's* scope; the App itself is shared
+      # with the DarkFactory workflows and holds more, which is why dispatching the
+      # reconciliation is a separate job below rather than a step here.
       - name: Mint GitHub App installation token
         id: app
         uses: actions/create-github-app-token@v2
@@ -83,6 +89,7 @@ jobs:
       # cannot change visibility, a Pages repository cannot be privatized, and a
       # delete must be preceded by an archive and confirmed by name.
       - name: Perform operation
+        id: operation
         env:
           UMBRELLA_APP_TOKEN: ${{ steps.app.outputs.token }}
           UMBRELLA_OWNER: ${{ github.repository_owner }}
@@ -93,12 +100,41 @@ jobs:
             "${{ inputs.repo }}" \
             "${{ inputs.operation == 'rename' && inputs.new_name || inputs.confirm_name }}"
 
-      # Not chained automatically, but nothing here needs a human afterwards: the sync
-      # opens a pull request that merges itself once Validate re-derives the
-      # expected layout and agrees.
-      - name: Summarise next step
+  # Archiving, unarchiving, changing visibility or deleting all move a repository
+  # to a different path in the workspace, so the layout is stale the moment the
+  # operation succeeds. Dispatching the sync here rather than printing a TODO is
+  # what makes the loop unattended: the operation reconciles itself.
+  #
+  # Split into its own job so this one mints actions:write and nothing else. The
+  # job that can delete repositories should not also be the job that triggers
+  # workflow runs.
+  reconcile:
+    name: Reconcile workspace
+    needs: admin
+    if: needs.admin.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+
+    # Nothing here uses GITHUB_TOKEN; every call goes through the App installation
+    # token below. Deny it outright rather than inheriting contents:write.
+    permissions: {}
+
+    steps:
+      - name: Mint GitHub App installation token
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-actions: write
+
+      - name: Dispatch the sync
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
         run: |
-          echo "Operation applied. If this changed where a repository belongs:"
-          echo "  1. run the Sync workspace workflow"
-          echo "  2. it opens a pull request that merges itself once Validate passes"
-          echo "  3. the next scheduled run does this on its own, every six hours"
+          gh api -X POST \
+            "repos/${{ github.repository_owner }}/${{ github.repository }}/actions/workflows/sync-workspace.yml/dispatches" \
+            -f ref=main \
+            --silent
+          echo "Dispatched Sync workspace. It will open a pull request, which merges"
+          echo "itself once Validate re-derives the expected layout and agrees."

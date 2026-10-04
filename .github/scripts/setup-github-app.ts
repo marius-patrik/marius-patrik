@@ -22,9 +22,17 @@ const APP_ID = "4861004";
 const APP_SLUG = "darkfactory-pipeline";
 const APP_NAME = "DarkFactory Pipeline";
 
-// What each workflow needs, and why. administration:write is the one that
-// matters for blast radius: it can delete any repository the App is installed on.
-// Only Repo admin requests it; Sync workspace and CI mint read-only tokens.
+// What each workflow needs, and why. administration:write is the one that matters
+// for blast radius: it can delete any repository the App is installed on, and
+// only the Repo admin `admin` job requests it.
+//
+// Be precise about "only". Each job mints a token scoped to the permissions it
+// asks for, so Sync workspace and CI do get read-only ones -- but the App itself
+// holds more than this table, because the DarkFactory delivery pipeline shares
+// it and needs Issues, Checks, Actions, Workflows and Projects write. Narrowing
+// the App to the union of this table would break those workflows. The narrowing
+// that protects this repository is per-job `permission-*`, not the App.
+//
 // Keyed by the API's permission name, not the settings-URL slug. They differ:
 // the settings page calls it "pull-requests", the API returns "pull_requests",
 // and a check written against the slug silently reports a permission the App
@@ -34,7 +42,8 @@ const REQUIRED: { permission: string; usedBy: string; why: string }[] = [
   { permission: "metadata:read", usedBy: "CI, Sync workspace, Repo admin", why: "list repositories, read archived/private" },
   { permission: "contents:write", usedBy: "Open workspace PR", why: "push the sync branch" },
   { permission: "pull_requests:write", usedBy: "Open workspace PR", why: "open PRs and enable auto-merge" },
-  { permission: "administration:write", usedBy: "Repo admin", why: "archive, visibility, rename, delete" }
+  { permission: "actions:write", usedBy: "Repo admin (reconcile job)", why: "dispatch the sync after a lifecycle change" },
+  { permission: "administration:write", usedBy: "Repo admin (admin job)", why: "archive, visibility, rename, delete" }
 ];
 
 interface AppInfo {
@@ -169,7 +178,7 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  console.log("\nAll App credentials are in place. Run the Sync workspace workflow to reconcile.");
+  console.log("\nAll App credentials are in place. Repo admin dispatches its own reconciliation.");
 }
 
 function readPrivateKey(): string | null {
