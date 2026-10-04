@@ -98,6 +98,12 @@
 	branch = main
 	update = none
 
+[submodule "StatusLine"]
+	path = _archive/StatusLine
+	url = https://github.com/marius-patrik/StatusLine.git
+	branch = master
+	update = none
+
 [submodule "template-agent-mcp"]
 	path = _archive/template-agent-mcp
 	url = https://github.com/marius-patrik/template-agent-mcp.git
@@ -288,11 +294,6 @@
 	path = _private/paes-old
 	url = https://github.com/marius-patrik/paes-old.git
 	branch = main
-
-[submodule "StatusLine"]
-	path = _private/StatusLine
-	url = https://github.com/marius-patrik/StatusLine.git
-	branch = master
 
 [submodule "Study"]
 	path = _private/Study
