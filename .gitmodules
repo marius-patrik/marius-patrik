@@ -14,6 +14,12 @@
 	branch = main
 	update = none
 
+[submodule "DarkFactory-Paper"]
+	path = _archive/DarkFactory-Paper
+	url = https://github.com/marius-patrik/DarkFactory-Paper.git
+	branch = main
+	update = none
+
 [submodule "Fabrica"]
 	path = _archive/Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
@@ -313,11 +319,6 @@
 [submodule "ChessWithQuests"]
 	path = ChessWithQuests
 	url = https://github.com/marius-patrik/ChessWithQuests.git
-	branch = main
-
-[submodule "DarkFactory-Paper"]
-	path = DarkFactory-Paper
-	url = https://github.com/marius-patrik/DarkFactory-Paper.git
 	branch = main
 
 [submodule "dsh-stack"]
