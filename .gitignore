@@ -24,17 +24,15 @@
 !.github/workflows/*
 
 !ChessWithQuests
-!InvariantOrientedEngineering
+!DarkFactory
+!KiKi
 !Memory
+!OdbornaPrace
+!OmNix
 !RSCode
 !SkyAgent
 !TransparentPhone
-!UniversalSDK
-!UniversalTranspiler
-!agent-DarkFactory
-!agents-super
-!dsh-stack
-!omnis
+!Transpiler
 !vsc-utils
 
 !_archive
