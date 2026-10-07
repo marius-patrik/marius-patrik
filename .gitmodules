@@ -233,6 +233,11 @@
 	url = https://github.com/marius-patrik/andromeda-old-2.git
 	branch = main
 
+[submodule "darkfactory-install-probe"]
+	path = _private/darkfactory-install-probe
+	url = https://github.com/marius-patrik/darkfactory-install-probe.git
+	branch = main
+
 [submodule "data-agents"]
 	path = _private/data-agents
 	url = https://github.com/marius-patrik/data-agents.git
