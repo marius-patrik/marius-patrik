@@ -313,6 +313,11 @@
 	url = https://github.com/marius-patrik/Memory.git
 	branch = main
 
+[submodule "OASIS"]
+	path = OASIS
+	url = https://github.com/marius-patrik/OASIS.git
+	branch = main
+
 [submodule "OdbornaPrace"]
 	path = OdbornaPrace
 	url = https://github.com/marius-patrik/OdbornaPrace.git
@@ -331,6 +336,11 @@
 [submodule "SkyAgent"]
 	path = SkyAgent
 	url = https://github.com/marius-patrik/SkyAgent.git
+	branch = main
+
+[submodule "sys"]
+	path = sys
+	url = https://github.com/marius-patrik/sys.git
 	branch = main
 
 [submodule "TransparentPhone"]
