@@ -23,17 +23,17 @@
 !.github/workflows/
 !.github/workflows/*
 
-!ChessWithQuests
+!BoardGamesWithQuests
 !DarkFactory
-!KiKi
 !Memory
 !OASIS
 !OdbornaPrace
-!OmNix
+!Omnis
 !RSCode
 !SkyAgent
 !TransparentPhone
 !Transpiler
+!dsh-stack
 !sys
 !vsc-utils
 
