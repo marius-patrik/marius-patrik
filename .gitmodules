@@ -233,11 +233,6 @@
 	url = https://github.com/marius-patrik/andromeda-old-2.git
 	branch = main
 
-[submodule "darkfactory-install-probe"]
-	path = _private/darkfactory-install-probe
-	url = https://github.com/marius-patrik/darkfactory-install-probe.git
-	branch = main
-
 [submodule "data-agents"]
 	path = _private/data-agents
 	url = https://github.com/marius-patrik/data-agents.git
@@ -293,9 +288,9 @@
 	url = https://github.com/marius-patrik/Study.git
 	branch = main
 
-[submodule "ChessWithQuests"]
-	path = ChessWithQuests
-	url = https://github.com/marius-patrik/ChessWithQuests.git
+[submodule "BoardGamesWithQuests"]
+	path = BoardGamesWithQuests
+	url = https://github.com/marius-patrik/BoardGamesWithQuests.git
 	branch = main
 
 [submodule "DarkFactory"]
@@ -303,9 +298,9 @@
 	url = https://github.com/marius-patrik/DarkFactory.git
 	branch = main
 
-[submodule "KiKi"]
-	path = KiKi
-	url = https://github.com/marius-patrik/KiKi.git
+[submodule "dsh-stack"]
+	path = dsh-stack
+	url = https://github.com/marius-patrik/dsh-stack.git
 	branch = main
 
 [submodule "Memory"]
@@ -323,9 +318,9 @@
 	url = https://github.com/marius-patrik/OdbornaPrace.git
 	branch = main
 
-[submodule "OmNix"]
-	path = OmNix
-	url = https://github.com/marius-patrik/OmNix.git
+[submodule "Omnis"]
+	path = Omnis
+	url = https://github.com/marius-patrik/Omnis.git
 	branch = main
 
 [submodule "RSCode"]
