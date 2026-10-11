@@ -11,7 +11,7 @@
 // The archived-pins case is the one that matters most: those submodules are
 // `update = none` and never cloned, so nothing here may assume a working tree.
 import { execFileSync } from "node:child_process";
-import { assertDesiredStateTrusted, parseGitlinkLine } from "./repo-index.ts";
+import { assertDesiredStateTrusted, expectedPath, parseGitlinkLine } from "./repo-index.ts";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -49,12 +49,12 @@ const CASES: {
     ]
   },
   {
-    name: "archived repository belongs under _archive/ with update = none",
+    name: "archived private repository belongs under _archive/_private/ with update = none",
     repos: [{ name: "gamma", archived: true, private: true, default_branch: "main" }],
     gitmodules: {
-      gamma: { path: "_archive/gamma", url: `https://github.com/${OWNER}/gamma.git`, branch: "main", update: "none" }
+      gamma: { path: "_archive/_private/gamma", url: `https://github.com/${OWNER}/gamma.git`, branch: "main", update: "none" }
     },
-    links: { "_archive/gamma": "3".repeat(40) },
+    links: { "_archive/_private/gamma": "3".repeat(40) },
     expect: []
   },
   {
@@ -88,6 +88,136 @@ const CASES: {
     links: {},
     expect: [{ kind: "missing-submodule", path: "eta" }]
   }
+];
+
+// Exact routing matrix (including currently unused agents-*).
+const ROUTING_CASES: [string, string, boolean, boolean, string][] = [
+  [
+    "generic active public",
+    "project",
+    false,
+    false,
+    "project"
+  ],
+  [
+    "generic active private",
+    "project",
+    false,
+    true,
+    "_private/project"
+  ],
+  [
+    "generic archived public",
+    "project",
+    true,
+    false,
+    "_archive/project"
+  ],
+  [
+    "generic archived private",
+    "project",
+    true,
+    true,
+    "_archive/_private/project"
+  ],
+  [
+    "data active public",
+    "data-sample",
+    false,
+    false,
+    "_data/data-sample"
+  ],
+  [
+    "data active private",
+    "data-sample",
+    false,
+    true,
+    "_data/_private/data-sample"
+  ],
+  [
+    "data archived public",
+    "data-sample",
+    true,
+    false,
+    "_data/_archive/data-sample"
+  ],
+  [
+    "data archived private",
+    "data-sample",
+    true,
+    true,
+    "_data/_archive/_private/data-sample"
+  ],
+  [
+    "template active public",
+    "template-sample",
+    false,
+    false,
+    "_templates/template-sample"
+  ],
+  [
+    "template active private",
+    "template-sample",
+    false,
+    true,
+    "_templates/_private/template-sample"
+  ],
+  [
+    "template archived public",
+    "template-sample",
+    true,
+    false,
+    "_templates/_archive/template-sample"
+  ],
+  [
+    "template archived private",
+    "template-sample",
+    true,
+    true,
+    "_templates/_archive/_private/template-sample"
+  ],
+  [
+    "agents active public",
+    "agents-sample",
+    false,
+    false,
+    "_agents/agents-sample"
+  ],
+  [
+    "agents active private",
+    "agents-sample",
+    false,
+    true,
+    "_agents/_private/agents-sample"
+  ],
+  [
+    "agents archived public",
+    "agents-sample",
+    true,
+    false,
+    "_agents/_archive/agents-sample"
+  ],
+  [
+    "agents archived private",
+    "agents-sample",
+    true,
+    true,
+    "_agents/_archive/_private/agents-sample"
+  ],
+  [
+    "data-agents exception",
+    "data-agents",
+    false,
+    true,
+    ".agents"
+  ],
+  [
+    "data-agents exception archived",
+    "data-agents",
+    true,
+    true,
+    ".agents"
+  ]
 ];
 
 // Guards the gitlink parsing, which is where a silent corruption cost the most
@@ -128,6 +258,15 @@ const GITLINK_PARSING: { name: string; line: string; expected: string | null }[]
 ];
 
 let failures = 0;
+
+for (const [description, name, archived, isPrivate, want] of ROUTING_CASES) {
+  const actual = expectedPath({ name, archived, private: isPrivate });
+  if (actual === want) console.log(`ok    ${description}`);
+  else {
+    failures++;
+    console.log(`FAIL  ${description}: expected ${want}, got ${actual}`);
+  }
+}
 
 for (const testCase of GITLINK_PARSING) {
   const actual = parseGitlinkLine(testCase.line);

@@ -4,7 +4,7 @@
 // that merges itself once Validate passes.
 //
 // Three commits, deliberately separated:
-//   1. active layout      (Study relocated to _private/, any add/remove/relocate)
+//   1. active layout      (any add/remove/relocate under namespaced paths)
 //   2. active pointers    (the repositories you actually work in)
 //   3. archived pointers  (frozen history, high churn, low interest)
 // Separating archive churn from real changes keeps the reviewable diff readable.
@@ -18,6 +18,8 @@ import {
   expectedPath,
   git,
   readGitlinks,
+  readGitmodules,
+  trackedRepositoryNames,
   removeGitlink,
   hasStagedChanges,
   splitPinsByArchived,
@@ -40,7 +42,7 @@ async function main(): Promise<SyncResult> {
   // failure mode of this script which destroys data rather than merely failing.
   assertDesiredStateTrusted({
     repoNames: allRepos.map((repo) => repo.name),
-    trackedNames: [...readGitlinks().keys()].map((p) => p.split("/").pop() ?? p),
+    trackedNames: trackedRepositoryNames(),
     selfName: SELF,
     complete: process.env.UMBRELLA_ENUMERATION_COMPLETE === "true"
   });
@@ -172,11 +174,12 @@ async function applyLayout(options: { structural: StructuralChange[]; tracked: R
 
   const existing = readGitlinks();
 
-  // Carry the pin across a move by repository name, not by path. Looking the SHA
-  // up under the new path would find nothing and silently reset the pointer.
+  // Carry pins by declared repository name; .agents deliberately does not have
+  // the same basename as its source repository data-agents.
   const shaByName = new Map<string, string>();
-  for (const [path, sha] of existing) {
-    shaByName.set(path.split("/").pop() ?? path, sha);
+  for (const [name, declaration] of readGitmodules()) {
+    const sha = declaration.path ? existing.get(declaration.path) : undefined;
+    if (sha) shaByName.set(name, sha);
   }
 
   writeGitmodules(OWNER, tracked);
