@@ -3,7 +3,7 @@
 // disagree about what the workspace is supposed to look like.
 //
 // It needs a token that can see private repositories. The workflow-provided
-// GITHUB_TOKEN cannot (it 404s on `Study`), so CI mints a GitHub App
+// GITHUB_TOKEN cannot (it 404s on private repositories), so CI mints a GitHub App
 // installation token and passes it as UMBRELLA_APP_TOKEN.
 import { headSha, listRepos } from "./github-api.ts";
 import {
@@ -12,7 +12,7 @@ import {
   diffWorkspace,
   expectedPath,
   readGitmodules,
-  readGitlinks
+  trackedRepositoryNames
 } from "./repo-index.ts";
 
 const OWNER = process.env.UMBRELLA_OWNER?.trim() || "marius-patrik";
@@ -30,7 +30,7 @@ async function main(): Promise<void> {
   try {
     assertDesiredStateTrusted({
       repoNames: allRepos.map((repo) => repo.name),
-      trackedNames: [...readGitlinks().keys()].map((p) => p.split("/").pop() ?? p),
+      trackedNames: trackedRepositoryNames(),
       selfName: SELF,
       complete: process.env.UMBRELLA_ENUMERATION_COMPLETE === "true"
     });

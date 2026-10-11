@@ -15,11 +15,15 @@ gh workflow run repo-admin.yml \
   -f operation=unarchive -f repo=omnis
 ```
 
-The reason is not ceremony. Each of those operations changes where a repository
-belongs in this workspace: archived goes under `_archive/`, active and private
-under `_private/`, active and public at the root. A direct API call changes the
-repository and leaves the index stale, which turns `Validate` red and blocks
-every subsequent merge.
+Each lifecycle operation changes where a repository belongs. Prefixes select
+the namespace: `data-*` -> `_data/`, `template-*` -> `_templates/`,
+`agents-*` -> `_agents/`; all others use the root. Within that namespace,
+active/public repositories are direct children; active/private use `_private/`;
+archived/public use `_archive/`; archived/private use `_archive/_private/`.
+The `data-agents` exception always mounts at root `.agents` and hosts the
+workspace lifecycle skill at `skills/umbrella-repository-lifecycle/`.
+Archived entries use `update = none`. A direct API operation leaves the index
+stale, turning `Validate` red and blocking merges.
 
 The workflow dispatches `Sync workspace` itself, the sync opens a pull request,
 and that pull request merges itself once `Validate` passes. A lifecycle change
