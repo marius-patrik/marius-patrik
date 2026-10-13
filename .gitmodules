@@ -294,6 +294,11 @@
 	branch = main
 	update = none
 
+[submodule "template-repo"]
+	path = _templates/template-repo
+	url = https://github.com/marius-patrik/template-repo.git
+	branch = main
+
 [submodule "data-agents"]
 	path = .agents
 	url = https://github.com/marius-patrik/data-agents.git
