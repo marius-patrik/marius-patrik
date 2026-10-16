@@ -304,9 +304,19 @@
 	url = https://github.com/marius-patrik/data-agents.git
 	branch = main
 
+[submodule "agent-brain"]
+	path = agent-brain
+	url = https://github.com/marius-patrik/agent-brain.git
+	branch = main
+
 [submodule "BoardGamesWithQuests"]
 	path = BoardGamesWithQuests
 	url = https://github.com/marius-patrik/BoardGamesWithQuests.git
+	branch = main
+
+[submodule "Cognition"]
+	path = Cognition
+	url = https://github.com/marius-patrik/Cognition.git
 	branch = main
 
 [submodule "DarkFactory"]
@@ -322,11 +332,6 @@
 [submodule "GHCode"]
 	path = GHCode
 	url = https://github.com/marius-patrik/GHCode.git
-	branch = main
-
-[submodule "Cognition"]
-	path = Cognition
-	url = https://github.com/marius-patrik/Cognition.git
 	branch = main
 
 [submodule "OASIS"]

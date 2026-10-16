@@ -16,9 +16,9 @@
 
 !.agents
 !BoardGamesWithQuests
+!Cognition
 !DarkFactory
 !GHCode
-!Memory
 !OASIS
 !OdbornaPrace
 !Omnis
@@ -84,6 +84,7 @@
 !_templates/_archive/_private/template-ts-tui
 !_templates/_archive/_private/template-web-app
 !_templates/template-repo
+!agent-brain
 !dsh-stack
 !sys
 !vsc-utils
