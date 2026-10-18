@@ -312,7 +312,7 @@
 [submodule "BoardGamesWithQuests"]
 	path = BoardGamesWithQuests
 	url = https://github.com/marius-patrik/BoardGamesWithQuests.git
-	branch = main
+	branch = develop
 
 [submodule "Cognition"]
 	path = Cognition
