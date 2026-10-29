@@ -49,6 +49,7 @@
 !_data/
 !_data/_private/
 !_data/_private/data-agents-os
+!_data/_private/data-car
 !_data/_private/data-claude
 !_data/_private/data-codex
 !_data/_private/data-cursor
