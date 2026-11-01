@@ -78,6 +78,7 @@ jobs:
           # validator correctly refuses to treat as authoritative.
           owner: ${{ github.repository_owner }}
           permission-administration: write
+          permission-contents: read
           permission-metadata: read
 
       - name: Set up Node.js

@@ -14,9 +14,39 @@
 
 # Run node .github/scripts/sync-workspace.ts --dry-run to preview.
 
+[submodule "agent-brain"]
+	path = _archive/_private/agent-brain
+	url = https://github.com/marius-patrik/agent-brain.git
+	branch = main
+	update = none
+
+[submodule "ams-old"]
+	path = _archive/_private/ams-old
+	url = https://github.com/marius-patrik/ams-old.git
+	branch = main
+	update = none
+
+[submodule "Andromeda-OLD"]
+	path = _archive/_private/Andromeda-OLD
+	url = https://github.com/marius-patrik/Andromeda-OLD.git
+	branch = main
+	update = none
+
+[submodule "andromeda-old-2"]
+	path = _archive/_private/andromeda-old-2
+	url = https://github.com/marius-patrik/andromeda-old-2.git
+	branch = main
+	update = none
+
 [submodule "Citizen"]
 	path = _archive/_private/Citizen
 	url = https://github.com/marius-patrik/Citizen.git
+	branch = main
+	update = none
+
+[submodule "Cognition"]
+	path = _archive/_private/Cognition
+	url = https://github.com/marius-patrik/Cognition.git
 	branch = main
 	update = none
 
@@ -24,6 +54,12 @@
 	path = _archive/_private/Fabrica
 	url = https://github.com/marius-patrik/Fabrica.git
 	branch = dev
+	update = none
+
+[submodule "genesis-old"]
+	path = _archive/_private/genesis-old
+	url = https://github.com/marius-patrik/genesis-old.git
+	branch = main
 	update = none
 
 [submodule "life-support"]
@@ -74,9 +110,21 @@
 	branch = main
 	update = none
 
+[submodule "OASIS"]
+	path = _archive/_private/OASIS
+	url = https://github.com/marius-patrik/OASIS.git
+	branch = main
+	update = none
+
 [submodule "paes"]
 	path = _archive/_private/paes
 	url = https://github.com/marius-patrik/paes.git
+	branch = main
+	update = none
+
+[submodule "paes-old"]
+	path = _archive/_private/paes-old
+	url = https://github.com/marius-patrik/paes-old.git
 	branch = main
 	update = none
 
@@ -92,15 +140,45 @@
 	branch = main
 	update = none
 
+[submodule "SkyAgent"]
+	path = _archive/_private/SkyAgent
+	url = https://github.com/marius-patrik/SkyAgent.git
+	branch = main
+	update = none
+
 [submodule "StatusLine"]
 	path = _archive/_private/StatusLine
 	url = https://github.com/marius-patrik/StatusLine.git
 	branch = master
 	update = none
 
+[submodule "sys"]
+	path = _archive/_private/sys
+	url = https://github.com/marius-patrik/sys.git
+	branch = main
+	update = none
+
 [submodule "templates-super"]
 	path = _archive/_private/templates-super
 	url = https://github.com/marius-patrik/templates-super.git
+	branch = main
+	update = none
+
+[submodule "TransparentPhone"]
+	path = _archive/_private/TransparentPhone
+	url = https://github.com/marius-patrik/TransparentPhone.git
+	branch = main
+	update = none
+
+[submodule "Transpiler"]
+	path = _archive/_private/Transpiler
+	url = https://github.com/marius-patrik/Transpiler.git
+	branch = main
+	update = none
+
+[submodule "vsc-utils"]
+	path = _archive/_private/vsc-utils
+	url = https://github.com/marius-patrik/vsc-utils.git
 	branch = main
 	update = none
 
@@ -116,6 +194,12 @@
 	branch = main
 	update = none
 
+[submodule "Omnis"]
+	path = _archive/Omnis
+	url = https://github.com/marius-patrik/Omnis.git
+	branch = main
+	update = none
+
 [submodule "PersonalCode"]
 	path = _archive/PersonalCode
 	url = https://github.com/marius-patrik/PersonalCode.git
@@ -123,9 +207,10 @@
 	update = none
 
 [submodule "data-agents-os"]
-	path = _data/_private/data-agents-os
+	path = _data/_archive/_private/data-agents-os
 	url = https://github.com/marius-patrik/data-agents-os.git
 	branch = main
+	update = none
 
 [submodule "data-car"]
 	path = _data/_private/data-car
@@ -162,39 +247,14 @@
 	url = https://github.com/marius-patrik/data-kimi.git
 	branch = main
 
+[submodule "data-school"]
+	path = _data/_private/data-school
+	url = https://github.com/marius-patrik/data-school.git
+	branch = main
+
 [submodule "data-tax"]
 	path = _data/_private/data-tax
 	url = https://github.com/marius-patrik/data-tax.git
-	branch = main
-
-[submodule "ams-old"]
-	path = _private/ams-old
-	url = https://github.com/marius-patrik/ams-old.git
-	branch = main
-
-[submodule "Andromeda-OLD"]
-	path = _private/Andromeda-OLD
-	url = https://github.com/marius-patrik/Andromeda-OLD.git
-	branch = main
-
-[submodule "andromeda-old-2"]
-	path = _private/andromeda-old-2
-	url = https://github.com/marius-patrik/andromeda-old-2.git
-	branch = main
-
-[submodule "genesis-old"]
-	path = _private/genesis-old
-	url = https://github.com/marius-patrik/genesis-old.git
-	branch = main
-
-[submodule "paes-old"]
-	path = _private/paes-old
-	url = https://github.com/marius-patrik/paes-old.git
-	branch = main
-
-[submodule "Study"]
-	path = _private/Study
-	url = https://github.com/marius-patrik/Study.git
 	branch = main
 
 [submodule "template-agent-mcp"]
@@ -299,19 +359,9 @@
 	branch = main
 	update = none
 
-[submodule "template-repo"]
-	path = _templates/template-repo
-	url = https://github.com/marius-patrik/template-repo.git
-	branch = main
-
 [submodule "data-agents"]
 	path = .agents
 	url = https://github.com/marius-patrik/data-agents.git
-	branch = main
-
-[submodule "agent-brain"]
-	path = agent-brain
-	url = https://github.com/marius-patrik/agent-brain.git
 	branch = main
 
 [submodule "BoardGamesWithQuests"]
@@ -319,67 +369,32 @@
 	url = https://github.com/marius-patrik/BoardGamesWithQuests.git
 	branch = develop
 
-[submodule "Cognition"]
-	path = Cognition
-	url = https://github.com/marius-patrik/Cognition.git
-	branch = main
-
 [submodule "DarkFactory"]
 	path = DarkFactory
 	url = https://github.com/marius-patrik/DarkFactory.git
 	branch = main
 
-[submodule "dsh-stack"]
-	path = dsh-stack
-	url = https://github.com/marius-patrik/dsh-stack.git
+[submodule "DarkFactory-core"]
+	path = DarkFactory-core
+	url = https://github.com/marius-patrik/DarkFactory-core.git
+	branch = main
+
+[submodule "DarkFactory-paper"]
+	path = DarkFactory-paper
+	url = https://github.com/marius-patrik/DarkFactory-paper.git
+	branch = main
+
+[submodule "DarkFactory-template"]
+	path = DarkFactory-template
+	url = https://github.com/marius-patrik/DarkFactory-template.git
+	branch = main
+
+[submodule "DarkFactory-web"]
+	path = DarkFactory-web
+	url = https://github.com/marius-patrik/DarkFactory-web.git
 	branch = main
 
 [submodule "GHCode"]
 	path = GHCode
 	url = https://github.com/marius-patrik/GHCode.git
-	branch = main
-
-[submodule "OASIS"]
-	path = OASIS
-	url = https://github.com/marius-patrik/OASIS.git
-	branch = main
-
-[submodule "OdbornaPrace"]
-	path = OdbornaPrace
-	url = https://github.com/marius-patrik/OdbornaPrace.git
-	branch = main
-
-[submodule "Omnis"]
-	path = Omnis
-	url = https://github.com/marius-patrik/Omnis.git
-	branch = main
-
-[submodule "RSCode"]
-	path = RSCode
-	url = https://github.com/marius-patrik/RSCode.git
-	branch = main
-
-[submodule "SkyAgent"]
-	path = SkyAgent
-	url = https://github.com/marius-patrik/SkyAgent.git
-	branch = main
-
-[submodule "sys"]
-	path = sys
-	url = https://github.com/marius-patrik/sys.git
-	branch = main
-
-[submodule "TransparentPhone"]
-	path = TransparentPhone
-	url = https://github.com/marius-patrik/TransparentPhone.git
-	branch = main
-
-[submodule "Transpiler"]
-	path = Transpiler
-	url = https://github.com/marius-patrik/Transpiler.git
-	branch = main
-
-[submodule "vsc-utils"]
-	path = vsc-utils
-	url = https://github.com/marius-patrik/vsc-utils.git
 	branch = main
