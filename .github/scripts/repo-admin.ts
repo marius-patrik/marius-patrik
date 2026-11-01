@@ -135,7 +135,11 @@ async function rename(name: string, newName: string | undefined): Promise<{ chan
   }
   const repo = await requireRepo(name);
   const collision = await getRepo(OWNER, newName);
-  if (collision) throw new Refusal(`${OWNER}/${newName} already exists`);
+  // GitHub resolves an earlier repository name to its current repository. A
+  // rename back to that name is safe when the lookup returns this same repo.
+  if (collision && collision.name.toLowerCase() !== repo.name.toLowerCase()) {
+    throw new Refusal(`${OWNER}/${newName} already exists`);
+  }
 
   // Read the pin before the rename. Afterwards the old name 404s on the API even
   // though git redirects it, so the pointer has to be captured up front.
