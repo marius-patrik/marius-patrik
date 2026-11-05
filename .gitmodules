@@ -389,7 +389,7 @@
 	url = https://github.com/marius-patrik/DarkFactory-template.git
 	branch = main
 
-[submodule "DarkFactory-web"]
-	path = DarkFactory-web
-	url = https://github.com/marius-patrik/DarkFactory-web.git
+[submodule "Wrkbench"]
+	path = Wrkbench
+	url = https://github.com/marius-patrik/Wrkbench.git
 	branch = main
